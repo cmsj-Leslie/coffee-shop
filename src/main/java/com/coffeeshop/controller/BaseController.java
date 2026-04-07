@@ -109,7 +109,7 @@ public class BaseController {
         });
         double cartRmb = 0;
         for (Cart temp : carts) {
-            cartRmb += temp.getCount() * temp.getCommodity().getNowPrice();
+            cartRmb += temp.getCount() * temp.getCommodity().getCurrentPrice();
         }
         session.setAttribute("cartRmb", cartRmb);
     }

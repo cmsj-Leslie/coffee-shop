@@ -117,7 +117,7 @@
 
                       <br>
                       <div class="andro_product-price">
-                        <span th:text="${'¥'+commodity.nowPrice}"></span>
+                        <span th:text="${'¥'+commodity.currentPrice}"></span>
                         <span th:text="${'¥'+commodity.originalPrice}"></span>
                       </div>
 
@@ -179,7 +179,7 @@
                   <h5 class="andro_product-title"> <a th:href="@{product(id=${commodity.id})}"
                       th:text="${commodity.name + '-' + commodity.classify}"></a> </h5>
                   <div class="andro_product-price">
-                    <span th:text="${'¥'+commodity.nowPrice}"></span>
+                    <span th:text="${'¥'+commodity.currentPrice}"></span>
                     <span th:text="${'¥'+commodity.originalPrice}"></span>
                   </div>
                   <p th:text="${commodity.info}"></p>
@@ -260,7 +260,7 @@
                   <h5 class="andro_product-title"> <a th:href="@{product(id=${commodity.id})}"
                       th:text="${commodity.name + '-' + commodity.classify}"></a> </h5>
                   <div class="andro_product-price">
-                    <span th:text="${'¥'+commodity.nowPrice}"></span>
+                    <span th:text="${'¥'+commodity.currentPrice}"></span>
                     <span th:text="${'¥'+commodity.originalPrice}"></span>
                   </div>
                   <p th:text="${commodity.info}"></p>

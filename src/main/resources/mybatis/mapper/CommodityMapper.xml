@@ -13,7 +13,7 @@
         <result property="origin" column="origin" jdbcType="VARCHAR"/>
         <result property="classifyId" column="classify_id" jdbcType="INTEGER"/>
         <result property="originalPrice" column="original_price" jdbcType="NUMERIC"/>
-        <result property="nowPrice" column="now_price" jdbcType="NUMERIC"/>
+        <result property="currentPrice" column="current_price" jdbcType="NUMERIC"/>
         <result property="inventory" column="inventory" jdbcType="INTEGER"/>
         <result property="publishTime" column="publish_time" jdbcType="TIMESTAMP"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
@@ -22,7 +22,7 @@
     </resultMap>
 
     <!--全部字段-->
-    <sql id="allColumn"> id, name, info, description, color, material, origin, classify_id, original_price, now_price, inventory, publish_time, status, img, sale_count </sql>
+    <sql id="allColumn"> id, name, info, description, color, material, origin, classify_id, original_price, current_price, inventory, publish_time, status, img, sale_count </sql>
 
     <!--添加语句的字段列表-->
     <sql id="insertColumn">
@@ -50,8 +50,8 @@
         <if test="originalPrice != null">
             original_price,
         </if>
-        <if test="nowPrice != null">
-            now_price,
+        <if test="currentPrice != null">
+            current_price,
         </if>
         <if test="inventory != null">
             inventory,
@@ -96,8 +96,8 @@
         <if test="originalPrice != null">
             #{originalPrice},
         </if>
-        <if test="nowPrice != null">
-            #{nowPrice},
+        <if test="currentPrice != null">
+            #{currentPrice},
         </if>
         <if test="inventory != null">
             #{inventory},
@@ -142,8 +142,8 @@
         <if test="originalPrice != null">
             original_price = #{originalPrice},
         </if>
-        <if test="nowPrice != null">
-            now_price = #{nowPrice},
+        <if test="currentPrice != null">
+            current_price = #{currentPrice},
         </if>
         <if test="inventory != null">
             inventory = #{inventory},
@@ -188,8 +188,8 @@
         <if test="originalPrice != null">
             and original_price = #{originalPrice}
         </if>
-        <if test="nowPrice != null">
-            and now_price = #{nowPrice}
+        <if test="currentPrice != null">
+            and current_price = #{currentPrice}
         </if>
         <if test="inventory != null">
             and inventory = #{inventory}

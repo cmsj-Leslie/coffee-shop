@@ -296,7 +296,7 @@ public class SystemController extends BaseController {
             if (cart != null) {
                 carts.add(cart);
                 totalCount += cart.getCount();
-                totalPrice += cart.getCommodity().getNowPrice() * cart.getCount();
+                totalPrice += cart.getCommodity().getCurrentPrice() * cart.getCount();
                 originalPrice += cart.getCommodity().getOriginalPrice() * cart.getCount();
                 if (cart.getCount() > cart.getCommodity().getInventory()) {
                     hasInsufficientStock = true;

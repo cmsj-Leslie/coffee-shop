@@ -3,6 +3,10 @@ git_push_error.txt
 
 # Real credential backups (NEVER upload these!)
 *.real
+
+# Local config files with real credentials (NEVER upload these!)
+src/main/resources/application.yml
+src/main/resources/application.Backup.yml
 target/
 *.class
 

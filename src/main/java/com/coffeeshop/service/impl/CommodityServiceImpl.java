@@ -40,8 +40,8 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
         }
         // 计算折扣
         Double originalPrice = commodity.getOriginalPrice();
-        Double nowPrice = commodity.getNowPrice();
-        Double discount = new BigDecimal(nowPrice / originalPrice).multiply(new BigDecimal(10))
+        Double currentPrice = commodity.getCurrentPrice();
+        Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
                 .setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
         commodity.setDiscount(discount);
         // 获取平均星星数
@@ -64,8 +64,8 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             }
             // 计算折扣
             Double originalPrice = temp.getOriginalPrice();
-            Double nowPrice = temp.getNowPrice();
-            Double discount = new BigDecimal(nowPrice / originalPrice).multiply(new BigDecimal(10))
+            Double currentPrice = temp.getCurrentPrice();
+            Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
                     .setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
             temp.setDiscount(discount);
             // 获取平均星星数
@@ -89,8 +89,8 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             }
             // 计算折扣
             Double originalPrice = temp.getOriginalPrice();
-            Double nowPrice = temp.getNowPrice();
-            Double discount = new BigDecimal(nowPrice / originalPrice).multiply(new BigDecimal(10))
+            Double currentPrice = temp.getCurrentPrice();
+            Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
                     .setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
             temp.setDiscount(discount);
             // 获取平均星星数
@@ -114,8 +114,8 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             }
             // 计算折扣
             Double originalPrice = temp.getOriginalPrice();
-            Double nowPrice = temp.getNowPrice();
-            Double discount = new BigDecimal(nowPrice / originalPrice).multiply(new BigDecimal(10))
+            Double currentPrice = temp.getCurrentPrice();
+            Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
                     .setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
             temp.setDiscount(discount);
             // 获取平均星星数
@@ -149,8 +149,8 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             }
             // 计算折扣
             Double originalPrice = temp.getOriginalPrice();
-            Double nowPrice = temp.getNowPrice();
-            Double discount = new BigDecimal(nowPrice / originalPrice).multiply(new BigDecimal(10))
+            Double currentPrice = temp.getCurrentPrice();
+            Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
                     .setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
             temp.setDiscount(discount);
             // 获取平均星星数

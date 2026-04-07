@@ -10,16 +10,16 @@
         <result property="commodityId" column="commodity_id" jdbcType="INTEGER"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="courierNumber" column="courier_number" jdbcType="VARCHAR"/>
-        <result property="courierName" column="courier_name" jdbcType="VARCHAR"/>
+        <result property="courierCompany" column="courier_company" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
-        <result property="sippingTime" column="sipping_time" jdbcType="TIMESTAMP"/>
+        <result property="shippingTime" column="shipping_time" jdbcType="TIMESTAMP"/>
         <result property="successTime" column="success_time" jdbcType="TIMESTAMP"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--全部字段-->
-    <sql id="allColumn"> id, order_number, user_id, commodity_id, address_id, content, courier_number, courier_name, create_time, pay_time, sipping_time, success_time, status </sql>
+    <sql id="allColumn"> id, order_number, user_id, commodity_id, address_id, content, courier_number, courier_company, create_time, pay_time, shipping_time, success_time, status </sql>
 
     <!--添加语句的字段列表-->
     <sql id="insertColumn">
@@ -41,8 +41,8 @@
         <if test="courierNumber != null and courierNumber != ''">
             courier_number,
         </if>
-        <if test="courierName != null and courierName != ''">
-            courier_name,
+        <if test="courierCompany != null and courierCompany != ''">
+            courier_company,
         </if>
         <if test="createTime != null">
             create_time,
@@ -50,8 +50,8 @@
         <if test="payTime != null">
             pay_time,
         </if>
-        <if test="sippingTime != null">
-            sipping_time,
+        <if test="shippingTime != null">
+            shipping_time,
         </if>
         <if test="successTime != null">
             success_time,
@@ -81,8 +81,8 @@
         <if test="courierNumber != null and courierNumber != ''">
             #{courierNumber},
         </if>
-        <if test="courierName != null and courierName != ''">
-            #{courierName},
+        <if test="courierCompany != null and courierCompany != ''">
+            #{courierCompany},
         </if>
         <if test="createTime != null">
             #{createTime},
@@ -90,8 +90,8 @@
         <if test="payTime != null">
             #{payTime},
         </if>
-        <if test="sippingTime != null">
-            #{sippingTime},
+        <if test="shippingTime != null">
+            #{shippingTime},
         </if>
         <if test="successTime != null">
             #{successTime},
@@ -121,8 +121,8 @@
         <if test="courierNumber != null and courierNumber != ''">
             courier_number = #{courierNumber},
         </if>
-        <if test="courierName != null and courierName != ''">
-            courier_name = #{courierName},
+        <if test="courierCompany != null and courierCompany != ''">
+            courier_company = #{courierCompany},
         </if>
         <if test="createTime != null">
             create_time = #{createTime},
@@ -130,8 +130,8 @@
         <if test="payTime != null">
             pay_time = #{payTime},
         </if>
-        <if test="sippingTime != null">
-            sipping_time = #{sippingTime},
+        <if test="shippingTime != null">
+            shipping_time = #{shippingTime},
         </if>
         <if test="successTime != null">
             success_time = #{successTime},
@@ -161,8 +161,8 @@
         <if test="courierNumber != null and courierNumber != ''">
             and courier_number = #{courierNumber}
         </if>
-        <if test="courierName != null and courierName != ''">
-            and courier_name = #{courierName}
+        <if test="courierCompany != null and courierCompany != ''">
+            and courier_company = #{courierCompany}
         </if>
         <if test="createTime != null">
             and create_time = #{createTime}
@@ -170,8 +170,8 @@
         <if test="payTime != null">
             and pay_time = #{payTime}
         </if>
-        <if test="sippingTime != null">
-            and sipping_time = #{sippingTime}
+        <if test="shippingTime != null">
+            and shipping_time = #{shippingTime}
         </if>
         <if test="successTime != null">
             and success_time = #{successTime}

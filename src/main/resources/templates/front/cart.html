@@ -85,7 +85,7 @@
           <tr th:each="cart:${carts}">
             <td th:if="${cart.commodity.status == 1}" style="text-align: center;">
               <input type="checkbox" class="cart-checkbox" th:value="${cart.id}"
-                th:attr="data-price=${cart.commodity.nowPrice},data-count=${cart.count}" onchange="updateTotal()"
+                th:attr="data-price=${cart.commodity.currentPrice},data-count=${cart.count}" onchange="updateTotal()"
                 style="width: 18px; height: 18px; cursor: pointer;">
             </td>
             <td th:if="${cart.commodity.status == 0}" style="text-align: center;">
@@ -107,7 +107,7 @@
                 </div>
               </div>
             </td>
-            <td data-title="Price"> <strong th:text="${'¥ '+cart.commodity.nowPrice}"></strong> </td>
+            <td data-title="Price"> <strong th:text="${'¥ '+cart.commodity.currentPrice}"></strong> </td>
             <td class="quantity" data-title="Quantity">
               <div class="qty">
                 <span class="qty-subtract" th:onclick="changeCartCount([[${cart.id}]],'-')"><i

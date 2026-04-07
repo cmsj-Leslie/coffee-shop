@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-title="Price"><strong th:text="${'¥ '+cart.commodity.nowPrice}"></strong></td>
+                        <td data-title="Price"><strong th:text="${'¥ '+cart.commodity.currentPrice}"></strong></td>
                         <td class="quantity" data-title="Quantity">
                             <strong th:text="${cart.count +'（件）'}"></strong>
                         </td>
@@ -96,7 +96,7 @@
                                 th:if="${cart.count > cart.commodity.inventory}">库存不足（剩余：[[${cart.commodity.inventory}]]）</span>
                         </td>
                         <td data-title="Subtotal">
-                            <strong th:text="${'¥ ' + (cart.commodity.nowPrice * cart.count)}"
+                            <strong th:text="${'¥ ' + (cart.commodity.currentPrice * cart.count)}"
                                 style="color: #c38241;"></strong>
                         </td>
                     </tr>

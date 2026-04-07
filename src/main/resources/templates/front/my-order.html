@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -139,10 +139,10 @@
             <td style="text-align: center" th:text="${order.content}"></td>
             <td style="text-align: center"
               th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
-            <td style="text-align: center" th:text="${order.courierName}"></td>
+            <td style="text-align: center" th:text="${order.courierCompany}"></td>
             <td style="text-align: center" th:text="${order.courierNumber}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td style="text-align: center" th:text="${#dates.format(order.sippingTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td style="text-align: center" th:text="${#dates.format(order.shippingTime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td style="text-align: center">
               <a href="javascript:void (0)" th:onclick="confirmOrder([[${order.id}]])"
                 class="andro_btn-custom btn-sm shadow-none">确认收货</a>
@@ -170,7 +170,7 @@
             <td style="text-align: center" th:text="${order.content}"></td>
             <td style="text-align: center"
               th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
-            <td style="text-align: center" th:text="${order.courierName}"></td>
+            <td style="text-align: center" th:text="${order.courierCompany}"></td>
             <td style="text-align: center" th:text="${order.courierNumber}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.successTime,'yyyy-MM-dd HH:mm:ss')}"></td>

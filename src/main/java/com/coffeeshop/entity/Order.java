@@ -56,7 +56,7 @@ public class Order implements Serializable {
     /**
      * 快递公司
      */
-    private String courierName;
+    private String courierCompany;
 
     /**
      * 创建时间
@@ -71,7 +71,7 @@ public class Order implements Serializable {
     /**
      * 发货时间
      */
-    private Date sippingTime;
+    private Date shippingTime;
 
     /**
      * 成交时间

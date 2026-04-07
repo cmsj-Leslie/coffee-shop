@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 回复评论
  * @param id
  */
@@ -148,7 +148,7 @@ function deliverGoods(id) {
             '           <input placeholder="快递单号" type="text" id="courierNumber" class="form-control">' +
             '       </div>' +
             '       <div class="form-group">' +
-            '           <select class="form-control" placeholder="请选择快递公司" id="courierName">' +
+            '           <select class="form-control" placeholder="请选择快递公司" id="courierCompany">' +
             '               <option value="顺丰快递">顺丰快递</option>' +
             '               <option value="韵达快递">韵达快递</option>' +
             '               <option value="圆通快递">圆通快递</option>' +
@@ -162,7 +162,7 @@ function deliverGoods(id) {
         btn: ['发货'],
         btn1: function () {
             let courierNumber = $("#courierNumber").val().trim();
-            let courierName = $('#courierName').find('option:selected').val();
+            let courierCompany = $('#courierCompany').find('option:selected').val();
             if (courierNumber == '') {
                 xtip.msg("快递单号不能为空");
                 return;
@@ -174,7 +174,7 @@ function deliverGoods(id) {
                 data: {
                     id: id,
                     courierNumber: courierNumber,
-                    courierName: courierName,
+                    courierCompany: courierCompany,
                 },
                 dataType: "json",
                 success: function (data) {
@@ -827,7 +827,7 @@ function publishNewGoods() {
     let material = $("#material").val().trim();
     let origin = $("#origin").val().trim();
     let original_price = $("#original_price").val().trim();
-    let now_price = $("#now_price").val().trim();
+    let current_price = $("#current_price").val().trim();
     let inventory = $("#inventory").val().trim();
     let classify = $('#classify').find('option:selected').val();
     let status = $('#status').find('option:selected').val();
@@ -855,7 +855,7 @@ function publishNewGoods() {
         xtip.msg("商品原价不能为空");
         return;
     }
-    if (now_price == '') {
+    if (current_price == '') {
         xtip.msg("商品现价不能为空");
         return;
     }
@@ -888,7 +888,7 @@ function publishNewGoods() {
             origin: origin,
             classifyId: classify,
             originalPrice: original_price,
-            nowPrice: now_price,
+            currentPrice: current_price,
             inventory: inventory,
             status: status,
             img: img_path,
@@ -1070,7 +1070,7 @@ function editGoods() {
     let material = $("#material").val().trim();
     let origin = $("#origin").val().trim();
     let original_price = $("#original_price").val().trim();
-    let now_price = $("#now_price").val().trim();
+    let current_price = $("#current_price").val().trim();
     let inventory = $("#inventory").val().trim();
     let classify = $('#classify').find('option:selected').val();
     let status = $('#status').find('option:selected').val();
@@ -1098,7 +1098,7 @@ function editGoods() {
         xtip.msg("商品原价不能为空");
         return;
     }
-    if (now_price == '') {
+    if (current_price == '') {
         xtip.msg("商品现价不能为空");
         return;
     }
@@ -1132,7 +1132,7 @@ function editGoods() {
             origin: origin,
             classifyId: classify,
             originalPrice: original_price,
-            nowPrice: now_price,
+            currentPrice: current_price,
             inventory: inventory,
             status: status,
             img: img_path,

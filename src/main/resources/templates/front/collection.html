@@ -91,7 +91,7 @@
                 </div>
               </div>
             </td>
-            <td data-title="Price"> <strong th:text="${'¥ '+commodity.nowPrice}"></strong> </td>
+            <td data-title="Price"> <strong th:text="${'¥ '+commodity.currentPrice}"></strong> </td>
             <td data-title="Availability">
               <span th:if="${commodity.status == 1}" class="andro_product-stock instock">上架</span>
               <span th:if="${commodity.status == 0}" class="andro_product-stock outofstock">该商品已下架</span>

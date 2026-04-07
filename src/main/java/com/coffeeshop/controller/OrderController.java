@@ -133,12 +133,12 @@ public class OrderController extends BaseController {
      * 发货
      */
     @PostMapping("/deliverGoods")
-    public ResponseResult deliverGoods(@RequestParam("id") Integer id, String courierNumber, String courierName) {
+    public ResponseResult deliverGoods(@RequestParam("id") Integer id, String courierNumber, String courierCompany) {
         // 获取订单信息
         Order order = orderService.getById(id);
         order.setCourierNumber(courierNumber);
-        order.setCourierName(courierName);
-        order.setSippingTime(new Date());
+        order.setCourierCompany(courierCompany);
+        order.setShippingTime(new Date());
         order.setStatus(1);
         // 更新订单信息
         if (orderService.update(order)) {

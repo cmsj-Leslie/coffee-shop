@@ -53,7 +53,7 @@
                                             <td th:text="${order.orderNumber}"></td>
                                             <td th:text="${order.content}"></td>
                                             <td th:text="${order.user.name}"></td>
-                                            <td th:text="${order.courierName}"></td>
+                                            <td th:text="${order.courierCompany}"></td>
                                             <td th:text="${order.courierNumber}"></td>
                                             <td th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
                                             <td th:text="${#dates.format(order.successTime,'yyyy-MM-dd HH:ss')}"></td>

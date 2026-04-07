@@ -69,9 +69,9 @@ public class Commodity implements Serializable {
     private Double originalPrice;
 
     /**
-     * 现价
+     * 当前售价
      */
-    private Double nowPrice;
+    private Double currentPrice;
 
     /**
      * 库存
