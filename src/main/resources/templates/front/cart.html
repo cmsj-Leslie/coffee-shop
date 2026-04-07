@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>购物车</title>
+
+  <!-- Vendor Stylesheets -->
+  <link rel="stylesheet" href="front/assets/css/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/animate.min.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/magnific-popup.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/slick.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/slick-theme.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/ion.rangeSlider.min.css">
+
+  <!-- Icon Fonts -->
+  <link rel="stylesheet" href="front/assets/fonts/flaticon/flaticon.css">
+  <link rel="stylesheet" href="front/assets/fonts/font-awesome/css/all.min.css">
+
+  <!-- Coffeez Style sheet -->
+  <link rel="stylesheet" href="front/assets/css/style.css">
+  <link rel="stylesheet" href="common/css/xtiper.css">
+  <link rel="stylesheet" href="common/css/sweetalert.css">
+  <!-- AI Chat Stylesheet -->
+  <link rel="stylesheet" href="common/css/ai-chat.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+
+</head>
+
+<body>
+
+  <div th:replace="common/front-common::#front1"></div>
+  <div th:replace="common/front-common::#androNewsletterPopup"></div>
+  <div th:replace="common/front-common::#front4"></div>
+  <div th:replace="common/front-common::#front5"></div>
+  <div th:replace="common/front-common::#front6"></div>
+  <div th:replace="common/front-common::#front7"></div>
+  <div th:replace="common/front-common::#front8"></div>
+
+  <!-- Subheader Start -->
+  <div class="andro_subheader pattern-bg primary-bg">
+    <div class="container">
+      <div class="andro_subheader-inner">
+        <h1>购物车</h1>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">主页</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Subheader End -->
+
+
+  <!--Cart Start -->
+  <div class="section">
+    <div class="container">
+
+      <!-- Cart Table Start -->
+      <table class="andro_responsive-table">
+        <thead>
+          <tr>
+            <th style="width: 100px; white-space: nowrap;">
+              <label
+                style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0; white-space: nowrap;">
+                <input type="checkbox" id="selectAll" onclick="toggleSelectAll()"
+                  style="width: 20px; height: 20px; cursor: pointer; margin: 0; flex-shrink: 0;">
+                <span style="white-space: nowrap;">全选</span>
+              </label>
+            </th>
+            <th class="remove-item"></th>
+            <th>商品信息</th>
+            <th>商品单价</th>
+            <th>数量</th>
+            <th>商品状态</th>
+            <th>加入时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="cart:${carts}">
+            <td th:if="${cart.commodity.status == 1}" style="text-align: center;">
+              <input type="checkbox" class="cart-checkbox" th:value="${cart.id}"
+                th:attr="data-price=${cart.commodity.nowPrice},data-count=${cart.count}" onchange="updateTotal()"
+                style="width: 18px; height: 18px; cursor: pointer;">
+            </td>
+            <td th:if="${cart.commodity.status == 0}" style="text-align: center;">
+              <input type="checkbox" disabled style="width: 18px; height: 18px; opacity: 0.5;">
+            </td>
+            <td class="remove">
+              <button type="button" th:onclick="deleteCart([[${cart.id}]])"
+                class="close-btn close-danger remove-from-cart">
+                <span></span>
+                <span></span>
+              </button>
+            </td>
+            <td data-title="Product">
+              <div class="andro_cart-product-wrapper">
+                <img th:src="${cart.commodity.img}" alt="prod1">
+                <div class="andro_cart-product-body">
+                  <h6> <a th:href="@{product(id=${cart.commodityId})}" th:text="${cart.commodity.name}"></a> </h6>
+                  <p th:text="${cart.commodity.info}"> </p>
+                </div>
+              </div>
+            </td>
+            <td data-title="Price"> <strong th:text="${'¥ '+cart.commodity.nowPrice}"></strong> </td>
+            <td class="quantity" data-title="Quantity">
+              <div class="qty">
+                <span class="qty-subtract" th:onclick="changeCartCount([[${cart.id}]],'-')"><i
+                    class="fa fa-minus"></i></span>
+                <input type="text" name="qty" th:value="${cart.count}" disabled th:id="${'count'+cart.id}">
+                <span class="qty-add" th:onclick="changeCartCount([[${cart.id}]],'+')"><i class="fa fa-plus"></i></span>
+              </div>
+            </td>
+            <td data-title="Total" class="andro_product-stock instock">
+              <span th:if="${cart.commodity.status == 1}" class="andro_product-stock instock">上架</span>
+              <span th:if="${cart.commodity.status == 0}" class="andro_product-stock outofstock">该商品已下架</span>
+            </td>
+            <td data-title="Total" th:text="${#dates.format(cart.addTime,'yyyy-MM-dd HH:mm')}"> </td>
+            <td th:if="${cart.commodity.status == 1}" data-title="Total"> <a th:href="@{pay(cartIds=${cart.id})}"
+                class="andro_btn-custom btn-sm shadow-none">立即购买</a> </td>
+            <td th:if="${cart.commodity.status == 0}" data-title="Total"> <span
+                class="andro_btn-custom btn-sm shadow-none" disabled="disabled" style="background: #c38241">商品已下架</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Cart Table End -->
+
+      <!-- Cart Summary Bar Start -->
+      <div class="cart-summary-bar"
+        style="background: #f8f8f8; padding: 20px; border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 30px;">
+          <span style="font-size: 16px;">已选 <strong id="selectedCount" style="color: #c38241;">0</strong> 件商品</span>
+          <span style="font-size: 18px;">合计：<strong id="totalPrice" style="color: #c38241; font-size: 22px;">¥
+              0.00</strong></span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="javascript:void(0)" onclick="batchCheckout()" class="andro_btn-custom shadow-none"
+            style="padding: 12px 30px;">去结算</a>
+        </div>
+      </div>
+      <!-- Cart Summary Bar End -->
+
+    </div>
+  </div>
+  <!-- Cart End -->
+
+  <!-- Instagram Start -->
+  <div th:replace="common/front-common::#instagram"></div>
+  <!-- Instagram End -->
+
+  <!-- Footer Start -->
+  <div th:replace="common/front-common::#footer"></div>
+  <!-- Footer End -->
+
+  <!-- Vendor Scripts -->
+  <script src="front/assets/js/plugins/jquery-3.4.1.min.js"></script>
+  <script src="front/assets/js/plugins/popper.min.js"></script>
+  <script src="front/assets/js/plugins/waypoint.js"></script>
+  <script src="front/assets/js/plugins/bootstrap.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.slimScroll.min.js"></script>
+  <script src="front/assets/js/plugins/imagesloaded.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.steps.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.countdown.min.js"></script>
+  <script src="front/assets/js/plugins/isotope.pkgd.min.js"></script>
+  <script src="front/assets/js/plugins/slick.min.js"></script>
+  <script src="front/assets/js/plugins/ion.rangeSlider.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.zoom.min.js"></script>
+
+
+  <!-- Coffeez Scripts -->
+  <script src="front/assets/js/main.js"></script>
+  <script src="common/js/xtiper.min.js"></script>
+  <script src="common/js/sweetalert.js"></script>
+  <script src="common/js/custom.js"></script>
+  <!-- AI Chat Script -->
+  <script src="common/js/ai-chat.js"></script>
+
+</body>
+
+</html>

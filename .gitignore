@@ -1,0 +1,34 @@
+# Java/Maven standard ignores
+git_push_error.txt
+
+# Real credential backups (NEVER upload these!)
+*.real
+target/
+*.class
+
+# IDE configurations
+.idea/
+.vscode/
+
+# Thesis and Docs
+*.doc
+*.docx
+*.docx.txt
+*.docx.txt.txt
+*.doc.txt
+*.doc.txt.txt
+论文补充材料.txt
+thesis_extracted/
+
+# Diagrams
+图*.png
+最终版*.png
+
+# Temporary/test scripts
+extract*.ps1
+extract.py
+
+# Mock HTML pages
+1.html
+yz.html
+admission_mock.html

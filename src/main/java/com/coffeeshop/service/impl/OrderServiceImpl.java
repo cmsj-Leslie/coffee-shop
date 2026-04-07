@@ -1,0 +1,55 @@
+package com.coffeeshop.service.impl;
+
+import org.springframework.stereotype.Service;
+import com.coffeeshop.entity.Order;
+import com.coffeeshop.service.BaseService;
+import com.coffeeshop.service.OrderService;
+
+import java.util.List;
+
+/**
+ * @author Wen
+ * @ClassName OrderServiceImpl
+ *            订单表(Order)表业务接口实现类
+ * @date 2025-11-15 14:22:00
+ * @Version 1.0
+ **/
+@Service("orderService")
+public class OrderServiceImpl extends BaseService implements OrderService {
+
+    @Override
+    public boolean insert(Order order) {
+        return orderMapper.insert(order) == 1;
+    }
+
+    @Override
+    public boolean deleteById(Integer id) {
+        return orderMapper.deleteById(id) == 1;
+    }
+
+    @Override
+    public Order getById(Integer id) {
+        return orderMapper.getById(id);
+    }
+
+    @Override
+    public List<Order> listOrders() {
+        return orderMapper.listOrders();
+    }
+
+    @Override
+    public List<Order> listOrders(Order order) {
+        return orderMapper.listOrders(order);
+    }
+
+    @Override
+    public int countOrders(Order order) {
+        return orderMapper.countOrders(order);
+    }
+
+    @Override
+    public boolean update(Order order) {
+        return orderMapper.update(order) == 1;
+    }
+
+}

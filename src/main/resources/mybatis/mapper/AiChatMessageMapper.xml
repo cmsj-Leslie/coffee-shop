@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    AI 聊天记录 Mapper XML
+    
+    【功能说明】
+    定义 AiChatMessageMapper 接口对应的 SQL 语句
+    
+    【文件位置】
+    resources/mybatis/mapper/AiChatMessageMapper.xml
+    
+    【命名空间】
+    必须与 Mapper 接口的全限定名一致
+-->
+<mapper namespace="com.coffeeshop.mapper.AiChatMessageMapper">
+
+    <!--
+        结果映射配置
+        
+        【作用】
+        定义数据库字段与 Java 实体属性的对应关系
+        处理下划线命名（数据库）到驼峰命名（Java）的转换
+        
+        例如：user_id (数据库) -> userId (Java)
+    -->
+    <resultMap type="com.coffeeshop.entity.AiChatMessage" id="AiChatMessageMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="provider" column="provider" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--
+        SQL 片段：全部字段
+        
+        【作用】
+        复用字段列表，避免在多个 SELECT 语句中重复书写
+        使用方式：<include refid="allColumn"/>
+    -->
+    <sql id="allColumn">
+        id, user_id, role, content, provider, create_time
+    </sql>
+
+    <!--
+        插入聊天记录
+        
+        【对应方法】
+        int insert(AiChatMessage message)
+        
+        【参数说明】
+        - #{userId}: 用户 ID
+        - #{role}: 消息角色（user/ai）
+        - #{content}: 消息内容
+        - #{provider}: AI 提供商
+        - #{createTime}: 创建时间
+        
+        【返回值】
+        自动将生成的主键 ID 设置到 message.id 属性
+    -->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO ai_chat_message (user_id, role, content, provider, create_time)
+        VALUES (#{userId}, #{role}, #{content}, #{provider}, #{createTime})
+    </insert>
+
+    <!--
+        查询用户的聊天历史
+        
+        【对应方法】
+        List<AiChatMessage> listByUserId(Integer userId, Integer limit)
+        
+        【排序说明】
+        ORDER BY create_time ASC：按时间正序，旧消息在前，新消息在后
+        这样前端直接按顺序显示即可，符合聊天记录阅读习惯
+        
+        【分页说明】
+        LIMIT #{limit}：限制返回数量，避免一次加载过多数据
+        如果 limit 为 null，则不限制数量
+    -->
+    <select id="listByUserId" resultMap="AiChatMessageMap">
+        SELECT
+        <include refid="allColumn"/>
+        FROM ai_chat_message
+        WHERE user_id = #{userId}
+        ORDER BY create_time ASC
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+    </select>
+
+    <!--
+        删除用户的所有聊天记录
+        
+        【对应方法】
+        int deleteByUserId(Integer userId)
+        
+        【使用场景】
+        用户点击"清空记录"按钮时调用
+        
+        【返回值】
+        返回删除的记录数量
+    -->
+    <delete id="deleteByUserId">
+        DELETE FROM ai_chat_message
+        WHERE user_id = #{userId}
+    </delete>
+
+    <!--
+        统计用户的聊天记录数量
+        
+        【对应方法】
+        int countByUserId(Integer userId)
+        
+        【使用场景】
+        可用于显示用户的对话条数、判断是否有历史记录等
+    -->
+    <select id="countByUserId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM ai_chat_message
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>
