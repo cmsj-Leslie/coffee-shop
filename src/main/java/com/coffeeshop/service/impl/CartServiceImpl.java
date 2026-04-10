@@ -9,10 +9,8 @@ import com.coffeeshop.service.CartService;
 import java.util.List;
 
 /**
- * @author Wen
  * @ClassName CartServiceImpl
  *            购物车(Cart)表业务接口实现类
- * @date 2025-11-28 09:35:00
  * @Version 1.0
  **/
 @Service("cartService")

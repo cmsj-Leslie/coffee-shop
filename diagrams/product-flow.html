@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <title>商品管理业务流程图</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#fff; display:flex; justify-content:center; padding:40px; }
+  </style>
+</head>
+<body>
+<!--
+  Layout – main column center: X=350
+  Left branch  center: X=140
+  Mid  branch  center: X=350
+  Right branch center: X=560
+-->
+<svg width="710" height="730" xmlns="http://www.w3.org/2000/svg"
+     style="font-family:'Microsoft YaHei','微软雅黑',sans-serif; font-size:14px;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7"
+            refX="10" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0,10 3.5,0 7" fill="#000"/>
+    </marker>
+  </defs>
+
+  <!-- ============================================================
+       MAIN VERTICAL FLOW
+       ============================================================ -->
+
+  <!-- 开始 -->
+  <ellipse cx="350" cy="44" rx="52" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="44" text-anchor="middle" dominant-baseline="middle" fill="#000">开始</text>
+
+  <!-- ↓ -->
+  <line x1="350" y1="66" x2="350" y2="84" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 管理员登录  x=270 y=84 w=160 h=36 right=430 cy=102 -->
+  <rect x="270" y="84" width="160" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="102" text-anchor="middle" dominant-baseline="middle" fill="#000">管理员登录</text>
+
+  <!-- ↓ -->
+  <line x1="350" y1="120" x2="350" y2="162" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 是否登录  cx=350 cy=192 hw=80 hh=30  left=270 right=430 top=162 bottom=222 -->
+  <polygon points="350,162 430,192 350,222 270,192" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="192" text-anchor="middle" dominant-baseline="middle" fill="#000">是否登录</text>
+
+  <!-- 否: right→up→管理员登录 right   label above the right horizontal segment -->
+  <polyline points="430,192 510,192 510,102 430,102"
+            fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+  <text x="436" y="183" text-anchor="start" fill="#000" font-size="13">否</text>
+
+  <!-- 是: down  label right of vertical segment -->
+  <line x1="350" y1="222" x2="350" y2="252" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="360" y="238" dominant-baseline="middle" fill="#000" font-size="13">是</text>
+
+  <!-- 访问商品管理  x=265 y=252 w=170 h=36 bottom=288 -->
+  <rect x="265" y="252" width="170" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="270" text-anchor="middle" dominant-baseline="middle" fill="#000">访问商品管理</text>
+
+  <!-- ↓ to horizontal spread line at y=303 -->
+  <line x1="350" y1="288" x2="350" y2="303" stroke="black" stroke-width="1.5"/>
+
+  <!-- Left branch spread & drop -->
+  <polyline points="350,303 140,303 140,328" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+
+  <!-- Mid branch drop -->
+  <line x1="350" y1="303" x2="350" y2="328" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Right branch spread & drop -->
+  <polyline points="350,303 560,303 560,328" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+
+  <!-- ============================================================
+       LEFT BRANCH – 发布商品  (center X=140)
+       ============================================================ -->
+
+  <!-- 发布商品  x=75 y=328 w=130 h=36  bottom=364 -->
+  <rect x="75" y="328" width="130" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="140" y="346" text-anchor="middle" dominant-baseline="middle" fill="#000">发布商品</text>
+
+  <!-- ↓ -->
+  <line x1="140" y1="364" x2="140" y2="398" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 上传商品信息与图片  x=75 y=398 w=130 h=52  bottom=450 -->
+  <rect x="75" y="398" width="130" height="52" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="140" text-anchor="middle" fill="#000">
+    <tspan x="140" y="420">上传商品信息</tspan>
+    <tspan x="140" dy="18">与图片</tspan>
+  </text>
+
+  <!-- ↓ -->
+  <line x1="140" y1="450" x2="140" y2="484" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 是否发布成功  cx=140 cy=512 hw=78 hh=28  top=484 bottom=540 left=62 right=218 -->
+  <polygon points="140,484 218,512 140,540 62,512" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="140" y="512" text-anchor="middle" dominant-baseline="middle" fill="#000">是否发布成功</text>
+
+  <!-- 否: left→up→发布商品 left  label above horizontal segment near diamond -->
+  <polyline points="62,512 32,512 32,346 75,346"
+            fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+  <text x="56" y="502" text-anchor="middle" fill="#000" font-size="13">否</text>
+
+  <!-- 是: down  label right of line -->
+  <polyline points="140,540 140,580 350,580" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+  <text x="150" y="560" dominant-baseline="middle" fill="#000" font-size="13">是</text>
+
+  <!-- ============================================================
+       MIDDLE BRANCH – 修改商品  (center X=350)
+       ============================================================ -->
+
+  <!-- 修改商品  x=285 y=328 w=130 h=36  bottom=364 -->
+  <rect x="285" y="328" width="130" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="346" text-anchor="middle" dominant-baseline="middle" fill="#000">修改商品</text>
+
+  <!-- ↓ -->
+  <line x1="350" y1="364" x2="350" y2="398" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 编辑商品信息  x=285 y=398 w=130 h=36  bottom=434 -->
+  <rect x="285" y="398" width="130" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="416" text-anchor="middle" dominant-baseline="middle" fill="#000">编辑商品信息</text>
+
+  <!-- ↓ -->
+  <line x1="350" y1="434" x2="350" y2="484" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 是否修改成功  cx=350 cy=512 hw=78 hh=28  top=484 bottom=540 left=272 right=428 -->
+  <polygon points="350,484 428,512 350,540 272,512" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="512" text-anchor="middle" dominant-baseline="middle" fill="#000">是否修改成功</text>
+
+  <!-- 否: left→up→修改商品 left  label above segment near diamond -->
+  <polyline points="272,512 242,512 242,346 285,346"
+            fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+  <text x="268" y="502" text-anchor="end" fill="#000" font-size="13">否</text>
+
+  <!-- 是: down -->
+  <line x1="350" y1="540" x2="350" y2="580" stroke="black" stroke-width="1.5"/>
+  <text x="360" y="560" dominant-baseline="middle" fill="#000" font-size="13">是</text>
+
+  <!-- ============================================================
+       RIGHT BRANCH – 删除/下架商品  (center X=560)
+       ============================================================ -->
+
+  <!-- 删除/下架商品  x=488 y=328 w=144 h=36  right=632 bottom=364 -->
+  <rect x="488" y="328" width="144" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="560" y="346" text-anchor="middle" dominant-baseline="middle" fill="#000">删除/下架商品</text>
+
+  <!-- ↓ -->
+  <line x1="560" y1="364" x2="560" y2="398" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 确认操作  x=505 y=398 w=110 h=36  right=615 bottom=434 -->
+  <rect x="505" y="398" width="110" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="560" y="416" text-anchor="middle" dominant-baseline="middle" fill="#000">确认操作</text>
+
+  <!-- ↓ -->
+  <line x1="560" y1="434" x2="560" y2="484" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 是否操作成功  cx=560 cy=512 hw=78 hh=28  top=484 bottom=540 left=482 right=638 -->
+  <polygon points="560,484 638,512 560,540 482,512" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="560" y="512" text-anchor="middle" dominant-baseline="middle" fill="#000">是否操作成功</text>
+
+  <!-- 否: left→up→删除/下架 left  label above segment near diamond -->
+  <polyline points="482,512 452,512 452,346 488,346"
+            fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+  <text x="478" y="502" text-anchor="end" fill="#000" font-size="13">否</text>
+
+  <!-- 是: down -->
+  <polyline points="560,540 560,580 350,580" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+  <text x="570" y="560" dominant-baseline="middle" fill="#000" font-size="13">是</text>
+
+  <!-- ============================================================
+       CONVERGENCE BAR → 更新商品列表
+       ============================================================ -->
+
+  <!-- Single arrow from convergence centre down to 更新商品列表 -->
+  <line x1="350" y1="580" x2="350" y2="600" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 更新商品列表  x=270 y=600 w=160 h=36  bottom=636 -->
+  <rect x="270" y="600" width="160" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="618" text-anchor="middle" dominant-baseline="middle" fill="#000">更新商品列表</text>
+
+  <!-- ↓ -->
+  <line x1="350" y1="636" x2="350" y2="656" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 结束 -->
+  <ellipse cx="350" cy="678" rx="52" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="350" y="678" text-anchor="middle" dominant-baseline="middle" fill="#000">结束</text>
+
+</svg>
+</body>
+</html>

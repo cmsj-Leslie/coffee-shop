@@ -4,10 +4,8 @@ import com.coffeeshop.entity.Cart;
 import java.util.List;
 
 /**
- * @author Wen
  * @InterfaceName CartService
  *                购物车(Cart)表业务接口
- * @date 2025-09-04 09:21:00
  * @Version 1.0
  **/
 public interface CartService {

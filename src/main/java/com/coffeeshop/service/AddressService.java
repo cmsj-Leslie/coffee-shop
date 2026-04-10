@@ -5,10 +5,8 @@ import com.coffeeshop.entity.Address;
 import java.util.List;
 
 /**
- * @author Wen
  * @InterfaceName AddressService
  *                收货地址(Address)表业务接口
- * @date 2025-11-18 13:04:00
  * @Version 1.0
  **/
 public interface AddressService {

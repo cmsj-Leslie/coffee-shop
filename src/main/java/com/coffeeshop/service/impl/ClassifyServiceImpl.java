@@ -9,10 +9,8 @@ import com.coffeeshop.service.ClassifyService;
 import java.util.List;
 
 /**
- * @author Wen
  * @ClassName ClassifyServiceImpl
  *            归类(Classify)表业务接口实现类
- * @date 2025-10-19 13:51:00
  * @Version 1.0
  **/
 @Service("classifyService")

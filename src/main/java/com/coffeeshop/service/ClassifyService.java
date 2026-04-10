@@ -5,10 +5,8 @@ import com.coffeeshop.entity.Classify;
 import java.util.List;
 
 /**
- * @author Wen
  * @InterfaceName ClassifyService
  *                归类(Classify)表业务接口
- * @date 2025-12-18 14:18:00
  * @Version 1.0
  **/
 public interface ClassifyService {

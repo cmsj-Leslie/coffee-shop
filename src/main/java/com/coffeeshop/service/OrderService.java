@@ -5,10 +5,8 @@ import com.coffeeshop.entity.Order;
 import java.util.List;
 
 /**
- * @author Wen
  * @InterfaceName OrderService
  *                订单表(Order)表业务接口
- * @date 2026-01-10 12:58:00
  * @Version 1.0
  **/
 public interface OrderService {

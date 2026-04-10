@@ -10,7 +10,6 @@ import java.io.Serializable;
 /**
  * 收货地址(Address)实体类
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

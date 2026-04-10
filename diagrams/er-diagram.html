@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <title>系统E-R图</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#fff; display:flex; justify-content:center; padding:40px; }
+  </style>
+</head>
+<body>
+<svg width="950" height="800" xmlns="http://www.w3.org/2000/svg"
+     style="font-family:'Microsoft YaHei','微软雅黑',sans-serif; font-size:14px;">
+
+  <!-- ===============================
+       连线 (Lines & Polylines)
+       =============================== -->
+  <!-- User to D_CartTop to Cart E -->
+  <polyline points="405,140 150,140 150,230" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+  <line x1="150" y1="270" x2="150" y2="330" stroke="black" stroke-width="1.5"/>
+
+  <!-- Cart E to D_CartMid to Order E -->
+  <line x1="195" y1="350" x2="260" y2="350" stroke="black" stroke-width="1.5"/>
+  <line x1="340" y1="350" x2="405" y2="350" stroke="black" stroke-width="1.5"/>
+
+  <!-- User to Address E -->
+  <polyline points="405,160 80,160 80,550 105,550" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+
+  <!-- Address E to D_Address to Order E -->
+  <polyline points="195,550 330,550 330,470" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polyline points="330,430 330,390 430,390 430,370" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+
+  <!-- User to D_Order to Order E -->
+  <line x1="450" y1="170" x2="450" y2="230" stroke="black" stroke-width="1.5"/>
+  <line x1="450" y1="270" x2="450" y2="330" stroke="black" stroke-width="1.5"/>
+
+  <!-- User to Collection E to D_Collection to Product E -->
+  <polyline points="495,140 650,140 650,180" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+  <line x1="650" y1="220" x2="650" y2="250" stroke="black" stroke-width="1.5"/>
+  <line x1="650" y1="290" x2="650" y2="330" stroke="black" stroke-width="1.5"/>
+
+  <!-- User to Review E -->
+  <polyline points="495,160 580,160 580,550 605,550" fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="miter"/>
+
+  <!-- Review E to D_Review to Product E -->
+  <line x1="650" y1="530" x2="650" y2="470" stroke="black" stroke-width="1.5"/>
+  <line x1="650" y1="430" x2="650" y2="370" stroke="black" stroke-width="1.5"/>
+
+  <!-- Order E to Product E -->
+  <line x1="495" y1="350" x2="605" y2="350" stroke="black" stroke-width="1.5"/>
+
+  <!-- Product E to D_Category to Category E -->
+  <line x1="695" y1="350" x2="720" y2="350" stroke="black" stroke-width="1.5"/>
+  <line x1="800" y1="350" x2="825" y2="350" stroke="black" stroke-width="1.5"/>
+
+  <!-- Order E to D_AI to AI_Chat E -->
+  <line x1="470" y1="370" x2="470" y2="430" stroke="black" stroke-width="1.5"/>
+  <line x1="470" y1="470" x2="470" y2="530" stroke="black" stroke-width="1.5"/>
+
+
+  <!-- ===============================
+       矩形实体 (Rectangles)
+       =============================== -->
+  <g fill="white" stroke="black" stroke-width="1.5">
+    <rect x="405" y="130" width="90" height="40" />
+    <rect x="105" y="330" width="90" height="40" />
+    <rect x="105" y="530" width="90" height="40" />
+    <rect x="605" y="180" width="90" height="40" />
+    <rect x="605" y="530" width="90" height="40" />
+    <rect x="405" y="330" width="90" height="40" />
+    <rect x="605" y="330" width="90" height="40" />
+    <rect x="825" y="330" width="90" height="40" />
+    <rect x="420" y="530" width="100" height="40" />
+  </g>
+
+  <g text-anchor="middle" dominant-baseline="middle" fill="#000">
+    <text x="450" y="150">用户</text>
+    <text x="150" y="350">购物车</text>
+    <text x="150" y="550">收货地址</text>
+    <text x="650" y="200">收藏</text>
+    <text x="650" y="550">评价</text>
+    <text x="450" y="350">订单</text>
+    <text x="650" y="350">商品</text>
+    <text x="870" y="350">分类</text>
+    <text x="470" y="550"><tspan font-family="'Times New Roman',serif">AI</tspan>聊天记录</text>
+  </g>
+
+  <!-- ===============================
+       菱形联系 (Diamonds)
+       =============================== -->
+  <g fill="white" stroke="black" stroke-width="1.5">
+    <polygon points="150,230 190,250 150,270 110,250" />
+    <polygon points="300,330 340,350 300,370 260,350" />
+    <polygon points="450,230 490,250 450,270 410,250" />
+    <polygon points="650,250 690,270 650,290 610,270" />
+    <polygon points="760,330 800,350 760,370 720,350" />
+    <polygon points="330,430 370,450 330,470 290,450" />
+    <polygon points="650,430 690,450 650,470 610,450" />
+    <polygon points="470,430 510,450 470,470 430,450" />
+  </g>
+
+  <g text-anchor="middle" dominant-baseline="middle" fill="#000">
+    <text x="150" y="250">购物车</text>
+    <text x="300" y="350">购物车</text>
+    <text x="450" y="250">订单</text>
+    <text x="650" y="270">收藏</text>
+    <text x="760" y="350">分类</text>
+    <text x="330" y="450">收货地址</text>
+    <text x="650" y="450">评价</text>
+    <text x="470" y="450"><tspan font-family="'Times New Roman',serif">AI</tspan>聊天</text>
+  </g>
+
+  <!-- ===============================
+       1 和 N 标注 (Cardinalities)
+       =============================== -->
+  <g font-family="'Times New Roman',serif" font-size="14px" fill="#000" dominant-baseline="middle">
+    <!-- 用户左侧 (购物车和地址) -->
+    <text x="380" y="130">1</text>
+    <text x="380" y="170">1</text>
+    
+    <!-- 购物车相关 -->
+    <text x="165" y="310">N</text>
+    <text x="215" y="340">N</text>
+    
+    <!-- 订单相关 -->
+    <text x="390" y="340">1</text>
+    <text x="465" y="190">1</text>
+    <text x="465" y="310">N</text>
+    <text x="515" y="340">N</text>
+    
+    <!-- 用户右侧 (收藏和评价) -->
+    <text x="520" y="130">1</text>
+    <text x="520" y="170">1</text>
+    
+    <!-- 收藏相关 -->
+    <text x="665" y="200">N</text>
+    <text x="665" y="235">N</text>
+    
+    <!-- 评价相关 -->
+    <text x="665" y="500">N</text>
+    <text x="585" y="540">1</text>
+    
+    <!-- 收货地址相关 -->
+    <text x="95" y="540">1</text>
+    <text x="210" y="540">N</text>
+    
+    <!-- 商品和分类相关 -->
+    <text x="665" y="310">1</text>
+    <text x="665" y="390">1</text>
+    <text x="590" y="340">1</text>
+    <text x="705" y="340">N</text>
+    <text x="815" y="340">1</text>
+    
+    <!-- AI聊天记录相关 -->
+    <text x="485" y="390">1</text>
+    <text x="485" y="510">N</text>
+  </g>
+</svg>
+</body>
+</html>

@@ -17,7 +17,6 @@ import java.util.Map;
 /**
  * 配置Druid的相关信息
  *
- * @author Wen
  */
 @Configuration
 public class DruidConfig {

@@ -25,7 +25,6 @@ import com.coffeeshop.service.AiChatService;
  * - 决定了 AI 回答的专业度、风格和边界
  * - 是整个 AI 助手最核心的部分
  *
- * @author Wen
  */
 @Slf4j // Lombok 注解：自动生成日志对象 log
 @Service // 注册为 Spring Service Bean

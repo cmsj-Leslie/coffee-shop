@@ -5,10 +5,8 @@ import com.coffeeshop.entity.Collection;
 import java.util.List;
 
 /**
- * @author Wen
  * @InterfaceName CollectionService
  *                收藏表(Collection)表业务接口
- * @date 2025-12-17 09:06:00
  * @Version 1.0
  **/
 public interface CollectionService {

@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * 收藏表(Collection)实体类
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

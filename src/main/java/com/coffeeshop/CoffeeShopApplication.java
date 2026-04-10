@@ -11,7 +11,6 @@ import com.coffeeshop.config.AiConfig;
 /**
  * 应用程序启动类
  *
- * @author Wen
  */
 @SpringBootApplication
 @MapperScan(basePackages = { "com.coffeeshop.mapper" })

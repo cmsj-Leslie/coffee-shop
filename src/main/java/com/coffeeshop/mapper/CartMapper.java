@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 购物车(Cart)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface CartMapper {

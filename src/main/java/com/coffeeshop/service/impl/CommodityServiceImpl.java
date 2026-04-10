@@ -11,10 +11,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * @author Wen
  * @ClassName CommodityServiceImpl
  *            商品【咖啡豆】表(Commodity)表业务接口实现类
- * @date 2025-12-20 09:13:00
  * @Version 1.0
  **/
 @Service("commodityService")

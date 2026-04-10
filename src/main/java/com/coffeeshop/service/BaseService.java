@@ -7,8 +7,6 @@ import javax.annotation.Resource;
 /**
  * : 基础业务逻辑类
  *
- * @author: WenZeTong
- * @date 2025-12-18 12:18:00
  * @Version: 1.0
  */
 public class BaseService {

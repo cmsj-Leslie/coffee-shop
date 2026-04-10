@@ -8,10 +8,8 @@ import com.coffeeshop.service.OrderService;
 import java.util.List;
 
 /**
- * @author Wen
  * @ClassName OrderServiceImpl
  *            订单表(Order)表业务接口实现类
- * @date 2025-11-15 14:22:00
  * @Version 1.0
  **/
 @Service("orderService")

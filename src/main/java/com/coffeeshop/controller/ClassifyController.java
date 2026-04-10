@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * 商品分类控制器
  *
- * @author Wen
  */
 @RestController
 public class ClassifyController extends BaseController {

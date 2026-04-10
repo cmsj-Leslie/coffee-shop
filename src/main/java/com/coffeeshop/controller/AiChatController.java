@@ -27,7 +27,6 @@ import java.util.*;
  * - 通过 Session 获取当前登录用户
  * - 只有登录用户的聊天记录才会持久化到数据库
  *
- * @author Wen
  */
 @RestController // 声明为 REST 控制器（返回 JSON 而非视图）
 @RequestMapping("/ai") // 所有接口以 /ai 开头

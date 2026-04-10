@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 订单表(Order)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface OrderMapper {

@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * 订单表(Order)实体类
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

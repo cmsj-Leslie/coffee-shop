@@ -8,10 +8,8 @@ import com.coffeeshop.service.CommodityCommentService;
 import java.util.List;
 
 /**
- * @author Wen
  * @ClassName CommodityCommentServiceImpl
  *            商品评价表(CommodityComment)表业务接口实现类
- * @date 2025-11-08 16:33:00
  * @Version 1.0
  **/
 @Service("commodityCommentService")

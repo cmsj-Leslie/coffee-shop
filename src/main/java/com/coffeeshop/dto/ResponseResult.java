@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 /**
  * 数据返回结果
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

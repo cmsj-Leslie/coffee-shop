@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 /**
  * 系统页面跳转控制器
  *
- * @author Wen
  */
 @Controller
 public class SystemController extends BaseController {

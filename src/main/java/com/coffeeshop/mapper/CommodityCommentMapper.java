@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 商品评价表(CommodityComment)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface CommodityCommentMapper {

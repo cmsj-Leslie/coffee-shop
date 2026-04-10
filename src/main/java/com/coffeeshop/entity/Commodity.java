@@ -12,7 +12,6 @@ import java.util.Objects;
 /**
  * 商品表(Commodity)实体类
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

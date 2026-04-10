@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 收货地址(Address)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface AddressMapper {

@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * 归类(Classify)实体类
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

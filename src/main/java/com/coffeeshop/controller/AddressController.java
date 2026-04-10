@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * 地址控制器
  *
- * @author Wen
  */
 @RestController
 public class AddressController extends BaseController {

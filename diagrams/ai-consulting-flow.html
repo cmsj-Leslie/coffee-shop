@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <title>智能咨询业务流程图</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#fff; display:flex; justify-content:center; padding:40px; }
+  </style>
+</head>
+<body>
+<svg width="650" height="950" xmlns="http://www.w3.org/2000/svg"
+     style="font-family:'Microsoft YaHei','微软雅黑',sans-serif; font-size:14px;">
+  <defs>
+    <!-- 统一实心箭头定义 -->
+    <marker id="arr" markerWidth="10" markerHeight="7"
+            refX="10" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0,10 3.5,0 7" fill="#000"/>
+    </marker>
+  </defs>
+
+  <!-- ===============================
+       智能咨询业务流程
+       =============================== -->
+
+  <!-- 开始 -->
+  <ellipse cx="300" cy="44" rx="52" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="44" text-anchor="middle" dominant-baseline="middle" fill="#000">开始</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="66" x2="300" y2="100" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 用户点击AI助手按钮 -->
+  <rect x="210" y="100" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="118" text-anchor="middle" dominant-baseline="middle" fill="#000">用户点击<tspan font-family="'Times New Roman',serif">AI</tspan>助手按钮</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="136" x2="300" y2="170" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 展开聊天窗口 -->
+  <rect x="210" y="170" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="188" text-anchor="middle" dominant-baseline="middle" fill="#000">展开聊天窗口</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="206" x2="300" y2="240" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 输入咨询内容 -->
+  <rect x="210" y="240" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="258" text-anchor="middle" dominant-baseline="middle" fill="#000">输入咨询内容</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="276" x2="300" y2="310" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 选择AI模型 (DeepSeek/Gemini) -->
+  <!-- 加宽以适应文字长度 260px, cx=300 -> x=170 -->
+  <rect x="170" y="310" width="260" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="328" text-anchor="middle" dominant-baseline="middle" fill="#000">选择<tspan font-family="'Times New Roman',serif">AI</tspan>模型 <tspan font-family="'Times New Roman',serif">(DeepSeek/Gemini)</tspan></text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="346" x2="300" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 前端发送AJAX请求 -->
+  <rect x="210" y="380" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="398" text-anchor="middle" dominant-baseline="middle" fill="#000">前端发送<tspan font-family="'Times New Roman',serif">AJAX</tspan>请求</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="416" x2="300" y2="450" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 后端调用AI API接口 -->
+  <rect x="210" y="450" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="468" text-anchor="middle" dominant-baseline="middle" fill="#000">后端调用<tspan font-family="'Times New Roman',serif">AI API</tspan>接口</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="486" x2="300" y2="520" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 是否获取响应 -->
+  <!-- 菱形计算: cx=300, cy=550, hw=80, hh=30 => left=220, right=380, top=520, bot=580 -->
+  <polygon points="300,520 380,550 300,580 220,550" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="550" text-anchor="middle" dominant-baseline="middle" fill="#000">是否获取响应</text>
+
+  <!-- 否 -> 返回错误提示 -->
+  <!-- left arrow directly touches x=420 via marker refX adjustment -->
+  <line x1="380" y1="550" x2="420" y2="550" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="400" y="542" text-anchor="middle" fill="#000">否</text>
+
+  <rect x="420" y="532" width="120" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="480" y="550" text-anchor="middle" dominant-baseline="middle" fill="#000">返回错误提示</text>
+
+  <!-- 是 ↓ -->
+  <line x1="300" y1="580" x2="300" y2="614" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="312" y="598" dominant-baseline="middle" fill="#000">是</text>
+
+  <!-- 保存对话记录至数据库 -->
+  <rect x="210" y="614" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="632" text-anchor="middle" dominant-baseline="middle" fill="#000">保存对话记录至数据库</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="650" x2="300" y2="684" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 返回AI回复至前端显示 -->
+  <rect x="210" y="684" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="702" text-anchor="middle" dominant-baseline="middle" fill="#000">返回<tspan font-family="'Times New Roman',serif">AI</tspan>回复至前端显示</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="720" x2="300" y2="754" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 是否继续咨询 -->
+  <!-- cx=300, cy=784, hw=80, hh=30 => left=220, top=754, bot=814 -->
+  <polygon points="300,754 380,784 300,814 220,784" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="784" text-anchor="middle" dominant-baseline="middle" fill="#000">是否继续咨询</text>
+
+  <!-- 是 -> 回环到“输入咨询内容” -->
+  <!-- 220,784 -> 120,784 -> 120,258 -> 210,258 (y=258 is the center of "输入咨询内容" box) -->
+  <polyline points="220,784 120,784 120,258 210,258" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+  <text x="180" y="776" text-anchor="middle" fill="#000">是</text>
+
+  <!-- 否 ↓ -->
+  <line x1="300" y1="814" x2="300" y2="848" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="312" y="832" dominant-baseline="middle" fill="#000">否</text>
+
+  <!-- 结束 -->
+  <!-- cx=300, cy=870, rx=52, ry=22 -->
+  <ellipse cx="300" cy="870" rx="52" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="870" text-anchor="middle" dominant-baseline="middle" fill="#000">结束</text>
+
+</svg>
+</body>
+</html>

@@ -21,7 +21,6 @@ import java.util.List;
  * - 方法名与 XML 中的 id 对应
  * - @Param 注解用于给参数命名，在 XML 中通过 #{名称} 引用
  *
- * @author Wen
  */
 @Mapper // MyBatis 注解：声明这是一个 Mapper 接口
 public interface AiChatMessageMapper {

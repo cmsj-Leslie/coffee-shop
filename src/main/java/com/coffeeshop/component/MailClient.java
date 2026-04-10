@@ -14,7 +14,6 @@ import java.util.Objects;
 /**
  * 邮箱工具类
  *
- * @author Wen
  */
 @Component
 public class MailClient {

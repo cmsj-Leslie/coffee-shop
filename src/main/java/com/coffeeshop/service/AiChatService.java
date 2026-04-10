@@ -9,7 +9,6 @@ package com.coffeeshop.service;
  * 设计模式：
  * 采用策略模式思想，通过接口抽象，方便后续扩展更多 AI 提供商
  *
- * @author Wen
  */
 public interface AiChatService {
 

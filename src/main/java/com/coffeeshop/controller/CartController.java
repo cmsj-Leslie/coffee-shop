@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * 购物车控制器
  *
- * @author Wen
  */
 @RestController
 public class CartController extends BaseController {

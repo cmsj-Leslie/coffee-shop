@@ -5,10 +5,8 @@ import com.coffeeshop.entity.User;
 import java.util.List;
 
 /**
- * @author Wen
  * @InterfaceName UserService
  *                用户表(User)表业务接口
- * @date 2025-12-17 13:21:00
  * @Version 1.0
  **/
 public interface UserService {

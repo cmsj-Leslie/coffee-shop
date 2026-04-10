@@ -89,7 +89,7 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/cmsj-Leslie/kaka-shop.git
+git clone https://github.com/your-username/kaka-shop.git
 cd kaka-shop
 
 # 2. 创建数据库并导入数据
@@ -226,7 +226,7 @@ java -version && mvn -version
 ### 2. 上传项目
 
 ```bash
-git clone https://github.com/cmsj-Leslie/kaka-shop.git
+git clone https://github.com/your-username/kaka-shop.git
 cd kaka-shop
 ```
 
@@ -441,4 +441,4 @@ kaka-shop/
 
 感谢所有为本项目提供灵感和支持的开发者！
 
-如有问题或建议，欢迎提交 [Issue](https://github.com/cmsj-Leslie/kaka-shop/issues)。
+如有问题或建议，欢迎提交 [Issue](https://github.com/your-username/kaka-shop/issues)。

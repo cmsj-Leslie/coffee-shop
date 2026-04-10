@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 归类(Classify)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface ClassifyMapper {

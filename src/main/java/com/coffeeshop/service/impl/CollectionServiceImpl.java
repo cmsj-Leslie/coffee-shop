@@ -8,10 +8,8 @@ import com.coffeeshop.service.CollectionService;
 import java.util.List;
 
 /**
- * @author Wen
  * @ClassName CollectionServiceImpl
  *            收藏表(Collection)表业务接口实现类
- * @date 2025-12-14 16:57:00
  * @Version 1.0
  **/
 @Service("collectionService")

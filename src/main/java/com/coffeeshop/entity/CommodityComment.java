@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * 商品评价表(CommodityComment)实体类
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

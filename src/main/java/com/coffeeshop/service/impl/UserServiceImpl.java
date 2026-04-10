@@ -14,10 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Wen
  * @ClassName UserServiceImpl
  *            用户表(User)表业务接口实现类
- * @date 2025-09-28 12:54:00
  * @Version 1.0
  **/
 @Service("userService")

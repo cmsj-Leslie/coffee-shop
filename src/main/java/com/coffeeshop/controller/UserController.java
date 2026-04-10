@@ -13,7 +13,6 @@ import java.util.Date;
 /**
  * 用户控制器
  *
- * @author Wen
  */
 @RestController
 public class UserController extends BaseController {

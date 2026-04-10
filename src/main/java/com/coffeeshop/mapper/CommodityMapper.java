@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 商品【咖啡豆】表(Commodity)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface CommodityMapper {

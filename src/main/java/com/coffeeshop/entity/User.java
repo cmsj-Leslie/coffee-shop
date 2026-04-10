@@ -13,7 +13,6 @@ import java.util.Date;
  * 表示系统中的用户信息
  * 对应数据库中的 user 表
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

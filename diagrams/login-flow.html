@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <title>登录流程图</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#fff; display:flex; justify-content:center; padding:40px; }
+  </style>
+</head>
+<body>
+<!--
+  Layout:
+  Canvas 640×720, main column center cx=330
+  Left-side nodes: right edge ~190 → arrow gap to diamond left ~230-190=40px
+  Right-side nodes: left edge ~460 → arrow gap from diamond right ~420-460=40px
+-->
+<svg width="640" height="720" xmlns="http://www.w3.org/2000/svg"
+     style="font-family:'Microsoft YaHei','微软雅黑',sans-serif; font-size:14px;">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7"
+            refX="10" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0,10 3.5,0 7" fill="#000"/>
+    </marker>
+  </defs>
+
+  <!-- ① 开始 -->
+  <ellipse cx="330" cy="50" rx="50" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="50" text-anchor="middle" dominant-baseline="middle" fill="#000">开始</text>
+
+  <!-- ①→② -->
+  <line x1="330" y1="72" x2="330" y2="94" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ② 获取邮箱和密码 -->
+  <rect x="238" y="94" width="184" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="112" text-anchor="middle" dominant-baseline="middle" fill="#000">获取邮箱和密码</text>
+
+  <!-- ②→③ -->
+  <line x1="330" y1="130" x2="330" y2="160" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ③ 输入信息是否为空  cx=330 cy=193 hw=96 hh=30  left=234 right=426 -->
+  <polygon points="330,163 426,193 330,223 234,193" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="193" text-anchor="middle" dominant-baseline="middle" fill="#000">输入信息是否为空</text>
+
+  <!-- 是: 左分支 → ④ 提示信息不能为空  (234→190) -->
+  <line x1="234" y1="193" x2="190" y2="193" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- 是 label: above arrow, near diamond edge -->
+  <text x="230" y="183" text-anchor="middle" fill="#000" font-size="13">是</text>
+
+  <!-- ④ 提示信息不能为空  right=190 w=130 x=60 -->
+  <rect x="60" y="175" width="130" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="125" y="193" text-anchor="middle" dominant-baseline="middle" fill="#000">提示信息不能为空</text>
+
+  <!-- ④→② 回环 up then right -->
+  <polyline points="125,175 125,112 238,112"
+            fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 否: 下分支 →⑤ -->
+  <line x1="330" y1="223" x2="330" y2="255" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- 否 label: below diamond bottom, right of line -->
+  <text x="342" y="241" dominant-baseline="middle" fill="#000" font-size="13">否</text>
+
+  <!-- ⑤ 以邮箱为关键字检索数据库 -->
+  <rect x="202" y="255" width="256" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="273" text-anchor="middle" dominant-baseline="middle" fill="#000">以邮箱为关键字检索数据库</text>
+
+  <!-- ⑤→⑥ -->
+  <line x1="330" y1="291" x2="330" y2="320" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ⑥ 用户是否为空  cx=330 cy=350 hw=88 hh=28  left=242 right=418 -->
+  <polygon points="330,322 418,350 330,378 242,350" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="350" text-anchor="middle" dominant-baseline="middle" fill="#000">用户是否为空</text>
+
+  <!-- 是: 左分支 → ⑦ 用户不存在  (242→192) -->
+  <line x1="242" y1="350" x2="192" y2="350" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- 是 label: above arrow, near diamond edge -->
+  <text x="237" y="340" text-anchor="middle" fill="#000" font-size="13">是</text>
+
+  <!-- ⑦ 用户不存在  right=192 w=114 x=78 -->
+  <rect x="78" y="332" width="114" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="135" y="350" text-anchor="middle" dominant-baseline="middle" fill="#000">用户不存在</text>
+
+  <!-- ⑦→结束 左侧回环 -->
+  <polyline points="78,350 40,350 40,648 280,648"
+            fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 否: 下分支 →⑧ -->
+  <line x1="330" y1="378" x2="330" y2="408" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="342" y="394" dominant-baseline="middle" fill="#000" font-size="13">否</text>
+
+  <!-- ⑧ 通过邮箱获取密码 -->
+  <rect x="228" y="408" width="204" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="426" text-anchor="middle" dominant-baseline="middle" fill="#000">通过邮箱获取密码</text>
+
+  <!-- ⑧→⑨ -->
+  <line x1="330" y1="444" x2="330" y2="472" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ⑨ 输入密码是否正确  cx=330 cy=502 hw=100 hh=28  left=230 right=430 -->
+  <polygon points="330,474 430,502 330,530 230,502" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="502" text-anchor="middle" dominant-baseline="middle" fill="#000">输入密码是否正确</text>
+
+  <!-- 否: 右分支 → ⑩ 密码错误  (430→460) -->
+  <line x1="430" y1="502" x2="460" y2="502" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- 否 label: above arrow, near diamond edge -->
+  <text x="432" y="492" text-anchor="start" fill="#000" font-size="13">否</text>
+
+  <!-- ⑩ 密码错误  left=460 w=90 -->
+  <rect x="460" y="484" width="90" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="505" y="502" text-anchor="middle" dominant-baseline="middle" fill="#000">密码错误</text>
+
+  <!-- ⑩→结束 右侧回环 -->
+  <polyline points="550,502 582,502 582,648 380,648"
+            fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 是: 下分支 →⑪ 登录成功 -->
+  <line x1="330" y1="530" x2="330" y2="558" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="342" y="546" dominant-baseline="middle" fill="#000" font-size="13">是</text>
+
+  <!-- ⑪ 登录成功 -->
+  <rect x="255" y="558" width="150" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="576" text-anchor="middle" dominant-baseline="middle" fill="#000">登录成功</text>
+
+  <!-- ⑪→结束 -->
+  <line x1="330" y1="594" x2="330" y2="626" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- 结束 -->
+  <ellipse cx="330" cy="648" rx="50" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="330" y="648" text-anchor="middle" dominant-baseline="middle" fill="#000">结束</text>
+</svg>
+</body>
+</html>

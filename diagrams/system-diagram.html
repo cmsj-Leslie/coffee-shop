@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>咖咖商城系统 — 功能模块图</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; color: #000; }
+
+    body {
+      font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 40px;
+      min-height: 100vh;
+    }
+
+    /* ── Outer wrapper (position:relative so SVG overlay works) ── */
+    .diagram {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Level-0 / Level-1 node boxes ── */
+    .node {
+      border: 1.5px solid #000;
+      padding: 8px 24px;
+      white-space: nowrap;
+      font-size: 16px;
+      background: #fff;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* ── Vertical leaf boxes ── */
+    .node-v {
+      border: 1.5px solid #000;
+      width: 38px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      background: #fff;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      letter-spacing: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── Row / Col flex helpers ── */
+    .row { display: flex; align-items: flex-start; justify-content: center; }
+    .col { display: flex; flex-direction: column; align-items: center; }
+
+    /* ── SVG connector overlay ── */
+    svg.connectors {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+    svg.connectors line {
+      stroke: #000;
+      stroke-width: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="diagram" id="diagram">
+
+  <!-- Level 0: Root -->
+  <div class="node" id="root">咖咖商城系统</div>
+
+  <!-- 60px vertical gap before branching -->
+  <div style="height:60px"></div>
+
+  <!-- Level 1: two branches, spaced far apart -->
+  <div class="row" style="gap: 200px; align-items: flex-start;">
+
+    <!-- LEFT: 管理员 -->
+    <div class="col" id="col-admin">
+      <div class="node" id="admin">管理员</div>
+      <!-- 50px gap before leaf row -->
+      <div style="height:50px"></div>
+      <!-- leaf row with 10px gaps between boxes -->
+      <div class="row" style="gap:10px;" id="admin-leaves">
+        <div class="node-v" id="a1">商品管理</div>
+        <div class="node-v" id="a2">分类管理</div>
+        <div class="node-v" id="a3">订单管理</div>
+        <div class="node-v" id="a4">用户管理</div>
+        <div class="node-v" id="a5">评论管理</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: 普通用户 -->
+    <div class="col" id="col-user">
+      <div class="node" id="user">普通用户</div>
+      <div style="height:50px"></div>
+      <div class="row" style="gap:10px;" id="user-leaves">
+        <div class="node-v" id="u1">商城浏览</div>
+        <div class="node-v" id="u2">商品搜索</div>
+        <div class="node-v" id="u3">购物车管理</div>
+        <div class="node-v" id="u4">订单支付</div>
+        <div class="node-v" id="u5"><span style="font-family:'Times New Roman',serif;">AI</span>智能助手</div>
+        <div class="node-v" id="u6">地址管理</div>
+        <div class="node-v" id="u7">商品评价</div>
+        <div class="node-v" id="u8">收藏管理</div>
+      </div>
+    </div>
+
+  </div><!-- /.row level-1 -->
+
+  <!-- SVG overlay for all connector lines -->
+  <svg class="connectors" id="svg-lines"></svg>
+
+</div><!-- /.diagram -->
+
+<script>
+(function () {
+  const diagram = document.getElementById('diagram');
+  const svg     = document.getElementById('svg-lines');
+
+  // Get bounding rect relative to the diagram container
+  function r(id) {
+    const el = document.getElementById(id);
+    const eb = el.getBoundingClientRect();
+    const db = diagram.getBoundingClientRect();
+    return {
+      top:    eb.top    - db.top,
+      left:   eb.left   - db.left,
+      right:  eb.right  - db.left,
+      bottom: eb.bottom - db.top,
+      cx:     (eb.left + eb.right)  / 2 - db.left,
+      cy:     (eb.top  + eb.bottom) / 2 - db.top,
+    };
+  }
+
+  function ln(x1, y1, x2, y2) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    el.setAttribute('x1', x1); el.setAttribute('y1', y1);
+    el.setAttribute('x2', x2); el.setAttribute('y2', y2);
+    svg.appendChild(el);
+  }
+
+  // ── Root → 管理员 / 普通用户 ──────────────────────────────────
+  const root  = r('root');
+  const admin = r('admin');
+  const user  = r('user');
+
+  // Short vertical drop from root centre to horizontal bar
+  const rootDropY = root.bottom + 20;
+  ln(root.cx, root.bottom, root.cx, rootDropY);
+  // Horizontal bar spanning both branches
+  ln(admin.cx, rootDropY, user.cx, rootDropY);
+  // Verticals down to each branch's top
+  ln(admin.cx, rootDropY, admin.cx, admin.top);
+  ln(user.cx,  rootDropY, user.cx,  user.top);
+
+  // ── 管理员 → leaf row ──────────────────────────────────────────
+  function connectLeafRow(parentId, leafIds) {
+    const p      = r(parentId);
+    const leaves = leafIds.map(id => r(id));
+
+    // Horizontal bar sits halfway between parent bottom and leaf tops
+    const barY = p.bottom + 25;
+
+    // Short vertical from parent down to bar
+    ln(p.cx, p.bottom, p.cx, barY);
+    // Horizontal bar
+    ln(leaves[0].cx, barY, leaves[leaves.length - 1].cx, barY);
+    // Drop lines from bar to each leaf
+    leaves.forEach(l => ln(l.cx, barY, l.cx, l.top));
+  }
+
+  connectLeafRow('admin', ['a1','a2','a3','a4','a5']);
+  connectLeafRow('user',  ['u1','u2','u3','u4','u5','u6','u7','u8']);
+
+})();
+</script>
+</body>
+</html>

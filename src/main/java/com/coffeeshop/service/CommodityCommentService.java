@@ -5,10 +5,8 @@ import com.coffeeshop.entity.CommodityComment;
 import java.util.List;
 
 /**
- * @author Wen
  * @InterfaceName CommodityCommentService
  *                商品评价表(CommodityComment)表业务接口
- * @date 2025-10-12 09:13:00
  * @Version 1.0
  **/
 public interface CommodityCommentService {

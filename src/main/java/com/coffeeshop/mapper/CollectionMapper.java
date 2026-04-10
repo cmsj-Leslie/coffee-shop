@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 收藏表(Collection)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface CollectionMapper {

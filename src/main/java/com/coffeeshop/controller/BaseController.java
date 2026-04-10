@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * 基础控制器
  *
- * @author Wen
  */
 public class BaseController {
 

@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 用户表(User)表数据库访问层
  *
- * @author Wen
  **/
 @Mapper
 public interface UserMapper {

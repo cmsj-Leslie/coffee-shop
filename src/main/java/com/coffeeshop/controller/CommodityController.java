@@ -17,7 +17,6 @@ import java.util.Map;
 /**
  * 商品控制层
  *
- * @author Wen
  */
 @RestController
 public class CommodityController extends BaseController {

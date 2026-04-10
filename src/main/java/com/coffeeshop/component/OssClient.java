@@ -17,7 +17,6 @@ import java.util.Objects;
 /**
  * 对象存储工具
  *
- * @author Wen
  */
 @Component
 public class OssClient {

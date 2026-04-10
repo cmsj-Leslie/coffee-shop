@@ -10,7 +10,6 @@ import java.util.Date;
 /**
  * 评论控制器
  *
- * @author Wen
  */
 @RestController
 public class CommentController extends BaseController {

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <title>结账顺序图/生成订单时序图</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#fff; display:flex; justify-content:center; padding:40px; }
+  </style>
+</head>
+<body>
+<!--
+  Lifeline X Coordinates:
+  L1 (普通用户): 80
+  L2 (前端页面): 260
+  L3 (订单控制层): 440
+  L4 (核心业务层): 620
+  L5 (MySQL数据库): 800
+-->
+<svg width="900" height="880" xmlns="http://www.w3.org/2000/svg"
+     style="font-family:'Microsoft YaHei','微软雅黑',sans-serif; font-size:14px;">
+  <defs>
+    <!-- Solid black arrowhead for sync messages -->
+    <marker id="arr_solid" markerWidth="10" markerHeight="8"
+            refX="10" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0,10 4,0 8" fill="#000"/>
+    </marker>
+    <!-- Open arrowhead for dashed return messages -->
+    <marker id="arr_dashed" markerWidth="12" markerHeight="10"
+            refX="11" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <polyline points="2,1 11,5 2,9" fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="miter"/>
+    </marker>
+  </defs>
+
+  <!-- ===============================
+       背景生命线
+       =============================== -->
+  <!-- Starts below the headers (y > 105) so it doesn't overlap text or boxes -->
+  <line x1="80" y1="105" x2="80" y2="830" stroke="black" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="260" y1="110" x2="260" y2="830" stroke="black" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="440" y1="110" x2="440" y2="830" stroke="black" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="620" y1="110" x2="620" y2="830" stroke="black" stroke-width="1.2" stroke-dasharray="6,4"/>
+  <line x1="800" y1="110" x2="800" y2="830" stroke="black" stroke-width="1.2" stroke-dasharray="6,4"/>
+
+  <!-- ===============================
+       顶部节点 (Headers)
+       =============================== -->
+  <!-- L1: 普通用户 Stick Figure -->
+  <g stroke="black" stroke-width="1.5" fill="none">
+    <circle cx="80" cy="25" r="9" />
+    <line x1="80" y1="34" x2="80" y2="55" />
+    <line x1="60" y1="42" x2="100" y2="42" />
+    <line x1="80" y1="55" x2="65" y2="75" />
+    <line x1="80" y1="55" x2="95" y2="75" />
+  </g>
+  <text x="80" y="93" text-anchor="middle" fill="#000">普通用户</text>
+
+  <!-- L2: 前端页面 -->
+  <rect x="215" y="72" width="90" height="34" fill="white" stroke="black" stroke-width="1.5" rx="3" ry="3"/>
+  <text x="260" y="89" text-anchor="middle" dominant-baseline="middle" fill="#000">前端页面</text>
+
+  <!-- L3: 订单控制层 -->
+  <rect x="385" y="72" width="110" height="34" fill="white" stroke="black" stroke-width="1.5" rx="3" ry="3"/>
+  <text x="440" y="89" text-anchor="middle" dominant-baseline="middle" fill="#000">订单控制层</text>
+
+  <!-- L4: 核心业务层 -->
+  <rect x="565" y="72" width="110" height="34" fill="white" stroke="black" stroke-width="1.5" rx="3" ry="3"/>
+  <text x="620" y="89" text-anchor="middle" dominant-baseline="middle" fill="#000">核心业务层</text>
+
+  <!-- L5: MySQL数据库 -->
+  <rect x="735" y="72" width="130" height="34" fill="white" stroke="black" stroke-width="1.5" rx="3" ry="3"/>
+  <text x="800" y="89" text-anchor="middle" dominant-baseline="middle" fill="#000"><tspan font-family="'Times New Roman',serif">MySQL</tspan>数据库</text>
+
+  <!-- ===============================
+       激活块 (Activation Rectangles)
+       =============================== -->
+  <!-- Target line drops into the left edge precisely. With box width 12: left_edge=center-6, right_edge=center+6 -->
+  <!-- L2 Active: 130 to 780 -->
+  <rect x="254" y="130" width="12" height="650" fill="white" stroke="black" stroke-width="1.5"/>
+  <!-- L3 Active: 180 to 730 -->
+  <rect x="434" y="180" width="12" height="550" fill="white" stroke="black" stroke-width="1.5"/>
+  <!-- L4 Active: 230 to 680 -->
+  <rect x="614" y="230" width="12" height="450" fill="white" stroke="black" stroke-width="1.5"/>
+  
+  <!-- L5 Active small blocks (each mapping to a target database operation) -->
+  <rect x="794" y="280" width="12" height="50" fill="white" stroke="black" stroke-width="1.5"/>
+  <rect x="794" y="380" width="12" height="50" fill="white" stroke="black" stroke-width="1.5"/>
+  <rect x="794" y="480" width="12" height="50" fill="white" stroke="black" stroke-width="1.5"/>
+  <rect x="794" y="580" width="12" height="50" fill="white" stroke="black" stroke-width="1.5"/>
+
+  <!-- ===============================
+       交互消息 (Message Arrows & Text)
+       =============================== -->
+  <!-- 
+       Aesthetics adjustment applied:
+       - Forward lines (Solid): Left aligned text near source. 
+       - Return lines (Dashed, open arrow): Left aligned text near target!
+       This perfectly mirrors the specific spatial layout in the reference image.
+  -->
+
+  <!-- 1. 点击提交结算 L1 -> L2 -->
+  <polyline points="80,130 254,130" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr_solid)"/>
+  <text x="100" y="123" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">1</tspan>、点击提交结算</text>
+
+  <!-- 2. 发送结算请求 L2 -> L3 -->
+  <polyline points="266,180 434,180" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr_solid)"/>
+  <text x="286" y="173" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">2</tspan>、发送结算请求</text>
+
+  <!-- 3. 调用生成订单逻辑 L3 -> L4 -->
+  <polyline points="446,230 614,230" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr_solid)"/>
+  <text x="466" y="223" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">3</tspan>、调用生成订单逻辑</text>
+
+  <!-- 4. 查询实时库存 L4 -> L5 -->
+  <polyline points="626,280 794,280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr_solid)"/>
+  <text x="646" y="273" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">4</tspan>、查询实时库存</text>
+
+  <!-- 5. 返回库存余量 L5 -> L4 (Dashed, Return) -->
+  <polyline points="794,330 626,330" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr_dashed)"/>
+  <text x="646" y="323" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">5</tspan>、返回库存余量</text>
+
+  <!-- 6. 执行库存扣减 L4 -> L5 -->
+  <polyline points="626,380 794,380" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr_solid)"/>
+  <text x="646" y="373" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">6</tspan>、执行库存扣减</text>
+
+  <!-- 7. 扣减成功 L5 -> L4 (Dashed) -->
+  <polyline points="794,430 626,430" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr_dashed)"/>
+  <text x="646" y="423" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">7</tspan>、扣减成功</text>
+
+  <!-- 8. 插入新订单记录 L4 -> L5 -->
+  <polyline points="626,480 794,480" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr_solid)"/>
+  <text x="646" y="473" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">8</tspan>、插入新订单记录</text>
+
+  <!-- 9. 插入成功 L5 -> L4 (Dashed) -->
+  <polyline points="794,530 626,530" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr_dashed)"/>
+  <text x="646" y="523" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">9</tspan>、插入成功</text>
+
+  <!-- 10. 清除购物车记录 L4 -> L5 -->
+  <polyline points="626,580 794,580" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr_solid)"/>
+  <text x="646" y="573" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">10</tspan>、清除购物车记录</text>
+
+  <!-- 11. 清除成功 L5 -> L4 (Dashed) -->
+  <polyline points="794,630 626,630" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr_dashed)"/>
+  <text x="646" y="623" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">11</tspan>、清除成功</text>
+
+  <!-- 12. 事务执行成功 L4 -> L3 (Dashed) -->
+  <polyline points="614,680 446,680" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr_dashed)"/>
+  <text x="466" y="673" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">12</tspan>、事务执行成功</text>
+
+  <!-- 13. 返回成功结果 L3 -> L2 (Dashed) -->
+  <polyline points="434,730 266,730" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr_dashed)"/>
+  <text x="286" y="723" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">13</tspan>、返回成功结果</text>
+
+  <!-- 14. 展示支付结果 L2 -> L1 (Dashed) -->
+  <polyline points="254,780 80,780" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,5" marker-end="url(#arr_dashed)"/>
+  <text x="100" y="773" text-anchor="start" fill="#000"><tspan font-family="'Times New Roman',serif">14</tspan>、展示支付结果</text>
+
+</svg>
+</body>
+</html>

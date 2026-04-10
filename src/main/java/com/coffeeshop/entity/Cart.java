@@ -11,7 +11,6 @@ import java.util.Date;
 /**
  * 购物车(Cart)实体类
  *
- * @author Wen
  */
 @Data
 @NoArgsConstructor

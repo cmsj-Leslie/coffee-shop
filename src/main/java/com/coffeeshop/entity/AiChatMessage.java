@@ -28,7 +28,6 @@ import java.util.Date;
  * - 使用 Lombok 注解简化代码
  * - 实现 Serializable 接口，支持序列化（Session 存储等场景）
  *
- * @author Wen
  */
 @Data // Lombok: 自动生成 getter/setter/toString/equals/hashCode
 @NoArgsConstructor // Lombok: 自动生成无参构造函数

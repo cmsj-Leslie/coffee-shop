@@ -23,7 +23,6 @@ import org.springframework.stereotype.Component;
  * base-url: https://generativelanguage.googleapis.com/v1beta/models
  * model: gemini-2.0-flash
  *
- * @author Wen
  */
 @Data // Lombok 注解：自动生成 getter/setter
 @Component // 注册为 Spring Bean

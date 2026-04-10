@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * 用户登陆注册控制器
  *
- * @author Wen
  */
 @Slf4j
 @Controller
