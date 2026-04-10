@@ -1,43 +1,79 @@
+# ==========================================
+# 咖啡商城项目配置文件 (模版/备份文件)
+# 使用说明: 请将本文件重命名为 application.yml，并替换其中的占位符
+# ==========================================
+
 server:
   servlet:
+    # 项目应用路径，启动后可通过 http://localhost:8080/coffee-shop 访问
     context-path: /coffee-shop
+
 spring:
   mvc:
+    # 静态资源请求匹配路径映射
     static-path-pattern: /**
   resources:
+    # 静态资源的本地存放目录路径
     static-locations: classpath:/static/
   thymeleaf:
+    # 模板引擎缓存设置（开发环境下建议设为 false，方便热更新页面）
     cache: false
   datasource:
+    # 数据库用户名
     username: root
+    # 数据库密码（请修改为你自己本地的数据库密码）
     password: your_database_password
+    # 数据库连接地址，请确保创建名为 coffee-shop 的数据库，且设定相应的时区
     url: jdbc:mysql://127.0.0.1:3306/coffee-shop?serverTimezone=Hongkong&useAffectedRows=true&characterEncoding=utf-8
+    # 数据库驱动类
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # 使用的数据库连接池类型 (这里采用阿里开源的 Druid 德鲁伊连接池)
     type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化连接池时建立的连接数量
     initialSize: 5
+    # 连接池维持的最小空闲连接数
     minIdle: 5
+    # 连接池支持的最大活动连接数
     maxActive: 20
+    # 获取连接时的最大等待时间（毫秒）
     maxWait: 60000
+    # 检查空闲连接的运行间隔时间（毫秒）
     timeBetweenEvictionRunsMillis: 60000
+    # 连接池中某个连接可空闲的最小时间（毫秒），超时将被回收
     minEvictableIdleTimeMillis: 300000
+    # 验证数据库连接是否有效的 SQL 语句
     validationQuery: SELECT 1 FROM DUAL
+    # 借出连接时是否测试连接的空闲时间
     testWhileIdle: true
+    # 借出连接时是否自动测试连通性
     testOnBorrow: false
+    # 归还连接时是否自动测试连通性
     testOnReturn: false
+    # 是否开启预编译处理缓存 (PreparedStatement)
     poolPreparedStatements: true
+    # 配置监控统计与防御 SQL 注入的拦截器
     filters: stat,wall
+    # 指定每个连接上缓存的 PreparedStatement 数上限
     maxPoolPreparedStatementPerConnectionSize: 20
+    # 开启合并全局的数据源统计信息
     useGlobalDataSourceStat: true
+    # 通过设置属性开启慢 SQL 记录与SQL合并统计
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-  # 邮件配置
+  
+  # 邮件配置 (主要负责系统相关的邮件发送功能)
   mail:
+    # 修改为你配置的SMTP发件人邮箱
     username: your_email@qq.com
+    # SMTP 邮箱授权码（注意：不是QQ登录密码！）
     password: your_qq_mail_auth_code
+    # 邮件服务器地址（这里以QQ邮箱为例）
     host: smtp.qq.com
+    # 邮件服务器端口
     port: 587
     properties:
       mail:
         smtp:
+          # 是否开启SMTP认证
           auth: true
           starttls:
             enable: true
@@ -46,21 +82,34 @@ spring:
             port: 587
             class: javax.net.ssl.SSLSocketFactory
             fallback: false
+            
   servlet:
     multipart:
+      # 单个文件上传支持的最大体积限制
       max-file-size: 1024MB
+      # 单次请求上传文件支持的最大总计体积限制
       max-request-size: 1024MB
 
 mybatis:
+  # MyBatis 全局主配置文件位置
   config-location: classpath:mybatis/mybatis-config.xml
+  # MyBatis Mapper XML 文件扫描位置
   mapper-locations: classpath:mybatis/mapper/*.xml
 
-# 阿里云对象存储配置（请替换为你自己的 AccessKey）
+# ==========================================
+# 阿里云对象存储(OSS)配置说明：
+# 这里负责用户头像、商品图等静态静态上传资源的云端存储。
+# 如需使用，请自行在阿里云控制台开启OSS服务并获取密钥替换。
+# ==========================================
 oss:
+  # Bucket的名称
   bucket-name: your_bucket_name
+  # OSS终端访问节点
   end-point: oss-cn-hangzhou.aliyuncs.com
+  # 您的阿里云 AccessKey Id
   access-key: your_aliyun_access_key_id
+  # 您的阿里云 AccessKey Secret
   access-secret: your_aliyun_access_key_secret
 
-# 注册用户默认头像
+# 注册用户的默认头像地址，如果使用自己的OSS，请把前缀地址按需改掉
 default-avatar: https://your_bucket_name.oss-cn-hangzhou.aliyuncs.com/default.png
