@@ -175,7 +175,8 @@ CREATE TABLE `commodity`  (
   `status` int NULL DEFAULT 1 COMMENT '状态【1:上架】【0:下架】',
   `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '商品图片地址',
   `sale_count` int NULL DEFAULT 0 COMMENT '销量',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_sale_count`(`sale_count` DESC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------

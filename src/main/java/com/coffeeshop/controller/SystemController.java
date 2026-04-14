@@ -25,16 +25,12 @@ public class SystemController extends BaseController {
         Commodity param = Commodity.builder()
                 .status(1)
                 .build();
-        // 获取最新上架的9件商品
+        // 获取最新上架的9件商品（数据库已按 publish_time DESC 排序，保持时间顺序）
         PageHelper.startPage(0, 9);
         List<Commodity> commodities9 = commodityService.listCommoditys(param);
         // 获取销量排名前10的商品
         PageHelper.startPage(0, 10);
         List<Commodity> commodities = commodityService.listCommoditysOrderBySaleCount();
-
-        // 按照折扣排序
-        commodities9 = commodities9.stream().sorted(Comparator.comparingDouble(Commodity::getDiscount))
-                .collect(Collectors.toList());
 
         // 合并集合
         Set<Commodity> hashSet = new HashSet<>();

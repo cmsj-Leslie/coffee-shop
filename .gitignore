@@ -23,7 +23,8 @@ target/
 论文补充材料.txt
 thesis_extracted/
 
-# Diagrams
+# Diagrams (root-level PNGs are thesis materials, not source code)
+/*.png
 图*.png
 最终版*.png
 
@@ -31,7 +32,11 @@ thesis_extracted/
 extract*.ps1
 extract.py
 
-# Mock HTML pages
-1.html
-yz.html
-admission_mock.html
+# Root-level HTML files (mock pages, PPT exports, etc.)
+/*.html
+
+# Defense/thesis personal files
+答辩问答*
+thesis.txt
+thesis_content.txt
+null

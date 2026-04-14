@@ -157,7 +157,7 @@ CREATE DATABASE `kaka-shop` CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE `kaka-shop`;
 SOURCE /your/path/kaka-shop/src/main/resources/kaka-shop.sql;
 ```
-
+                                       
 ---
 
 ### 3. 配置项目
@@ -169,7 +169,7 @@ spring:
   datasource:
     username: root
     password: 你的MySQL密码
-    url: jdbc:mysql://127.0.0.1:3306/kaka-shop?serverTimezone=Hongkong&useAffectedRows=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/coffee-shop?serverTimezone=Hongkong&useAffectedRows=true&characterEncoding=utf-8
 
   mail:
     username: 你的QQ邮箱
