@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 回复评论
  * @param id
  */
@@ -193,6 +193,10 @@ function deliverGoods(id) {
  */
 function buyCommodity(id) {
     let addressId = $('#addressId').find('option:selected').val();
+    if (!addressId) {
+        xtip.msg('请先添加收货地址！', {icon: 'e', type: 'w'});
+        return;
+    }
     $.ajax({
         type: "POST",
         url: "buyCommodity",
@@ -471,6 +475,10 @@ function batchCheckout() {
  */
 function batchBuyCommodity(cartIds) {
     let addressId = $('#addressId').find('option:selected').val();
+    if (!addressId) {
+        xtip.msg('请先添加收货地址！', {icon: 'e', type: 'w'});
+        return;
+    }
     $.ajax({
         type: "POST",
         url: "batchBuyCommodity",
@@ -493,6 +501,11 @@ function batchBuyCommodity(cartIds) {
  * 批量购买商品（带优惠券）
  */
 function batchBuyCommodityWithCoupon(cartIds, addressId, userCouponId) {
+    if (!addressId) {
+        xtip.msg('缺少收货地址！请重新检查，即将跳转添加...', {icon: 'e', type: 'w'});
+        setTimeout(function() { window.location.href = 'address'; }, 1500);
+        return;
+    }
     $.ajax({
         type: "POST",
         url: "batchBuyCommodity",

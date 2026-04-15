@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -156,8 +156,9 @@
             </div>
 
             <div th:if="${addresses.size() == 0}">
-                <a class="andro_btn-custom shadow-none"
-                    style="background: red;color: white; padding: 12px 40px;">请添加收货地址！</a>
+                <a class="andro_btn-custom shadow-none" href="javascript:void(0)" 
+                    onclick="xtip.msg('您还没有收货地址无法下单，即将跳转去添加...', {icon: 'w'}); setTimeout(() => { window.location.href = 'address'; }, 1500);"
+                    style="background: red;color: white; padding: 12px 40px;">缺少收货地址，点击去添加！</a>
             </div>
 
         </div>
