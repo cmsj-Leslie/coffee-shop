@@ -1,8 +1,10 @@
 package com.coffeeshop.service;
 
+import com.coffeeshop.entity.Collection;
 import com.coffeeshop.entity.Commodity;
 import com.coffeeshop.entity.CommodityComment;
 import com.coffeeshop.entity.Order;
+import com.coffeeshop.mapper.CollectionMapper;
 import com.coffeeshop.mapper.CommodityCommentMapper;
 import com.coffeeshop.mapper.CommodityMapper;
 import com.coffeeshop.mapper.OrderMapper;
@@ -30,6 +32,8 @@ public class RecommendService {
     private OrderMapper orderMapper;
     @Resource
     private CommodityCommentMapper commodityCommentMapper;
+    @Resource
+    private CollectionMapper collectionMapper;
     @Resource
     private CommodityMapper commodityMapper;
 
@@ -126,6 +130,13 @@ public class RecommendService {
             double starScore = comment.getStars().doubleValue();
             matrix.computeIfAbsent(comment.getUserId(), k -> new HashMap<>())
                     .merge(comment.getCommodityId(), starScore, Math::max);
+        }
+
+        // 收藏行为（隐式正反馈，固定 2.0 分）
+        List<Collection> collections = collectionMapper.listAllUserCommodityCollections();
+        for (Collection collection : collections) {
+            matrix.computeIfAbsent(collection.getUserId(), k -> new HashMap<>())
+                    .merge(collection.getCommodityId(), 2.0, Math::max);
         }
 
         return matrix;

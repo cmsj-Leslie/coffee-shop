@@ -8,6 +8,8 @@ import com.coffeeshop.dto.ResponseResult;
 import com.coffeeshop.entity.Cart;
 import com.coffeeshop.entity.Commodity;
 import com.coffeeshop.entity.Order;
+import com.coffeeshop.entity.UserCoupon;
+import com.coffeeshop.entity.Coupon;
 
 import java.util.Date;
 
@@ -73,11 +75,37 @@ public class OrderController extends BaseController {
      */
     @PostMapping("/batchBuyCommodity")
     @Transactional(rollbackFor = Exception.class)
-    public ResponseResult batchBuyCommodity(@RequestParam("cartIds") String cartIds, Integer addressId) {
+    public ResponseResult batchBuyCommodity(@RequestParam("cartIds") String cartIds, Integer addressId, Integer userCouponId) {
         String[] ids = cartIds.split(",");
         String orderPrefix = System.currentTimeMillis() + "";
         int successCount = 0;
         StringBuilder errorMsg = new StringBuilder();
+
+        // 计算总金额
+        double totalAmount = 0;
+        for (String id : ids) {
+            Cart cart = cartService.getById(Integer.parseInt(id.trim()));
+            if (cart != null) {
+                totalAmount += cart.getCommodity().getCurrentPrice() * cart.getCount();
+            }
+        }
+
+        // 计算优惠券折扣
+        double actualAmount = totalAmount;
+        Integer couponId = null;
+        if (userCouponId != null && userCouponId > 0) {
+            UserCoupon userCoupon = userCouponService.getById(userCouponId);
+            if (userCoupon != null && userCoupon.getStatus() == 0) {
+                Coupon coupon = userCoupon.getCoupon();
+                if (coupon.getType() == 1) {
+                    actualAmount = totalAmount - coupon.getReduceAmount();
+                } else if (coupon.getType() == 2) {
+                    actualAmount = totalAmount * coupon.getDiscount();
+                }
+                actualAmount = Math.max(actualAmount, 0);
+                couponId = coupon.getId();
+            }
+        }
 
         for (int i = 0; i < ids.length; i++) {
             Integer cartId = Integer.parseInt(ids[i].trim());
@@ -105,6 +133,9 @@ public class OrderController extends BaseController {
                         .payTime(new Date())
                         .status(0)
                         .addressId(addressId)
+                        .totalAmount(totalAmount)
+                        .actualAmount(actualAmount)
+                        .couponId(couponId)
                         .build();
 
                 if (orderService.insert(order)) {
@@ -112,6 +143,16 @@ public class OrderController extends BaseController {
                     successCount++;
                 }
             }
+        }
+
+        // 标记优惠券已使用
+        if (userCouponId != null && userCouponId > 0 && successCount > 0) {
+            UserCoupon uc = UserCoupon.builder()
+                    .id(userCouponId)
+                    .status(1)
+                    .useTime(new Date())
+                    .build();
+            userCouponService.update(uc);
         }
 
         if (successCount == ids.length) {

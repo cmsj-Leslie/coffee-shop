@@ -66,4 +66,29 @@ public interface OrderMapper {
      */
     List<Order> listAllUserCommodityInteractions();
 
+    /**
+     * 获取总收入（历史订单从 content 解析数量）
+     */
+    Double getTotalRevenue();
+
+    /**
+     * 获取总订单数
+     */
+    Integer getTotalOrderCount();
+
+    /**
+     * 获取近N天每日订单数趋势
+     */
+    List<java.util.Map<String, Object>> getSalesTrend(@org.apache.ibatis.annotations.Param("days") int days);
+
+    /**
+     * 获取销量 Top5 商品
+     */
+    List<java.util.Map<String, Object>> getTop5Products();
+
+    /**
+     * 获取订单状态分布
+     */
+    List<java.util.Map<String, Object>> getOrderStatusDistribution();
+
 }

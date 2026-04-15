@@ -490,6 +490,28 @@ function batchBuyCommodity(cartIds) {
 }
 
 /**
+ * 批量购买商品（带优惠券）
+ */
+function batchBuyCommodityWithCoupon(cartIds, addressId, userCouponId) {
+    $.ajax({
+        type: "POST",
+        url: "batchBuyCommodity",
+        data: {
+            cartIds: cartIds,
+            addressId: addressId,
+            userCouponId: userCouponId || null
+        },
+        dataType: "json",
+        success: function (data) {
+            xtip.msg(data['message']);
+            if (data['code'] == 200) {
+                setTimeout("reloadTo('/success.html')", 1000);
+            }
+        }
+    });
+}
+
+/**
  * 删除分类
  * @param id
  */

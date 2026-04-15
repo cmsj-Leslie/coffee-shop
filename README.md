@@ -1,4 +1,4 @@
-# ☕ 咖咖商城 (kaka-shop)
+# ☕ 咖咖商城 (coffee-shop)
 
 一个基于 **Spring Boot + MyBatis + Thymeleaf** 的在线咖啡商城系统，支持用户注册登录、商品浏览、购物车、订单管理、AI 智能助手等功能。
 
@@ -35,6 +35,7 @@
 | **购物车** | 添加商品、数量调整、全选/批量结算 |
 | **订单管理** | 单个/批量下单、支付、查看订单状态、确认收货、取消/删除订单 |
 | **收藏功能** | 收藏喜欢的商品、管理收藏列表 |
+| **个性化推荐** | 基于 Item-based CF 协同过滤算法，融合购买、评价、收藏三重行为信号生成推荐；冷启动降级为全局热销 Top-8 |
 | **地址管理** | 多地址管理、默认地址设置 |
 | **商品评价** | 订单完成后评价商品、查看其他用户评价 |
 | **AI 智能助手** | 悬浮式聊天窗口、支持 DeepSeek/Gemini 双模型、咖啡专业咨询 |
@@ -58,6 +59,24 @@
 - **历史记录**：聊天记录持久化入库，页面刷新后可恢复
 - **咖啡主题 UI**：棕色系设计，与商城风格统一
 
+### 📊 数据可视化大屏
+
+- **现代化UI**：使用 **Chart.js** 打造带发光、渐变色阴影效果的现代化纯原生统计图表。
+- **多维呈现**：包含四大核心指标卡片（总销售额/总订单数/总用户数/总商品数）、近7天订单趋势折线图、实时订单状态分布环形图（待发货/待收货/已完结/已取消）、以及销量 Top-5 商品排行榜柱状图。
+
+### 🏷️ 营销与全局优惠券系统
+
+- **后台智能发券**：管理员灵活创建「满减券（如满100减20）」与「折扣券（如8折）」，系统后台在创建时会自动实现全员精准分发。
+- **前台动态核销**：用户在订单支付结算页下拉自选拥有的且达到门槛的可用优惠券，系统动态实时通过 JS + 后端校验双重拦截，动态计算折后及抵扣金额，并在下单成交后自动锁定核销。
+
+### 💡 核心：ItemCF 个性化智能推荐算法
+
+系统引入了 **基于物品的协同过滤算法（Item-based CF）** 代替原本的随机占位数据，底层实现位于 `RecommendService.java`：
+- **① 多信号评分矩阵**：抛弃单一购买评判，深度融合购买行为（3分）、用户收藏行为（2分）、商品订单评价（1~5星级对应的分数）。遇同一用户对单一商品产生多次不同行为，采用 `Math.max()` 提纯最高意向权重。
+- **② 相似度计算**：基于构建的评分矩阵，使用经典的 **余弦相似度（Cosine Similarity）** 数学模型，精准计算各商品间的特征潜在相似度。
+- **③ 推荐分推导**：对用户尚未购买的候选商品池，通过计算公式 `推荐分 = Σ (sim(候选商品, 用户已有行为的特定商品) × 历史评分)` 来预测用户兴趣期望值。
+- **④ 列表截取与兜底**：最终预测得分做倒序排序后，推送到首页截取专属的 **Top-8** 个性化商品。同时引入完善的冷启动逻辑——若探测到全新用户（行为孤岛），则立即且平滑降级为推荐全局历史销量的 **Top-8 爆款排名**。
+
 ---
 
 ## 🛠️ 技术架构
@@ -71,6 +90,7 @@
 | **文件存储** | 阿里云 OSS |
 | **邮件服务** | Spring Boot Mail（QQ 邮箱 SMTP） |
 | **AI 服务** | DeepSeek API / Gemini API |
+| **推荐算法** | Item-based CF（余弦相似度 + 多信号评分矩阵） |
 | **工具库** | Hutool |
 | **构建工具** | Maven |
 
@@ -89,12 +109,12 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/your-username/kaka-shop.git
-cd kaka-shop
+git clone https://github.com/your-username/coffee-shop.git
+cd coffee-shop
 
 # 2. 创建数据库并导入数据
-mysql -u root -p -e "CREATE DATABASE \`kaka-shop\` CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;"
-mysql -u root -p kaka-shop < src/main/resources/kaka-shop.sql
+mysql -u root -p -e "CREATE DATABASE \`coffee-shop\` CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;"
+mysql -u root -p coffee-shop < src/main/resources/coffee-shop.sql
 
 # 3. 配置文件（复制模板并填写实际配置）
 cp src/main/resources/application.Backup.yml src/main/resources/application.yml
@@ -151,11 +171,11 @@ mvn spring-boot:run
 mysql -u root -p
 
 -- 创建数据库
-CREATE DATABASE `kaka-shop` CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+CREATE DATABASE `coffee-shop` CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 -- 导入初始数据（包含所有表结构及测试数据）
-USE `kaka-shop`;
-SOURCE /your/path/kaka-shop/src/main/resources/kaka-shop.sql;
+USE `coffee-shop`;
+SOURCE /your/path/coffee-shop/src/main/resources/coffee-shop.sql;
 ```
                                        
 ---
@@ -226,21 +246,21 @@ java -version && mvn -version
 ### 2. 上传项目
 
 ```bash
-git clone https://github.com/your-username/kaka-shop.git
-cd kaka-shop
+git clone https://github.com/your-username/coffee-shop.git
+cd coffee-shop
 ```
 
 ### 3. 初始化数据库
 
 ```sql
-CREATE DATABASE `kaka-shop` CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-CREATE USER 'kakashop'@'localhost' IDENTIFIED BY 'your-password';
-GRANT ALL PRIVILEGES ON `kaka-shop`.* TO 'kakashop'@'localhost';
+CREATE DATABASE `coffee-shop` CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+CREATE USER 'coffeeshop'@'localhost' IDENTIFIED BY 'your-password';
+GRANT ALL PRIVILEGES ON `coffee-shop`.* TO 'coffeeshop'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
 ```bash
-mysql -u kakashop -p kaka-shop < src/main/resources/kaka-shop.sql
+mysql -u coffeeshop -p coffee-shop < src/main/resources/coffee-shop.sql
 ```
 
 ### 4. 配置并打包
@@ -264,18 +284,18 @@ nohup java -jar target/coffee-shop-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
 ### 6. 使用 Systemd 托管（推荐）
 
 ```bash
-sudo nano /etc/systemd/system/kaka-shop.service
+sudo nano /etc/systemd/system/coffee-shop.service
 ```
 
 ```ini
 [Unit]
-Description=Kaka Shop Application
+Description=Coffee Shop Application
 After=network.target mysql.service
 
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory=/home/ubuntu/kaka-shop
+WorkingDirectory=/home/ubuntu/coffee-shop
 ExecStart=/usr/bin/java -jar target/coffee-shop-0.0.1-SNAPSHOT.jar
 Restart=on-failure
 
@@ -285,8 +305,8 @@ WantedBy=multi-user.target
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl start kaka-shop
-sudo systemctl enable kaka-shop
+sudo systemctl start coffee-shop
+sudo systemctl enable coffee-shop
 ```
 
 ### 7. Nginx 反向代理（可选）
@@ -313,7 +333,7 @@ server {
 | 配置项 | 说明 | 是否必须 |
 |--------|------|---------|
 | `spring.datasource.password` | MySQL 数据库密码 | ✅ 必须 |
-| `spring.datasource.url` | 数据库连接地址（数据库名为 `kaka-shop`） | ✅ 必须 |
+| `spring.datasource.url` | 数据库连接地址（数据库名为 `coffee-shop`） | ✅ 必须 |
 | `spring.mail.username` | QQ 邮箱地址（用于发送验证码） | 找回密码功能需要 |
 | `spring.mail.password` | QQ 邮箱授权码（不是登录密码） | 找回密码功能需要 |
 | `oss.access-key` | 阿里云 AccessKey ID | 图片上传需要 |
@@ -326,7 +346,7 @@ server {
 ## 📁 项目结构
 
 ```
-kaka-shop/
+coffee-shop/
 ├── pom.xml                              # Maven 依赖配置
 ├── src/main/
 │   ├── java/com/coffeeshop/
@@ -346,12 +366,12 @@ kaka-shop/
 │   │   │   ├── AddressController.java   # 收货地址
 │   │   │   ├── ClassifyController.java  # 商品分类
 │   │   │   └── CommentController.java   # 商品评价
-│   │   ├── service/                     # 业务逻辑层
+│   │   ├── service/                     # 业务逻辑层（含 RecommendService 推荐算法）
 │   │   ├── mapper/                      # MyBatis Mapper 接口
 │   │   └── entity/                      # 实体类
 │   └── resources/
 │       ├── application.Backup.yml       # 配置模板（含说明，无真实密钥）
-│       ├── kaka-shop.sql                # 数据库初始化脚本（含测试数据）
+│       ├── coffee-shop.sql              # 数据库初始化脚本（含测试数据）
 │       ├── mybatis/mapper/              # MyBatis XML 映射文件
 │       ├── static/                      # 静态资源
 │       │   └── common/
@@ -382,7 +402,7 @@ kaka-shop/
 
 ## 🗄️ 数据库设计
 
-系统共 **8 张数据表**，全部收录在 `src/main/resources/kaka-shop.sql` 中：
+系统共 **10 张数据表**，全部收录在 `src/main/resources/coffee-shop.sql` 中：
 
 | 表名 | 说明 |
 |------|------|
@@ -395,6 +415,8 @@ kaka-shop/
 | `collection` | 收藏表 |
 | `commodity_comment` | 商品评价表（支持嵌套回复） |
 | `ai_chat_message` | AI 聊天记录表 |
+| `coupon` | 优惠券表（满减券/折扣券） |
+| `user_coupon` | 用户优惠券关联表 |
 
 ---
 
@@ -441,4 +463,4 @@ kaka-shop/
 
 感谢所有为本项目提供灵感和支持的开发者！
 
-如有问题或建议，欢迎提交 [Issue](https://github.com/your-username/kaka-shop/issues)。
+如有问题或建议，欢迎提交 [Issue](https://github.com/your-username/coffee-shop/issues)。

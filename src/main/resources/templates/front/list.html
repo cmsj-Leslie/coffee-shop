@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -27,6 +27,47 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+
+  <!-- Custom: fix product card height consistency -->
+  <style>
+    /* 商品列表 - 卡片等高 */
+    .row > [class*="col-"] {
+      display: flex;
+      margin-bottom: 30px;
+    }
+    .row > [class*="col-"] > .andro_product {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .andro_product .andro_product-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .andro_product .andro_product-body > p {
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.6;
+    }
+    .andro_product .andro_product-thumb img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .andro_product .andro_product-footer {
+      margin-top: auto;
+    }
+
+    /* 鼠标悬停展开完整简介 */
+    .andro_product .andro_product-body > p:hover {
+      -webkit-line-clamp: unset;
+    }
+  </style>
 
 </head>
 
@@ -182,7 +223,7 @@
                     <span th:text="${'¥'+commodity.currentPrice}"></span>
                     <span th:text="${'¥'+commodity.originalPrice}"></span>
                   </div>
-                  <p th:text="${commodity.info}"></p>
+                  <p th:text="${commodity.info}" th:title="${commodity.info}"></p>
                   <div class="andro_rating-wrapper">
                     <div class="andro_rating" th:if="${commodity.stars == 1}">
                       <i class="fa fa-star active"></i>
@@ -263,7 +304,7 @@
                     <span th:text="${'¥'+commodity.currentPrice}"></span>
                     <span th:text="${'¥'+commodity.originalPrice}"></span>
                   </div>
-                  <p th:text="${commodity.info}"></p>
+                  <p th:text="${commodity.info}" th:title="${commodity.info}"></p>
                   <div class="andro_rating-wrapper">
                     <div class="andro_rating" th:if="${commodity.stars == 1}">
                       <i class="fa fa-star active"></i>

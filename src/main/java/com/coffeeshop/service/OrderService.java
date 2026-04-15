@@ -60,4 +60,29 @@ public interface OrderService {
      */
     boolean update(Order order);
 
+    /**
+     * 获取总收入
+     */
+    Double getTotalRevenue();
+
+    /**
+     * 获取总订单数
+     */
+    Integer getTotalOrderCount();
+
+    /**
+     * 获取近N天每日订单数趋势
+     */
+    List<java.util.Map<String, Object>> getSalesTrend(int days);
+
+    /**
+     * 获取销量 Top5 商品
+     */
+    List<java.util.Map<String, Object>> getTop5Products();
+
+    /**
+     * 获取订单状态分布
+     */
+    List<java.util.Map<String, Object>> getOrderStatusDistribution();
+
 }

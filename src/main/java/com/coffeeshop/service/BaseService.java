@@ -35,4 +35,10 @@ public class BaseService {
     @Resource
     protected UserMapper userMapper;
 
+    @Resource
+    protected CouponMapper couponMapper;
+
+    @Resource
+    protected UserCouponMapper userCouponMapper;
+
 }

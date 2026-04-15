@@ -69,4 +69,11 @@ public interface CollectionMapper {
      */
     List<Integer> getCollectedCommodityIdsByUserId(Integer userId);
 
+    /**
+     * 查询所有用户收藏记录（用于协同过滤推荐）
+     *
+     * @return 全量收藏记录列表
+     */
+    List<Collection> listAllUserCommodityCollections();
+
 }

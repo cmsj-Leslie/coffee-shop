@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+          name="viewport">
+    <title>优惠券管理</title>
+    <link href="common/favicon.png" rel="shortcut icon" type="image/png">
+    <link rel="stylesheet" href="background/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="background/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="background/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="background/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="background/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="background/css/style.css">
+    <link rel="stylesheet" href="common/css/xtiper.css">
+    <link rel="stylesheet" href="common/css/sweetalert.css">
+    <link rel="stylesheet" href="common/datatable/dataTables.bootstrap4.min.css"/>
+</head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <div th:replace="common/background-common::navbar(currUri='coupon-manage')"></div>
+        <div th:replace="common/background-common::sidebar(currUri='coupon-manage')"></div>
+
+        <div class="main-content">
+            <section class="section">
+                <h1 class="section-header">
+                    <div>优惠券管理 <i class="ion ion-pricetag"></i></div>
+                </h1>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>优惠券列表</h4>
+                                <div class="card-header-action">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#addCouponModal">
+                                        <i class="fa fa-plus"></i> 新增优惠券
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example1" class="table table-bordered table-striped table-hover display" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>名称</th>
+                                            <th>类型</th>
+                                            <th>使用条件</th>
+                                            <th>优惠内容</th>
+                                            <th>有效期</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="font-size: 13px">
+                                        <tr th:each="coupon, stat : ${coupons}">
+                                            <td th:text="${stat.count}"></td>
+                                            <td th:text="${coupon.name}"></td>
+                                            <td>
+                                                <span th:if="${coupon.type == 1}" class="badge badge-warning">满减券</span>
+                                                <span th:if="${coupon.type == 2}" class="badge badge-info">折扣券</span>
+                                            </td>
+                                            <td th:text="${'满 ¥' + coupon.minAmount}"></td>
+                                            <td>
+                                                <span th:if="${coupon.type == 1}" th:text="${'减 ¥' + coupon.reduceAmount}"></span>
+                                                <span th:if="${coupon.type == 2}" th:text="${coupon.discount * 10 + '折'}"></span>
+                                            </td>
+                                            <td th:text="${#dates.format(coupon.startTime,'yyyy-MM-dd HH:mm') + ' ~ ' + #dates.format(coupon.endTime,'MM-dd HH:mm')}"></td>
+                                            <td>
+                                                <span th:if="${coupon.status == 1}" class="badge badge-success">启用</span>
+                                                <span th:if="${coupon.status == 0}" class="badge badge-secondary">禁用</span>
+                                            </td>
+                                            <td>
+                                                <button th:onclick="|deleteCoupon(${coupon.id}, this); return false;|" class="btn btn-danger btn-sm">
+                                                    <i class="ion ion-trash-b"></i> 删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div th:replace="common/background-common::footer"></div>
+    </div>
+</div>
+
+<!-- 新增优惠券弹窗 -->
+<div class="modal fade" id="addCouponModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增优惠券</h5>
+                <button type="button" class="close" onclick="closeCouponModal()"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>优惠券名称</label>
+                    <input type="text" class="form-control" id="couponName" placeholder="如：新人专享满100减20">
+                </div>
+                <div class="form-group">
+                    <label>类型</label>
+                    <select class="form-control" id="couponType" onchange="toggleCouponType()">
+                        <option value="1">满减券</option>
+                        <option value="2">折扣券</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>最低使用金额（元）</label>
+                    <input type="number" class="form-control" id="minAmount" value="0" min="0">
+                </div>
+                <div id="reduceGroup" class="form-group">
+                    <label>减免金额（元）</label>
+                    <input type="number" class="form-control" id="reduceAmount" min="0">
+                </div>
+                <div id="discountGroup" class="form-group" style="display:none">
+                    <label>折扣率（如0.8表示8折）</label>
+                    <input type="number" class="form-control" id="discount" min="0.1" max="0.99" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>生效时间</label>
+                    <input type="datetime-local" class="form-control" id="startTime">
+                </div>
+                <div class="form-group">
+                    <label>失效时间</label>
+                    <input type="datetime-local" class="form-control" id="endTime">
+                </div>
+            </div>
+            <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" onclick="closeCouponModal()">取消</button>
+                <button type="button" class="btn btn-primary" id="btn-add-coupon" onclick="addCoupon()">创建并发放</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="background/modules/jquery.min.js"></script>
+<script src="common/js/xtiper.min.js"></script>
+<script src="common/js/sweetalert.js"></script>
+<script src="common/js/custom.js"></script>
+<script src="common/datatable/jquery.dataTables.min.js"></script>
+<script src="common/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="background/modules/popper.js"></script>
+<script src="background/modules/tooltip.js"></script>
+<script src="background/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="background/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="background/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="background/js/sa-functions.js"></script>
+<script src="background/modules/chart.min.js"></script>
+<script src="background/modules/summernote/summernote-lite.js"></script>
+<script src="background/js/scripts.js"></script>
+<script>
+/*<![CDATA[*/
+    var dataTable;
+    $(document).ready(function() {
+        // 弹窗关闭时（包括点背景关闭）重置表单
+        $('#addCouponModal').on('hidden.bs.modal', function() {
+            resetCouponModal();
+        });
+
+        dataTable = $('#example1').DataTable({
+            language: {
+                "sProcessing": "处理中...", "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果", "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项", "sSearch": "搜索:",
+                "sEmptyTable": "暂无优惠券",
+                "oPaginate": {"sFirst": "首页", "sPrevious": "上页", "sNext": "下页", "sLast": "末页"}
+            },
+            "order": [ [5, 'asc'] ],
+            "aoColumnDefs": [{"bSortable": false, "aTargets": [1,2,3,4,6,7]}]
+        });
+
+        // 绑定事件，实现无刷新时的序号自动重排
+        dataTable.on('order.dt search.dt', function () {
+            dataTable.column(0, {search:'applied', order:'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+    });
+
+    function toggleCouponType() {
+        var type = $('#couponType').val();
+        if (type == '1') {
+            $('#reduceGroup').show();
+            $('#discountGroup').hide();
+        } else {
+            $('#reduceGroup').hide();
+            $('#discountGroup').show();
+        }
+    }
+
+    function resetCouponModal() {
+        $('#couponName').val('');
+        $('#couponType').val('1');
+        $('#minAmount').val('0');
+        $('#reduceAmount').val('');
+        $('#discount').val('');
+        $('#startTime').val('');
+        $('#endTime').val('');
+        toggleCouponType();
+    }
+
+    function closeCouponModal() {
+        resetCouponModal();
+        $('#addCouponModal').modal('hide');
+    }
+
+    function addCoupon() {
+        var name = $('#couponName').val();
+        var type = $('#couponType').val();
+        var startTime = $('#startTime').val();
+        var endTime = $('#endTime').val();
+
+        if (!name || !startTime || !endTime) {
+            swal('提示', '请完整填写优惠券信息和时间', 'warning');
+            return;
+        }
+
+        // 验证金额字段
+        if (type == '1') {
+            var reduceAmount = $('#reduceAmount').val();
+            if (!reduceAmount || parseFloat(reduceAmount) <= 0) {
+                swal('提示', '请填写有效的减免金额', 'warning');
+                return;
+            }
+        } else {
+            var discount = $('#discount').val();
+            if (!discount || parseFloat(discount) <= 0 || parseFloat(discount) >= 1) {
+                swal('提示', '请填写有效的折扣率（0.1-0.99）', 'warning');
+                return;
+            }
+        }
+
+        var btn = $('#btn-add-coupon');
+        btn.addClass('btn-progress disabled').prop('disabled', true);
+
+        var data = {
+            name: name,
+            type: type,
+            minAmount: $('#minAmount').val() || 0,
+            startTime: startTime.replace('T', ' ') + ':00',
+            endTime: endTime.replace('T', ' ') + ':00'
+        };
+        if (type == '1') data.reduceAmount = $('#reduceAmount').val();
+        else data.discount = $('#discount').val();
+
+        $.post('addCoupon', data, function(res) {
+            btn.removeClass('btn-progress disabled').prop('disabled', false);
+            if (res.code === 200) {
+                $('#addCouponModal').modal('hide');
+                swal({
+                    title: "发放成功",
+                    text: "已自动下发至全平台用户，列表已更新",
+                    type: "success",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+
+                // 动态添加到 DataTable
+                var coupon = res.data;
+                var typeBadge = coupon.type == 1 ? '<span class="badge badge-warning">满减券</span>' : '<span class="badge badge-info">折扣券</span>';
+                var condContent = '满 ¥' + coupon.minAmount;
+                var contentT = coupon.type == 1 ? '<span>减 ¥' + coupon.reduceAmount + '</span>' : '<span>' + (coupon.discount * 10) + '折</span>';
+                
+                function formatTime(dateStr) {
+                    var d = new Date(dateStr);
+                    var MM = (d.getMonth() + 1).toString().padStart(2, '0');
+                    var dd = d.getDate().toString().padStart(2, '0');
+                    var HH = d.getHours().toString().padStart(2, '0');
+                    var mm = d.getMinutes().toString().padStart(2, '0');
+                    return MM + '-' + dd + ' ' + HH + ':' + mm;
+                }
+                function formatTimeYear(dateStr) {
+                    var d = new Date(dateStr);
+                    var yyyy = d.getFullYear();
+                    var MM = (d.getMonth() + 1).toString().padStart(2, '0');
+                    var dd = d.getDate().toString().padStart(2, '0');
+                    var HH = d.getHours().toString().padStart(2, '0');
+                    var mm = d.getMinutes().toString().padStart(2, '0');
+                    return yyyy + '-' + MM + '-' + dd + ' ' + HH + ':' + mm;
+                }
+
+                var timeRange = formatTimeYear(coupon.startTime) + ' ~ ' + formatTime(coupon.endTime);
+                var statusBadge = '<span class="badge badge-success">启用</span>';
+                var opBtn = '<button onclick="deleteCoupon(' + coupon.id + ', this)" class="btn btn-danger btn-sm"><i class="ion ion-trash-b"></i> 删除</button>';
+
+                dataTable.row.add([
+                    '',
+                    coupon.name,
+                    typeBadge,
+                    condContent,
+                    contentT,
+                    timeRange,
+                    statusBadge,
+                    opBtn
+                ]).draw(false);
+
+            } else {
+                swal("失败", res.message, "error");
+            }
+        }).fail(function() {
+            btn.removeClass('btn-progress disabled').prop('disabled', false);
+            swal("错误", "网络请求失败", "error");
+        });
+    }
+
+    function deleteCoupon(id, btnElement) {
+        swal({
+            title: "确认销毁这张优惠券？",
+            text: "系统将同步清除所有用户手里的残余卡券，操作不可逆！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "确认销毁",
+            cancelButtonText: "取消操作",
+            closeOnConfirm: false
+        }, function(isConfirm) {
+            if (isConfirm) {
+                $.post('deleteCoupon', {id: id}, function(res) {
+                    if (res.code === 200) {
+                        swal({
+                            title: "销毁成功", 
+                            text: "券码已全网核销，列表已动态更新", 
+                            type: "success", 
+                            timer: 1500, 
+                            showConfirmButton: false
+                        });
+                        // 动态删除 DataTable 中的当前行，并重排不刷新页面
+                        var tr = $(btnElement).closest('tr');
+                        dataTable.row(tr).remove().draw(false);
+                    } else {
+                        swal("销毁失败", res.message, "error");
+                    }
+                }).fail(function() {
+                    swal("错误", "网络拦截或连接出错", "error");
+                });
+            }
+        });
+    }
+/*]]>*/
+</script>
+</body>
+</html>

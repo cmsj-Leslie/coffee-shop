@@ -52,7 +52,7 @@
                                             <td th:text="${order.orderNumber}"></td>
                                             <td th:text="${order.content}"></td>
                                             <td th:text="${order.user.name}"></td>
-                                            <td th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
+                                            <td th:text="${order.address != null ? (order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone) : '已失效或缺失地址'}"></td>
                                             <td th:text="${#dates.format(order.payTime,'yyyy-MM-dd HH:ss')}"></td>
                                             <td>
                                                 <a href="javascript:void (0)" th:onclick="deliverGoods([[${order.id}]])" class="text-success">发货</a>

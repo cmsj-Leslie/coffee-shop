@@ -55,7 +55,7 @@
                                             <td th:text="${order.user.name}"></td>
                                             <td th:text="${order.courierCompany}"></td>
                                             <td th:text="${order.courierNumber}"></td>
-                                            <td th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
+                                            <td th:text="${order.address != null ? (order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone) : '已失效或缺失地址'}"></td>
                                             <td th:text="${#dates.format(order.successTime,'yyyy-MM-dd HH:ss')}"></td>
                                         </tr>
                                         </tbody>

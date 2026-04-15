@@ -6,6 +6,7 @@ import com.coffeeshop.service.BaseService;
 import com.coffeeshop.service.OrderService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName OrderServiceImpl
@@ -48,6 +49,31 @@ public class OrderServiceImpl extends BaseService implements OrderService {
     @Override
     public boolean update(Order order) {
         return orderMapper.update(order) == 1;
+    }
+
+    @Override
+    public Double getTotalRevenue() {
+        return orderMapper.getTotalRevenue();
+    }
+
+    @Override
+    public Integer getTotalOrderCount() {
+        return orderMapper.getTotalOrderCount();
+    }
+
+    @Override
+    public List<Map<String, Object>> getSalesTrend(int days) {
+        return orderMapper.getSalesTrend(days);
+    }
+
+    @Override
+    public List<Map<String, Object>> getTop5Products() {
+        return orderMapper.getTop5Products();
+    }
+
+    @Override
+    public List<Map<String, Object>> getOrderStatusDistribution() {
+        return orderMapper.getOrderStatusDistribution();
     }
 
 }

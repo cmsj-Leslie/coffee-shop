@@ -16,6 +16,65 @@
     <link rel="stylesheet" href="background/css/style.css">
     <link rel="stylesheet" href="common/css/xtiper.css">
     <link rel="stylesheet" href="common/css/sweetalert.css">
+    <style>
+        /* Global Font Bump */
+        body {
+            font-size: 15px !important;
+        }
+        /* Enterprise Dashboard Layout & Font Fixes */
+        .card-statistic-1 {
+            display: flex;
+            flex-direction: row !important;
+            align-items: center;
+            padding: 25px 20px;
+        }
+        .card-statistic-1 .card-icon {
+            width: 65px !important;
+            height: 65px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 28px !important;
+            color: #fff !important;
+            margin-right: 20px !important;
+            margin-top: 0 !important;
+            position: static !important;
+        }
+        .card-statistic-1 .card-wrap {
+            flex: 1;
+            padding: 0 !important;
+        }
+        .card-statistic-1 .card-header h4 {
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            color: #6c757d !important;
+            margin: 0 0 5px 0 !important;
+            text-transform: none !important;
+            letter-spacing: 0 !important;
+        }
+        .card-statistic-1 .card-body {
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #34395e !important;
+            padding: 0 !important;
+        }
+        /* Chart Headers & General Card Fixes */
+        .card .card-header {
+            border-bottom: 1px solid #f9f9f9 !important;
+            padding: 18px 25px !important;
+            min-height: auto !important;
+            background-color: #fff;
+        }
+        .card .card-header h4 {
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            color: #34395e !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1.5 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,10 +87,101 @@
         <div class="main-content">
             <section class="section">
                 <h1 class="section-header">
-                    <div>仪表盘</div>
+                    <div>数据统计 <i class="ion ion-stats-bars"></i></div>
                 </h1>
                 <div class="row">
+                    <!-- 统计卡片 -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-primary">
+                                <i class="far fa-money-bill-alt"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>总销售额</h4>
+                                </div>
+                                <div class="card-body">
+                                    ¥<span th:text="${#numbers.formatDecimal(totalRevenue, 1, 2)}">0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-danger">
+                                <i class="far fa-newspaper"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>总订单数</h4>
+                                </div>
+                                <div class="card-body" th:text="${totalOrders}">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-warning">
+                                <i class="far fa-user"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>总用户数</h4>
+                                </div>
+                                <div class="card-body" th:text="${totalUsers}">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="card card-statistic-1">
+                            <div class="card-icon bg-success">
+                                <i class="fas fa-coffee"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>总商品数</h4>
+                                </div>
+                                <div class="card-body" th:text="${totalCommodities}">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- 图表区域 -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>近7天订单趋势</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="salesTrendChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>订单状态分布</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="statusChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>销量 Top5 商品</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="top5Chart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -55,5 +205,174 @@
 <script src="background/modules/summernote/summernote-lite.js"></script>
 
 <script src="background/js/scripts.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    // 近7天订单趋势
+    var salesTrendData = /*[[${salesTrend}]]*/ [];
+    var trendLabels = salesTrendData.map(item => item.date);
+    var trendCounts = salesTrendData.map(item => item.count);
+
+    var trendCtx = document.getElementById('salesTrendChart').getContext('2d');
+    new Chart(trendCtx, {
+        type: 'line',
+        data: {
+            labels: trendLabels,
+            datasets: [{
+                label: '订单数',
+                data: trendCounts,
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                pointBackgroundColor: '#667eea',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                tension: 0.4,
+                fill: true,
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        font: { size: 14 },
+                        padding: 15,
+                        usePointStyle: true
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        font: { size: 13 }
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)',
+                        drawBorder: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: { size: 13 }
+                    }
+                }
+            }
+        }
+    });
+
+    // 订单状态分布
+    var statusData = /*[[${statusDistribution}]]*/ [];
+    var statusLabels = statusData.map(item => {
+        switch(item.status) {
+            case -1: return '已取消';
+            case 0: return '待发货';
+            case 1: return '待收货';
+            case 2: return '已完成';
+            default: return '未知';
+        }
+    });
+    var statusCounts = statusData.map(item => item.count);
+
+    var statusCtx = document.getElementById('statusChart').getContext('2d');
+    new Chart(statusCtx, {
+        type: 'doughnut',
+        data: {
+            labels: statusLabels,
+            datasets: [{
+                data: statusCounts,
+                backgroundColor: [
+                    '#fc544b', // 已取消 (Stisla danger)
+                    '#ffa426', // 待发货 (Stisla warning)
+                    '#47c363', // 已完成 (Stisla success)
+                    '#6777ef'  // 待收货 (Stisla primary)
+                ],
+                borderWidth: 2,
+                borderColor: '#fff',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        font: { size: 14 },
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
+                }
+            }
+        }
+    });
+
+    // Top5 商品
+    var top5Data = /*[[${top5Products}]]*/ [];
+    var top5Labels = top5Data.map(item => item.name);
+    var top5Counts = top5Data.map(item => item.totalSold);
+
+    var top5Ctx = document.getElementById('top5Chart').getContext('2d');
+    new Chart(top5Ctx, {
+        type: 'bar',
+        data: {
+            labels: top5Labels,
+            datasets: [{
+                label: '销量',
+                data: top5Counts,
+                backgroundColor: '#6777ef',
+                borderColor: '#6777ef',
+                borderWidth: 1,
+                barPercentage: 0.5,
+                categoryPercentage: 0.5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        font: { size: 14 },
+                        padding: 15,
+                        usePointStyle: true
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        font: { size: 13 }
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)',
+                        drawBorder: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: { size: 13 }
+                    }
+                }
+            }
+        }
+    });
+    /*]]>*/
+</script>
 </body>
 </html>

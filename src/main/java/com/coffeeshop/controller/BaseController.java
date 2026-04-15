@@ -44,6 +44,10 @@ public class BaseController {
     @Autowired
     protected UserService userService;
     @Autowired
+    protected CouponService couponService;
+    @Autowired
+    protected UserCouponService userCouponService;
+    @Autowired
     protected OssClient ossClient;
 
     /**

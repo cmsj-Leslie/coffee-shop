@@ -130,4 +130,9 @@
         select commodity_id from collection where user_id = #{userId}
     </select>
 
+    <!--查询所有用户收藏记录（用于协同过滤推荐）-->
+    <select id="listAllUserCommodityCollections" resultMap="CollectionMap">
+        SELECT id, user_id, commodity_id FROM collection
+    </select>
+
 </mapper>

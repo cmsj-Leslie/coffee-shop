@@ -56,6 +56,37 @@ public class SystemController extends BaseController {
     }
 
     /**
+     * 后台仪表盘
+     */
+    @GetMapping("/dashboard")
+    public String dashboard(Map<String, Object> map) {
+        // 统计数据
+        Double totalRevenue = orderService.getTotalRevenue();
+        Integer totalOrders = orderService.getTotalOrderCount();
+        Integer totalUsers = userService.countUsers(new User());
+        Integer totalCommodities = commodityService.countCommoditys(new Commodity());
+
+        map.put("totalRevenue", totalRevenue != null ? totalRevenue : 0.0);
+        map.put("totalOrders", totalOrders != null ? totalOrders : 0);
+        map.put("totalUsers", totalUsers != null ? totalUsers : 0);
+        map.put("totalCommodities", totalCommodities != null ? totalCommodities : 0);
+
+        // 近7天订单趋势
+        List<Map<String, Object>> salesTrend = orderService.getSalesTrend(7);
+        map.put("salesTrend", salesTrend);
+
+        // Top5 商品
+        List<Map<String, Object>> top5Products = orderService.getTop5Products();
+        map.put("top5Products", top5Products);
+
+        // 订单状态分布
+        List<Map<String, Object>> statusDistribution = orderService.getOrderStatusDistribution();
+        map.put("statusDistribution", statusDistribution);
+
+        return "background/dashboard";
+    }
+
+    /**
      * 全部商品
      */
     @GetMapping("/goods")
@@ -316,6 +347,9 @@ public class SystemController extends BaseController {
         Address param = Address.builder().userId(loginUser.getId()).build();
         List<Address> addresses = addressService.listAddresss(param);
 
+        // 获取可用优惠券
+        List<UserCoupon> userCoupons = userCouponService.listUsableCoupons(loginUser.getId(), totalPrice);
+
         map.put("carts", carts);
         map.put("cartIds", cartIds);
         map.put("totalPrice", totalPrice);
@@ -324,6 +358,7 @@ public class SystemController extends BaseController {
         map.put("totalCount", totalCount);
         map.put("hasInsufficientStock", hasInsufficientStock);
         map.put("addresses", addresses);
+        map.put("userCoupons", userCoupons);
         return "front/pay";
     }
 
@@ -431,6 +466,16 @@ public class SystemController extends BaseController {
         });
         map.put("comments", comments);
         return "background/comment-reply";
+    }
+
+    /**
+     * 优惠券管理
+     */
+    @GetMapping("/coupon-manage")
+    public String couponManage(Map<String, Object> map) {
+        List<Coupon> coupons = couponService.listCoupons();
+        map.put("coupons", coupons);
+        return "background/coupon-manage";
     }
 
     /**

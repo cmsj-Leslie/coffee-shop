@@ -117,6 +117,20 @@
             </div>
             <!-- Cart Table End -->
 
+            <!-- Coupon Selection -->
+            <div class="form-group" style="margin-top: 15px;" th:if="${userCoupons != null and !#lists.isEmpty(userCoupons)}">
+                <label style="font-weight: bold; margin-bottom: 10px; display: block;">优惠券：</label>
+                <select class="form-control" id="couponId" onchange="applyCoupon()">
+                    <option value="">不使用优惠券</option>
+                    <option th:each="uc:${userCoupons}"
+                            th:value="${uc.id}"
+                            th:attr="data-type=${uc.coupon.type},data-reduce=${uc.coupon.reduceAmount},data-discount=${uc.coupon.discount}"
+                            th:text="${uc.coupon.name + '（截止' + #dates.format(uc.coupon.endTime,'MM-dd') + '）'}">
+                    </option>
+                </select>
+                <small id="couponTip" style="color:#28a745; margin-top:5px; display:block;"></small>
+            </div>
+
             <!-- Order Summary -->
             <div style="background: #f8f8f8; padding: 20px; border-radius: 8px; margin-top: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
@@ -125,9 +139,10 @@
                         <p style="margin: 5px 0;">商品总价：<strong th:text="${'¥ ' + totalPrice}"></strong></p>
                         <p style="margin: 5px 0; color: #28a745;">已优惠：<strong th:text="${'¥ ' + savedPrice}"></strong>
                         </p>
+                        <p id="couponDiscount" style="margin: 5px 0; color: #ff6b6b; display:none;">优惠券减免：<strong id="couponAmount">¥0</strong></p>
                     </div>
                     <div style="text-align: right;">
-                        <h4 style="color: #c38241;">待支付：<strong th:text="${'¥ ' + totalPrice}"></strong></h4>
+                        <h4 style="color: #c38241;">待支付：<strong id="finalPrice" th:text="${'¥ ' + totalPrice}"></strong></h4>
                     </div>
                 </div>
             </div>
@@ -135,7 +150,7 @@
             <br>
             <div th:if="${addresses.size() > 0}">
                 <a class="andro_btn-custom shadow-none" href="javascript:void(0)" th:if="${!hasInsufficientStock}"
-                    th:onclick="batchBuyCommodity([[${cartIds}]])" style="padding: 12px 40px;">立即购买</a>
+                    onclick="doBatchBuy()" style="padding: 12px 40px;">立即购买</a>
                 <a class="andro_btn-custom shadow-none" style="background: red;color: white; padding: 12px 40px;"
                     th:if="${hasInsufficientStock}">部分商品库存不足，请返回修改！</a>
             </div>
@@ -177,6 +192,39 @@
     <script src="common/js/xtiper.min.js"></script>
     <script src="common/js/sweetalert.js"></script>
     <script src="common/js/custom.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var totalPrice = /*[[${totalPrice}]]*/ 0;
+        var cartIds = /*[[${cartIds}]]*/ '';
+
+        function applyCoupon() {
+            var sel = document.getElementById('couponId');
+            var opt = sel.options[sel.selectedIndex];
+            if (!sel.value) {
+                document.getElementById('finalPrice').innerText = '¥ ' + totalPrice.toFixed(2);
+                document.getElementById('couponDiscount').style.display = 'none';
+                document.getElementById('couponTip').innerText = '';
+                return;
+            }
+            var type = opt.getAttribute('data-type');
+            var reduce = parseFloat(opt.getAttribute('data-reduce') || 0);
+            var discount = parseFloat(opt.getAttribute('data-discount') || 1);
+            var actual = (type == '1') ? totalPrice - reduce : totalPrice * discount;
+            var saved = totalPrice - Math.max(actual, 0);
+            document.getElementById('finalPrice').innerText = '¥ ' + Math.max(actual, 0).toFixed(2);
+            document.getElementById('couponAmount').innerText = '¥ ' + saved.toFixed(2);
+            document.getElementById('couponDiscount').style.display = 'block';
+            document.getElementById('couponTip').innerText = '已选优惠券，节省 ¥' + saved.toFixed(2);
+        }
+
+        function doBatchBuy() {
+            var addressId = document.getElementById('addressId').value;
+            var couponEl = document.getElementById('couponId');
+            var userCouponId = couponEl ? couponEl.value : '';
+            batchBuyCommodityWithCoupon(cartIds, addressId, userCouponId);
+        }
+        /*]]>*/
+    </script>
 
 </body>
 

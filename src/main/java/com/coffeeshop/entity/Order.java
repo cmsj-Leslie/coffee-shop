@@ -88,4 +88,19 @@ public class Order implements Serializable {
     private Integer addressId;
     private Address address;
 
+    /**
+     * 订单总金额
+     */
+    private Double totalAmount;
+
+    /**
+     * 实付金额（优惠后）
+     */
+    private Double actualAmount;
+
+    /**
+     * 使用的优惠券ID
+     */
+    private Integer couponId;
+
 }
