@@ -65,4 +65,9 @@ public interface CommodityCommentMapper {
      * 获取商品的平均星星数
      */
     Double getAvgStar(Integer commodityId);
+
+    /**
+     * 查询所有评价记录的 userId 和 commodityId（用于协同过滤）
+     */
+    List<CommodityComment> listAllUserCommodityComments();
 }

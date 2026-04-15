@@ -276,6 +276,16 @@
         order by publish_time desc
     </select>
 
+    <!--按ID列表批量查询上架商品（用于推荐结果回填）-->
+    <select id="listCommoditysByIds" resultMap="CommodityMap">
+        SELECT <include refid="allColumn"/>
+        FROM commodity
+        WHERE status = 1 AND id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
     <!--通过主键修改数据-->
     <update id="update">
         update commodity

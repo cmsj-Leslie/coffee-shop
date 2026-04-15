@@ -2,6 +2,8 @@ package com.coffeeshop.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
+import com.coffeeshop.service.RecommendService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,9 @@ import java.util.stream.Collectors;
  */
 @Controller
 public class SystemController extends BaseController {
+
+    @Autowired
+    private RecommendService recommendService;
 
     /**
      * 商城主页
@@ -39,6 +44,14 @@ public class SystemController extends BaseController {
         map.put("commodities9", commodities9);
         map.put("commodities", commodities);
         map.put("sumCommodities", hashSet);
+
+        // 个性化推荐（登录用户走 ItemCF，游客不展示）
+        if (ObjectUtil.isNotEmpty(loginUser)) {
+            List<Commodity> recommended = recommendService.recommend(loginUser.getId());
+            map.put("recommended", recommended);
+            hashSet.addAll(recommended);
+        }
+
         return "index";
     }
 

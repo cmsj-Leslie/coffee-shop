@@ -1,6 +1,7 @@
 package com.coffeeshop.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import com.coffeeshop.entity.Commodity;
 
 import java.util.List;
@@ -74,4 +75,9 @@ public interface CommodityMapper {
      * 修改Commodity, 根据 commodity 的主键修改数据
      */
     int update(Commodity commodity);
+
+    /**
+     * 按 ID 列表批量查询上架商品（用于推荐结果回填）
+     */
+    List<Commodity> listCommoditysByIds(@Param("ids") List<Integer> ids);
 }

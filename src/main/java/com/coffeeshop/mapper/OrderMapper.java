@@ -61,4 +61,9 @@ public interface OrderMapper {
      */
     int update(Order order);
 
+    /**
+     * 查询所有已完成/已发货订单的 userId 和 commodityId（用于协同过滤）
+     */
+    List<Order> listAllUserCommodityInteractions();
+
 }

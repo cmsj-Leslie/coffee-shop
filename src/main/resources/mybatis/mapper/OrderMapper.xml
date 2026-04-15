@@ -230,6 +230,11 @@
         </trim>
     </select>
 
+    <!--查询所有用户-商品交互订单（status >= 0，即非取消）用于协同过滤-->
+    <select id="listAllUserCommodityInteractions" resultMap="OrderMap">
+        SELECT id, user_id, commodity_id, status FROM `order` WHERE status >= 0
+    </select>
+
     <!--通过主键修改数据-->
     <update id="update">
         update `order`

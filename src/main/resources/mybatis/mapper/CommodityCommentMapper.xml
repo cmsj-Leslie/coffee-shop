@@ -159,6 +159,11 @@
         SELECT avg(stars) FROM commodity_comment where commodity_id = #{commodityId} and reply_id is null
     </select>
 
+    <!--查询所有有评星的评价（用于协同过滤）-->
+    <select id="listAllUserCommodityComments" resultMap="CommodityCommentMap">
+        SELECT id, user_id, commodity_id, stars FROM commodity_comment WHERE stars IS NOT NULL
+    </select>
+
     <!--通过主键修改数据-->
     <update id="update">
         update commodity_comment
