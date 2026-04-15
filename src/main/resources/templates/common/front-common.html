@@ -6,6 +6,15 @@
     <title>前台-公共部门</title>
     <!-- AI Chat Stylesheet (Global) -->
     <link rel="stylesheet" href="common/css/ai-chat.css">
+    <style>
+        /* 强行确保侧边栏和侧边栏阴影的层级最高，防止在部分页面被 position:fixed 的粘性导航栏遮挡 */
+        .andro_aside {
+            z-index: 99999 !important;
+        }
+        .andro_aside-overlay {
+            z-index: 99998 !important;
+        }
+    </style>
 </head>
 
 <body>

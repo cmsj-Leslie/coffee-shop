@@ -82,7 +82,7 @@
             <td style="text-align: center" th:text="${order.orderNumber}"></td>
             <td style="text-align: center" th:text="${order.content}"></td>
             <td style="text-align: center"
-              th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
+              th:text="${order.address != null ? order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone : '（未提供收货信息）'}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.payTime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td style="text-align: center">
@@ -109,7 +109,7 @@
             <td style="text-align: center" th:text="${order.orderNumber}"></td>
             <td style="text-align: center" th:text="${order.content}"></td>
             <td style="text-align: center"
-              th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
+              th:text="${order.address != null ? order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone : '（未提供收货信息）'}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.payTime,'yyyy-MM-dd HH:mm:ss')}"></td>
             <td style="text-align: center">
@@ -138,7 +138,7 @@
             <td style="text-align: center" th:text="${order.orderNumber}"></td>
             <td style="text-align: center" th:text="${order.content}"></td>
             <td style="text-align: center"
-              th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
+              th:text="${order.address != null ? order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone : '（未提供收货信息）'}"></td>
             <td style="text-align: center" th:text="${order.courierCompany}"></td>
             <td style="text-align: center" th:text="${order.courierNumber}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
@@ -169,7 +169,7 @@
             <td style="text-align: center" th:text="${order.orderNumber}"></td>
             <td style="text-align: center" th:text="${order.content}"></td>
             <td style="text-align: center"
-              th:text="${order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone}"></td>
+              th:text="${order.address != null ? order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone : '（未提供收货信息）'}"></td>
             <td style="text-align: center" th:text="${order.courierCompany}"></td>
             <td style="text-align: center" th:text="${order.courierNumber}"></td>
             <td style="text-align: center" th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>

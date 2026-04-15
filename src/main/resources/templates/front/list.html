@@ -30,15 +30,12 @@
 
   <!-- Custom: fix product card height consistency -->
   <style>
-    /* 商品列表 - 卡片等高 */
-    .row > [class*="col-"] {
-      display: flex;
-      margin-bottom: 30px;
-    }
+    /* 商品列表 - 卡片等高（去除危险的全局行级拦截，避免污染右侧抽屉列表） */
     .row > [class*="col-"] > .andro_product {
       display: flex;
       flex-direction: column;
       width: 100%;
+      height: 100%;
     }
     .andro_product .andro_product-body {
       flex: 1;
