@@ -11,6 +11,11 @@ import java.util.List;
 public class UserCouponServiceImpl extends BaseService implements UserCouponService {
 
     @Override
+    public List<UserCoupon> listUserCoupons(UserCoupon param) {
+        return userCouponMapper.listUserCoupons(param);
+    }
+
+    @Override
     public List<UserCoupon> listUsableCoupons(Integer userId, Double totalAmount) {
         return userCouponMapper.listUsableCoupons(userId, totalAmount);
     }

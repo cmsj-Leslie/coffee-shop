@@ -54,8 +54,8 @@
                                             <td th:text="${order.content}"></td>
                                             <td th:text="${order.user.name}"></td>
                                             <td th:text="${order.address != null ? (order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone) : '已失效或缺失地址'}"></td>
-                                            <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:ss')}"></td>
-                                            <td th:text="${#dates.format(order.payTime,'yyyy-MM-dd HH:ss')}"></td>
+                                            <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm')}"></td>
+                                            <td th:text="${#dates.format(order.payTime,'yyyy-MM-dd HH:mm')}"></td>
                                             <td><a th:onclick="deleteOrder([[${order.id}]])" href="javaScript:void (0)" class="text-danger">删除</a></td>
                                         </tr>
                                         </tbody>

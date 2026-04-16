@@ -80,4 +80,9 @@ public interface CommodityMapper {
      * 按 ID 列表批量查询上架商品（用于推荐结果回填）
      */
     List<Commodity> listCommoditysByIds(@Param("ids") List<Integer> ids);
+
+    /**
+     * 查询库存不足的商品
+     */
+    List<Commodity> listLowInventory(@Param("threshold") int threshold);
 }

@@ -479,6 +479,31 @@ public class SystemController extends BaseController {
     }
 
     /**
+     * 我的优惠券
+     */
+    @GetMapping("/my-coupon")
+    public String myCoupon(@RequestParam(value = "status", defaultValue = "0") Integer status, Map<String, Object> map) {
+        UserCoupon param = UserCoupon.builder()
+                .userId(loginUser.getId())
+                .status(status)
+                .build();
+        List<UserCoupon> userCoupons = userCouponService.listUserCoupons(param);
+        map.put("userCoupons", userCoupons);
+        map.put("status", status);
+        return "front/my-coupon";
+    }
+
+    /**
+     * 库存预警（管理员）
+     */
+    @GetMapping("/inventory-warning")
+    public String inventoryWarning(Map<String, Object> map) {
+        List<Commodity> lowStockList = commodityService.listLowInventory(5);
+        map.put("lowStockList", lowStockList);
+        return "background/inventory-warning";
+    }
+
+    /**
      * 处理订单信息
      */
     private List<Order> dealOrder(List<Order> orders) {

@@ -97,13 +97,20 @@ public class OrderController extends BaseController {
             UserCoupon userCoupon = userCouponService.getById(userCouponId);
             if (userCoupon != null && userCoupon.getStatus() == 0) {
                 Coupon coupon = userCoupon.getCoupon();
-                if (coupon.getType() == 1) {
-                    actualAmount = totalAmount - coupon.getReduceAmount();
-                } else if (coupon.getType() == 2) {
-                    actualAmount = totalAmount * coupon.getDiscount();
+                // 二次校验：优惠券是否在有效期内 && 订单金额是否满足最低门槛
+                boolean isValid = coupon != null
+                        && coupon.getEndTime() != null && coupon.getEndTime().after(new Date())
+                        && (coupon.getMinAmount() == null || totalAmount >= coupon.getMinAmount());
+                if (isValid) {
+                    if (coupon.getType() == 1) {
+                        actualAmount = totalAmount - coupon.getReduceAmount();
+                    } else if (coupon.getType() == 2) {
+                        actualAmount = totalAmount * coupon.getDiscount();
+                    }
+                    actualAmount = Math.max(actualAmount, 0);
+                    couponId = coupon.getId();
                 }
-                actualAmount = Math.max(actualAmount, 0);
-                couponId = coupon.getId();
+                // 若校验不通过，couponId 保持 null，按原价结算
             }
         }
 

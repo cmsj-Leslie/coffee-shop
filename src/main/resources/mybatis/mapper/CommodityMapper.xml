@@ -297,4 +297,12 @@
         </where>
     </update>
 
+    <!--查询库存不足的商品-->
+    <select id="listLowInventory" resultMap="CommodityMap">
+        SELECT <include refid="allColumn"/>
+        FROM commodity
+        WHERE inventory &lt;= #{threshold} AND status = 1
+        ORDER BY inventory ASC
+    </select>
+
 </mapper>

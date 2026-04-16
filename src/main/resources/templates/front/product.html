@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -151,6 +151,12 @@
                 </div>
               </li>
             </ul>
+
+            <!-- 风味雷达图 -->
+            <div style="margin-top: 20px;">
+              <h5 style="font-weight: 700; margin-bottom: 10px;"><i class="fa fa-chart-area" style="color:#c38241;"></i> 风味特征分析</h5>
+              <div id="flavorRadar" style="width: 100%; height: 300px;"></div>
+            </div>
 
           </div>
 
@@ -357,8 +363,64 @@
   <script src="common/js/xtiper.min.js"></script>
   <script src="common/js/sweetalert.js"></script>
   <script src="common/js/custom.js"></script>
+  <!-- ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <!-- AI Chat Script -->
   <script src="common/js/ai-chat.js"></script>
+
+  <script th:inline="javascript">
+  /*<![CDATA[*/
+  (function() {
+    var classifyId = /*[[${commodity.classifyId}]]*/ 1;
+    // 风味预设数据：[酸度, 甜度, 醇厚度, 香气, 余韵]，每项 1-10
+    var flavorMap = {
+      1:  [4, 7, 5, 8, 6],   // 卡布其诺
+      2:  [5, 8, 3, 6, 4],   // 冰咖啡
+      3:  [3, 9, 7, 8, 7],   // 摩卡咖啡
+      4:  [7, 5, 6, 9, 8],   // 阿拉比卡咖啡
+      5:  [3, 3, 9, 5, 7],   // 罗布斯塔
+      6:  [4, 4, 8, 6, 6],   // 刚果咖啡
+      7:  [6, 7, 8, 9, 9],   // 蓝山咖啡
+      8:  [5, 8, 6, 9, 7],   // 夏威夷卡曼
+      9:  [3, 4, 9, 7, 8],   // 印度曼特宁
+      10: [5, 5, 7, 6, 5],   // 乌干达咖啡
+      11: [7, 6, 7, 8, 7]    // 哥伦比亚咖啡
+    };
+    var data = flavorMap[classifyId] || [5, 5, 5, 5, 5];
+
+    var chart = echarts.init(document.getElementById('flavorRadar'));
+    chart.setOption({
+      radar: {
+        indicator: [
+          { name: '酸度', max: 10 },
+          { name: '甜度', max: 10 },
+          { name: '醇厚度', max: 10 },
+          { name: '香气', max: 10 },
+          { name: '余韵', max: 10 }
+        ],
+        shape: 'polygon',
+        splitNumber: 5,
+        name: { textStyle: { color: '#333', fontSize: 13, fontWeight: 600 } },
+        splitArea: { areaStyle: { color: ['#fffdf9','#fff8ef','#fff3e0','#ffe8cc','#ffddb3'] } },
+        axisLine: { lineStyle: { color: '#e0d5c8' } },
+        splitLine: { lineStyle: { color: '#e0d5c8' } }
+      },
+      series: [{
+        type: 'radar',
+        data: [{
+          value: data,
+          name: '风味特征',
+          areaStyle: { color: 'rgba(195,130,65,0.25)' },
+          lineStyle: { color: '#c38241', width: 2 },
+          itemStyle: { color: '#c38241' },
+          symbolSize: 6
+        }]
+      }]
+    });
+    window.addEventListener('resize', function() { chart.resize(); });
+  })();
+  /*]]>*/
+  </script>
 
 </body>
 

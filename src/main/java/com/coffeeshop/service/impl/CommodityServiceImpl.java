@@ -161,4 +161,16 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
         return commodities;
     }
 
+    @Override
+    public List<Commodity> listLowInventory(int threshold) {
+        List<Commodity> commodities = commodityMapper.listLowInventory(threshold);
+        commodities.forEach(temp -> {
+            Classify classify = classifyMapper.getById(temp.getClassifyId());
+            if (ObjectUtil.isNotEmpty(classify)) {
+                temp.setClassify(classify.getName());
+            }
+        });
+        return commodities;
+    }
+
 }

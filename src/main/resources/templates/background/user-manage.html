@@ -39,7 +39,7 @@
                                     <table id="example1" class="table table-bordered table-hover display" style="text-align: center">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>序号</th>
                                             <th>用户名</th>
                                             <th>邮箱</th>
                                             <th>密码</th>
@@ -51,8 +51,8 @@
                                         </tr>
                                         </thead>
                                         <tbody style="font-size: 13px">
-                                        <tr th:each="user:${users}">
-                                            <td th:text="${'#'+ user.id}"></td>
+                                        <tr th:each="user, stat:${users}">
+                                            <td th:text="${stat.count}"></td>
                                             <td th:text="${user.name}"></td>
                                             <td th:text="${user.email}"></td>
                                             <td th:text="${user.password}"></td>

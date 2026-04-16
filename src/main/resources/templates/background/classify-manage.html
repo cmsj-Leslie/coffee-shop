@@ -17,6 +17,45 @@
     <link rel="stylesheet" href="common/css/xtiper.css">
     <link rel="stylesheet" href="common/css/sweetalert.css">
     <link rel="stylesheet" href="common/datatable/dataTables.bootstrap4.min.css"/>
+    <style>
+        .add-bar {
+            display: flex; align-items: center; gap: 12px;
+            padding: 15px 20px; border-radius: 8px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border: 1px dashed #d0d0d0;
+        }
+        .add-bar input { border-radius: 6px; font-size: 14px; }
+        .add-bar input:focus { border-color: #6777ef; box-shadow: 0 0 0 3px rgba(103,119,239,0.15); }
+        .add-bar .btn { border-radius: 6px; padding: 8px 20px; font-weight: 600; white-space: nowrap; }
+
+        #example1 thead th {
+            background: #f8f9fa; font-weight: 700; font-size: 13px;
+            color: #555; border-bottom: 2px solid #dee2e6;
+            vertical-align: middle; padding: 12px 10px;
+        }
+        #example1 tbody td { vertical-align: middle; padding: 8px 10px; }
+        #example1 tbody tr { transition: background 0.2s; }
+        #example1 tbody tr:hover { background: #f2f6ff; }
+
+        .id-badge {
+            display: inline-block; background: #eef0ff; color: #6777ef;
+            font-weight: 700; font-size: 13px; padding: 4px 14px;
+            border-radius: 15px; letter-spacing: 0.5px;
+        }
+        .count-badge {
+            display: inline-block; background: #e8f5e9; color: #47c363;
+            font-weight: 600; font-size: 13px; padding: 4px 12px;
+            border-radius: 15px;
+        }
+        .count-badge.empty { background: #f5f5f5; color: #aaa; }
+        .name-input {
+            border: 1px solid #e0e0e0; border-radius: 6px; text-align: center;
+            font-size: 14px; font-weight: 500; transition: all 0.2s;
+        }
+        .name-input:focus { border-color: #6777ef; box-shadow: 0 0 0 3px rgba(103,119,239,0.12); }
+        .time-text { color: #888; font-size: 13px; }
+        .btn-del { border-radius: 6px; font-size: 12px; padding: 5px 14px; font-weight: 600; }
+    </style>
 </head>
 
 <body>
@@ -51,32 +90,33 @@
                                     <table id="example1" class="table table-bordered table-hover display" style="text-align: center">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th style="width:80px">序号</th>
                                             <th>分类名称</th>
-                                            <th>商品数</th>
+                                            <th style="width:100px">商品数</th>
                                             <th>创建时间</th>
-                                            <th>操作</th>
+                                            <th style="width:140px">操作</th>
                                         </tr>
                                         </thead>
                                         <tbody style="font-size: 13px">
-                                            <tr th:each="classify:${classifies}">
+                                            <tr th:each="classify, stat:${classifies}">
                                                 <td>
-                                                    <span class="form-control" style="text-align: center"  th:text="${'#'+ classify.id}"></span>
+                                                    <span class="id-badge" th:text="${stat.count}"></span>
                                                 </td>
                                                 <td>
-                                                    <input th:onchange="updateClassify([[${classify.id}]])" th:id="${'classify'+classify.id}" class="form-control" style="text-align: center" type="text" th:value="${classify.name}">
+                                                    <input th:onchange="updateClassify([[${classify.id}]])" th:id="${'classify'+classify.id}" class="form-control name-input" type="text" th:value="${classify.name}">
                                                 </td>
                                                 <td>
-                                                    <span class="form-control" style="text-align: center"  th:text="${classify.count + '（件）'}"></span>
+                                                    <span th:if="${classify.count > 0}" class="count-badge" th:text="${classify.count + ' 件'}"></span>
+                                                    <span th:if="${classify.count == 0}" class="count-badge empty">0 件</span>
                                                 </td>
                                                 <td>
-                                                    <span class="form-control" style="text-align: center"  th:text="${#dates.format(classify.createTime,'yyyy-MM-dd HH:ss')}"></span>
+                                                    <span class="time-text" th:text="${#dates.format(classify.createTime,'yyyy-MM-dd HH:mm')}"></span>
                                                 </td>
                                                 <td>
-                                                    <button th:if="${classify.count > 0}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title=" 当前分类下已存在商品，无法删除！">
-                                                        <i class="ion ion-information-circled"></i> 无法删除
+                                                    <button th:if="${classify.count > 0}" type="button" class="btn btn-outline-secondary btn-del" data-toggle="tooltip" data-placement="top" title="" data-original-title="当前分类下已存在商品，无法删除">
+                                                        <i class="ion ion-locked"></i> 不可删
                                                     </button>
-                                                    <button th:if="${classify.count == 0}" th:onclick="deleteClassify([[${classify.id}]])" class="btn btn-danger"><i class="ion ion-trash-b"></i> 点击删除</button>
+                                                    <button th:if="${classify.count == 0}" th:onclick="deleteClassify([[${classify.id}]])" class="btn btn-outline-danger btn-del"><i class="ion ion-trash-b"></i> 删除</button>
                                                 </td>
                                             </tr>
                                         </tbody>

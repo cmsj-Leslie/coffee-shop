@@ -73,4 +73,9 @@ public interface CommodityService {
      *         分页使用MyBatis的插件实现
      */
     List<Commodity> listCommoditysOrderBySaleCount();
+
+    /**
+     * 查询库存不足的商品（库存 ≤ threshold）
+     */
+    List<Commodity> listLowInventory(int threshold);
 }

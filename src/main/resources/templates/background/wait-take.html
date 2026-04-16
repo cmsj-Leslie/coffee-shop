@@ -56,7 +56,7 @@
                                             <td th:text="${order.courierCompany}"></td>
                                             <td th:text="${order.courierNumber}"></td>
                                             <td th:text="${order.address != null ? (order.address.name + ' - ' + order.address.address + ' - ' + order.address.phone) : '已失效或缺失地址'}"></td>
-                                            <td th:text="${#dates.format(order.shippingTime,'yyyy-MM-dd HH:ss')}"></td>
+                                            <td th:text="${#dates.format(order.shippingTime,'yyyy-MM-dd HH:mm')}"></td>
                                         </tr>
                                         </tbody>
                                         <thead>

@@ -67,6 +67,7 @@
           AND uc.status = 0
           AND c.status = 1
           AND c.end_time > NOW()
+          AND c.start_time &lt;= NOW()
           AND c.min_amount &lt;= #{totalAmount}
         ORDER BY c.type, c.reduce_amount DESC
     </select>

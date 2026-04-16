@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的优惠券</title>
+
+  <!-- Vendor Stylesheets -->
+  <link rel="stylesheet" href="front/assets/css/plugins/bootstrap.min.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/animate.min.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/magnific-popup.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/slick.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/slick-theme.css">
+  <link rel="stylesheet" href="front/assets/css/plugins/ion.rangeSlider.min.css">
+
+  <!-- Icon Fonts -->
+  <link rel="stylesheet" href="front/assets/fonts/flaticon/flaticon.css">
+  <link rel="stylesheet" href="front/assets/fonts/font-awesome/css/all.min.css">
+
+  <!-- Coffeez Style sheet -->
+  <link rel="stylesheet" href="front/assets/css/style.css">
+  <link rel="stylesheet" href="common/css/xtiper.css">
+  <link rel="stylesheet" href="common/css/sweetalert.css">
+  <!-- AI Chat Stylesheet -->
+  <link rel="stylesheet" href="common/css/ai-chat.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+
+  <style>
+    .coupon-tabs { margin-bottom: 30px; }
+    .coupon-tabs .nav-link { font-size: 16px; font-weight: 600; color: #666; padding: 10px 25px; border-radius: 25px; margin-right: 10px; }
+    .coupon-tabs .nav-link.active { background: #c38241; color: #fff; }
+    .coupon-tabs .nav-link:hover { color: #c38241; }
+    .coupon-tabs .nav-link.active:hover { color: #fff; }
+
+    .coupon-card {
+      border: 2px dashed #e0d5c8;
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fffdf9;
+      transition: all 0.3s ease;
+    }
+    .coupon-card:hover { border-color: #c38241; box-shadow: 0 4px 15px rgba(195,130,65,0.15); }
+    .coupon-card.used { opacity: 0.55; background: #f5f5f5; border-color: #ddd; }
+    .coupon-card.expired { opacity: 0.45; background: #f0f0f0; border-color: #ccc; }
+
+    .coupon-left { display: flex; align-items: center; gap: 20px; }
+    .coupon-amount { text-align: center; min-width: 90px; }
+    .coupon-amount .number { font-size: 32px; font-weight: 700; color: #c38241; line-height: 1; }
+    .coupon-amount .unit { font-size: 14px; color: #c38241; }
+    .coupon-amount .label { font-size: 12px; color: #999; margin-top: 4px; }
+    .coupon-card.used .coupon-amount .number,
+    .coupon-card.used .coupon-amount .unit,
+    .coupon-card.expired .coupon-amount .number,
+    .coupon-card.expired .coupon-amount .unit { color: #aaa; }
+
+    .coupon-info h5 { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: #333; }
+    .coupon-info p { font-size: 13px; color: #999; margin: 2px 0; }
+
+    .coupon-status-badge {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-usable { background: #fff3e0; color: #c38241; }
+    .badge-used { background: #e8e8e8; color: #999; }
+    .badge-expired { background: #fce4e4; color: #cc5555; }
+
+    .empty-coupon {
+      text-align: center;
+      padding: 60px 20px;
+      color: #aaa;
+    }
+    .empty-coupon i { font-size: 48px; margin-bottom: 15px; display: block; }
+  </style>
+</head>
+
+<body>
+
+  <div th:replace="common/front-common::#front1"></div>
+  <div th:replace="common/front-common::#androNewsletterPopup"></div>
+  <div th:replace="common/front-common::#front4"></div>
+  <div th:replace="common/front-common::#front5"></div>
+  <div th:replace="common/front-common::#front6"></div>
+  <div th:replace="common/front-common::#front7"></div>
+  <div th:replace="common/front-common::#front8"></div>
+
+  <!-- Subheader Start -->
+  <div class="andro_subheader pattern-bg primary-bg">
+    <div class="container">
+      <div class="andro_subheader-inner">
+        <h1>我的优惠券</h1>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">主页</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Subheader End -->
+
+  <div class="section">
+    <div class="container">
+
+      <!-- Tab Navigation -->
+      <ul class="nav coupon-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" th:classappend="${status == 0} ? ' active' : ''" href="my-coupon?status=0">未使用</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:classappend="${status == 1} ? ' active' : ''" href="my-coupon?status=1">已使用</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:classappend="${status == 2} ? ' active' : ''" href="my-coupon?status=2">已过期</a>
+        </li>
+      </ul>
+
+      <!-- Coupon List -->
+      <div th:if="${userCoupons.size() == 0}" class="empty-coupon">
+        <i class="fa fa-ticket-alt"></i>
+        <h5 th:if="${status == 0}">暂无可用优惠券</h5>
+        <h5 th:if="${status == 1}">暂无已使用的优惠券</h5>
+        <h5 th:if="${status == 2}">暂无已过期的优惠券</h5>
+        <p>去商城逛逛，也许有新券等着你呢~</p>
+      </div>
+
+      <div th:each="uc : ${userCoupons}">
+        <div class="coupon-card" th:classappend="${status == 1} ? ' used' : (status == 2 ? ' expired' : '')">
+          <div class="coupon-left">
+            <!-- Amount display -->
+            <div class="coupon-amount">
+              <div th:if="${uc.coupon.type == 1}">
+                <span class="unit">¥</span><span class="number" th:text="${#numbers.formatDecimal(uc.coupon.reduceAmount, 0, 0)}">20</span>
+                <div class="label">满减券</div>
+              </div>
+              <div th:if="${uc.coupon.type == 2}">
+                <span class="number" th:text="${uc.coupon.discount * 10}">8</span><span class="unit">折</span>
+                <div class="label">折扣券</div>
+              </div>
+            </div>
+            <!-- Info -->
+            <div class="coupon-info">
+              <h5 th:text="${uc.coupon.name}">优惠券名称</h5>
+              <p th:text="${'满 ¥' + #numbers.formatDecimal(uc.coupon.minAmount, 0, 0) + ' 可用'}">满100可用</p>
+              <p th:text="${'有效期至 ' + #dates.format(uc.coupon.endTime, 'yyyy-MM-dd HH:mm')}">有效期</p>
+              <p th:if="${status == 1}" th:text="${'使用时间：' + #dates.format(uc.useTime, 'yyyy-MM-dd HH:mm')}">使用时间</p>
+            </div>
+          </div>
+          <!-- Status Badge -->
+          <div>
+            <span class="coupon-status-badge badge-usable" th:if="${status == 0}">可使用</span>
+            <span class="coupon-status-badge badge-used" th:if="${status == 1}">已使用</span>
+            <span class="coupon-status-badge badge-expired" th:if="${status == 2}">已过期</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Instagram Start -->
+  <div th:replace="common/front-common::#instagram"></div>
+  <!-- Instagram End -->
+
+  <!-- Footer Start -->
+  <div th:replace="common/front-common::#footer"></div>
+  <!-- Footer End -->
+
+  <!-- Vendor Scripts -->
+  <script src="front/assets/js/plugins/jquery-3.4.1.min.js"></script>
+  <script src="front/assets/js/plugins/popper.min.js"></script>
+  <script src="front/assets/js/plugins/waypoint.js"></script>
+  <script src="front/assets/js/plugins/bootstrap.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.slimScroll.min.js"></script>
+  <script src="front/assets/js/plugins/imagesloaded.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.steps.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.countdown.min.js"></script>
+  <script src="front/assets/js/plugins/isotope.pkgd.min.js"></script>
+  <script src="front/assets/js/plugins/slick.min.js"></script>
+  <script src="front/assets/js/plugins/ion.rangeSlider.min.js"></script>
+  <script src="front/assets/js/plugins/jquery.zoom.min.js"></script>
+
+  <!-- Coffeez Scripts -->
+  <script src="front/assets/js/main.js"></script>
+  <script src="common/js/xtiper.min.js"></script>
+  <script src="common/js/sweetalert.js"></script>
+  <script src="common/js/custom.js"></script>
+  <!-- AI Chat Script -->
+  <script src="common/js/ai-chat.js"></script>
+
+</body>
+
+</html>

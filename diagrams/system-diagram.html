@@ -13,7 +13,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 60px 40px;
+      padding: 60px 20px;
       min-height: 100vh;
     }
 
@@ -81,7 +81,7 @@
   <div style="height:60px"></div>
 
   <!-- Level 1: two branches, spaced far apart -->
-  <div class="row" style="gap: 200px; align-items: flex-start;">
+  <div class="row" style="gap: 160px; align-items: flex-start;">
 
     <!-- LEFT: 管理员 -->
     <div class="col" id="col-admin">
@@ -90,11 +90,17 @@
       <div style="height:50px"></div>
       <!-- leaf row with 10px gaps between boxes -->
       <div class="row" style="gap:10px;" id="admin-leaves">
-        <div class="node-v" id="a1">商品管理</div>
-        <div class="node-v" id="a2">分类管理</div>
-        <div class="node-v" id="a3">订单管理</div>
-        <div class="node-v" id="a4">用户管理</div>
-        <div class="node-v" id="a5">评论管理</div>
+        <div class="node-v" id="a1">数据统计</div>
+        <div class="node-v" id="a2">用户管理</div>
+        <div class="node-v" id="a3">分类管理</div>
+        <div class="node-v" id="a4">商品管理</div>
+        <div class="node-v" id="a5">商品发布</div>
+        <div class="node-v" id="a6">订单管理</div>
+        <div class="node-v" id="a7">物流发货</div>
+        <div class="node-v" id="a8">评论管理</div>
+        <div class="node-v" id="a9">优惠券管理</div>
+        <div class="node-v" id="a10">库存预警</div>
+        <div class="node-v" id="a11">角色权限</div>
       </div>
     </div>
 
@@ -103,14 +109,19 @@
       <div class="node" id="user">普通用户</div>
       <div style="height:50px"></div>
       <div class="row" style="gap:10px;" id="user-leaves">
-        <div class="node-v" id="u1">商城浏览</div>
-        <div class="node-v" id="u2">商品搜索</div>
-        <div class="node-v" id="u3">购物车管理</div>
-        <div class="node-v" id="u4">订单支付</div>
-        <div class="node-v" id="u5"><span style="font-family:'Times New Roman',serif;">AI</span>智能助手</div>
-        <div class="node-v" id="u6">地址管理</div>
-        <div class="node-v" id="u7">商品评价</div>
-        <div class="node-v" id="u8">收藏管理</div>
+        <div class="node-v" id="u1">注册登录</div>
+        <div class="node-v" id="u2">商城浏览</div>
+        <div class="node-v" id="u3">个性化推荐</div>
+        <div class="node-v" id="u4">商品搜索</div>
+        <div class="node-v" id="u5">购物车管理</div>
+        <div class="node-v" id="u6">订单与支付</div>
+        <div class="node-v" id="u7">优惠券使用</div>
+        <div class="node-v" id="u8"><span style="font-family:'Times New Roman',serif;">AI</span>智能助手</div>
+        <div class="node-v" id="u9">地址管理</div>
+        <div class="node-v" id="u10">商品评价</div>
+        <div class="node-v" id="u11">收藏管理</div>
+        <div class="node-v" id="u12">风味分析</div>
+        <div class="node-v" id="u13">个人中心</div>
       </div>
     </div>
 
@@ -178,8 +189,8 @@
     leaves.forEach(l => ln(l.cx, barY, l.cx, l.top));
   }
 
-  connectLeafRow('admin', ['a1','a2','a3','a4','a5']);
-  connectLeafRow('user',  ['u1','u2','u3','u4','u5','u6','u7','u8']);
+  connectLeafRow('admin', ['a1','a2','a3','a4','a5','a6','a7','a8','a9','a10','a11']);
+  connectLeafRow('user',  ['u1','u2','u3','u4','u5','u6','u7','u8','u9','u10','u11','u12','u13']);
 
 })();
 </script>

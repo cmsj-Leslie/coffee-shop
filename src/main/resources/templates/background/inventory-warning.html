@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+          name="viewport">
+    <title>库存预警</title>
+    <link href="common/favicon.png" rel="shortcut icon" type="image/png">
+    <link rel="stylesheet" href="background/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="background/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="background/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="background/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="background/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="background/css/style.css">
+    <link rel="stylesheet" href="common/css/xtiper.css">
+    <link rel="stylesheet" href="common/css/sweetalert.css">
+    <link rel="stylesheet" href="common/datatable/dataTables.bootstrap4.min.css"/>
+    <style>
+        .stock-danger { color: #fc544b; font-weight: 700; font-size: 15px; }
+        .stock-warning { color: #ffa426; font-weight: 700; font-size: 15px; }
+
+        .alert-summary {
+            display: flex; align-items: center; gap: 18px;
+            padding: 20px 28px; border-radius: 10px;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            border-left: 5px solid #fc544b; margin-bottom: 25px;
+            box-shadow: 0 2px 12px rgba(252,84,75,0.08);
+        }
+        .alert-summary i { font-size: 36px; color: #fc544b; }
+        .alert-summary .alert-text h5 { margin: 0 0 4px 0; font-size: 17px; font-weight: 700; color: #333; }
+        .alert-summary .alert-text p { margin: 0; font-size: 13px; color: #888; }
+
+        #warningTable thead th {
+            background: #f8f9fa; font-weight: 700; font-size: 13px;
+            color: #555; border-bottom: 2px solid #dee2e6;
+            vertical-align: middle; padding: 12px 8px;
+        }
+        #warningTable tbody td { vertical-align: middle; padding: 10px 8px; }
+        #warningTable tbody tr:hover { background: #fff8f0; }
+
+        .product-thumb {
+            width: 60px; height: 60px; object-fit: cover;
+            border-radius: 8px; border: 1px solid #eee;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .stock-bar { width: 80px; height: 8px; border-radius: 4px; background: #eee; display: inline-block; vertical-align: middle; margin-left: 6px; }
+        .stock-bar-inner { height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .stock-bar-danger .stock-bar-inner { background: linear-gradient(90deg, #fc544b, #ff7875); }
+        .stock-bar-warning .stock-bar-inner { background: linear-gradient(90deg, #ffa426, #ffc107); }
+
+        .badge-level { padding: 5px 14px; font-size: 12px; font-weight: 600; border-radius: 15px; letter-spacing: 1px; }
+        .badge-level-danger { background: #ffeaea; color: #fc544b; border: 1px solid #ffd4d4; }
+        .badge-level-warning { background: #fff8ea; color: #e2a30b; border: 1px solid #ffe5a0; }
+        .badge-level-sold { background: #f0f0f0; color: #999; border: 1px solid #ddd; }
+
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .pulse-anim { animation: pulse 1.5s ease-in-out infinite; }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <div th:replace="common/background-common::navbar(currUri='inventory-warning')"></div>
+        <div th:replace="common/background-common::sidebar(currUri='inventory-warning')"></div>
+
+        <div class="main-content">
+            <section class="section">
+                <h1 class="section-header">
+                    <div>库存预警 <i class="ion ion-alert-circled"></i></div>
+                </h1>
+
+                <!-- Alert Summary -->
+                <div class="alert-summary" th:if="${lowStockList.size() > 0}">
+                    <i class="ion ion-alert-circled"></i>
+                    <div class="alert-text">
+                        <h5>检测到 <span th:text="${lowStockList.size()}">0</span> 件商品库存不足！</h5>
+                        <p>以下商品库存 ≤ 5 件，建议尽快补货以避免超卖</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>低库存商品列表</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="warningTable" class="table table-bordered table-striped table-hover display" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>商品图片</th>
+                                            <th>商品名称</th>
+                                            <th>所属分类</th>
+                                            <th>当前售价</th>
+                                            <th>剩余库存</th>
+                                            <th>累计销量</th>
+                                            <th>预警等级</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="font-size: 13px">
+                                        <tr th:each="item, stat : ${lowStockList}">
+                                            <td th:text="${stat.count}"></td>
+                                            <td><img th:src="${item.img}" class="product-thumb"></td>
+                                            <td style="font-weight:600;" th:text="${item.name}"></td>
+                                            <td><span class="badge badge-light" style="font-size:12px; padding:5px 12px;" th:text="${item.classify}"></span></td>
+                                            <td style="font-weight:600; color:#c38241;" th:text="${'¥' + item.currentPrice}"></td>
+                                            <td>
+                                                <span th:if="${item.inventory <= 2}" class="stock-danger" th:text="${item.inventory + ' 件'}"></span>
+                                                <span th:if="${item.inventory > 2}" class="stock-warning" th:text="${item.inventory + ' 件'}"></span>
+                                                <div th:classappend="${item.inventory <= 2} ? 'stock-bar stock-bar-danger' : 'stock-bar stock-bar-warning'">
+                                                    <div class="stock-bar-inner" th:style="${'width:' + (item.inventory * 20) + '%'}"></div>
+                                                </div>
+                                            </td>
+                                            <td th:text="${item.saleCount + ' 件'}"></td>
+                                            <td>
+                                                <span th:if="${item.inventory == 0}" class="badge-level badge-level-sold pulse-anim">已售罄</span>
+                                                <span th:if="${item.inventory > 0 and item.inventory <= 2}" class="badge-level badge-level-danger pulse-anim">紧 急</span>
+                                                <span th:if="${item.inventory > 2}" class="badge-level badge-level-warning">偏 低</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div th:if="${lowStockList.size() == 0}" style="text-align:center; padding:40px; color:#aaa;">
+                                    <i class="ion ion-checkmark-circled" style="font-size:48px; color:#47c363;"></i>
+                                    <h5 style="margin-top:15px; color:#47c363;">库存充足，暂无预警商品 ✓</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div th:replace="common/background-common::footer"></div>
+    </div>
+</div>
+
+<script src="background/modules/jquery.min.js"></script>
+<script src="common/js/xtiper.min.js"></script>
+<script src="common/js/sweetalert.js"></script>
+<script src="common/js/custom.js"></script>
+<script src="common/datatable/jquery.dataTables.min.js"></script>
+<script src="common/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="background/modules/popper.js"></script>
+<script src="background/modules/tooltip.js"></script>
+<script src="background/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="background/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="background/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="background/js/sa-functions.js"></script>
+<script src="background/modules/summernote/summernote-lite.js"></script>
+<script src="background/js/scripts.js"></script>
+<script th:inline="none">
+    $(document).ready(function() {
+        $('#warningTable').DataTable({
+            language: {
+                "sProcessing": "处理中...", "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果", "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项", "sSearch": "搜索:",
+                "sEmptyTable": "库存充足，暂无预警商品",
+                "oPaginate": {"sFirst": "首页", "sPrevious": "上页", "sNext": "下页", "sLast": "末页"}
+            },
+            "order": [[5, 'asc']],
+            "aoColumnDefs": [{"bSortable": false, "aTargets": [1, 7]}]
+        });
+    });
+</script>
+</body>
+</html>
