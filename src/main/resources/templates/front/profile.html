@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -64,19 +64,42 @@
             </div>
           </div>
           <!-- Sidebar End -->
-          <div class="col-lg-8">
+          <div class="col-lg-7 offset-lg-1">
             <input style="display: none" id="avatar" type="file" onchange="uploadAvatar()">
-            <div class="andro_auth-form">
-              <div class="form-group">
-                <input id="username" th:value="${user.name}" type="text" class="form-control" placeholder="用户名">
+            <div class="andro_auth-form shadow-sm" style="border-radius: 12px; padding: 40px; background: #fff; border: 1px solid #f0f0f0; text-align: left;">
+              
+              <div class="mb-4 text-center">
+                 <h4 style="font-weight: 700; color: #333; margin-bottom: 8px; letter-spacing: 1px;">个人资料</h4>
+                 <p style="color: #888; font-size: 14px;">请完善您的基本信息，以便我们为您提供更准确的咖啡推荐服务</p>
+                 <hr style="margin-top: 20px; border-top: 1px dashed #eee;">
               </div>
-              <div class="form-group">
-                <input id="email" th:value="${user.email}" type="email" class="form-control form-control-light" placeholder="邮箱地址">
+
+              <div class="form-group mb-4">
+                <label style="font-weight: 600; color: #555; margin-bottom: 10px; font-size: 14px;">
+                   <i class="fas fa-user-edit mr-2" style="color: #b5876d;"></i> 账户昵称
+                </label>
+                <input id="username" th:value="${user.name}" type="text" class="form-control" placeholder="请输入新的用户名" style="border-radius: 6px; padding: 24px 20px; background-color: #fafafa; border: 1px solid #eee;">
               </div>
-              <div class="form-group">
-                <textarea id="info" placeholder="个人说明" class="form-control form-control-light" style="height: 100px" th:text="${user.info}"></textarea>
+              
+              <div class="form-group mb-4">
+                <label style="font-weight: 600; color: #555; margin-bottom: 10px; font-size: 14px;">
+                   <i class="fas fa-envelope mr-2" style="color: #b5876d;"></i> 密保邮箱
+                </label>
+                <input id="email" th:value="${user.email}" type="email" class="form-control form-control-light" placeholder="用于接收订单状态通知和专属卡券" style="border-radius: 6px; padding: 24px 20px; background-color: #fafafa; border: 1px solid #eee;">
               </div>
-              <button onclick="updateProfile()" class="andro_btn-custom primary">修改资料</button>
+              
+              <div class="form-group mb-5">
+                <label style="font-weight: 600; color: #555; margin-bottom: 10px; font-size: 14px;">
+                   <i class="fas fa-pen-nib mr-2" style="color: #b5876d;"></i> 个人说明
+                </label>
+                <textarea id="info" placeholder="写下一句属于你的咖啡物语..." class="form-control form-control-light" style="height: 120px; border-radius: 6px; padding: 20px; background-color: #fafafa; border: 1px solid #eee; resize: none;" th:text="${user.info}"></textarea>
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button onclick="updateProfile()" class="andro_btn-custom primary text-center" style="border-radius: 6px; font-weight: 600; padding: 15px 40px; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 10px rgba(181, 135, 109, 0.3);">
+                  <i class="fas fa-save mr-2"></i> 保存资料更改
+                </button>
+              </div>
 
             </div>
           </div>
