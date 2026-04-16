@@ -9,7 +9,7 @@
   </style>
 </head>
 <body>
-<svg width="650" height="1000" xmlns="http://www.w3.org/2000/svg"
+<svg width="650" height="1100" xmlns="http://www.w3.org/2000/svg"
      style="font-family:'Microsoft YaHei','微软雅黑',sans-serif; font-size:14px;">
   <defs>
     <marker id="arr" markerWidth="10" markerHeight="7"
@@ -48,16 +48,16 @@
   <line x1="300" y1="222" x2="300" y2="256" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
   <text x="310" y="244" dominant-baseline="middle" fill="#000" font-size="13">是</text>
 
-  <!-- 浏览商品并加入购物车 -->
-  <rect x="210" y="256" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="274" text-anchor="middle" dominant-baseline="middle" fill="#000">浏览商品并加入购物车</text>
+  <!-- 浏览热卖或专属推荐商品 -->
+  <rect x="200" y="256" width="200" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="274" text-anchor="middle" dominant-baseline="middle" fill="#000">浏览热卖或专属推荐商品</text>
 
   <!-- ↓ -->
   <line x1="300" y1="292" x2="300" y2="330" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
   <!-- 勾选商品并点击结算 -->
   <rect x="210" y="330" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="348" text-anchor="middle" dominant-baseline="middle" fill="#000">勾选商品并点击结算</text>
+  <text x="300" y="348" text-anchor="middle" dominant-baseline="middle" fill="#000">勾选商品并加购结算</text>
 
   <!-- ↓ -->
   <line x1="300" y1="366" x2="300" y2="400" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
@@ -69,63 +69,70 @@
   <!-- ↓ -->
   <line x1="300" y1="436" x2="300" y2="470" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- 确认支付 -->
+  <!-- 选择可用优惠券减免 -->
   <rect x="210" y="470" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="488" text-anchor="middle" dominant-baseline="middle" fill="#000">确认支付</text>
+  <text x="300" y="488" text-anchor="middle" dominant-baseline="middle" fill="#000">选择满减/折扣优惠券</text>
 
   <!-- ↓ -->
   <line x1="300" y1="506" x2="300" y2="540" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- 库存是否充足 -->
-  <polygon points="300,540 380,570 300,600 220,570" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="570" text-anchor="middle" dominant-baseline="middle" fill="#000">库存是否充足</text>
-
-  <!-- 否: 向右进入“提示库存不足” -->
-  <line x1="380" y1="570" x2="420" y2="570" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="392" y="560" text-anchor="start" fill="#000" font-size="13">否</text>
-
-  <!-- 提示库存不足 -->
-  <rect x="420" y="552" width="120" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="480" y="570" text-anchor="middle" dominant-baseline="middle" fill="#000">提示库存不足</text>
-
-  <!-- 提示库存不足 -> 回环到“浏览商品并加入购物车” (y中心点 274) -->
-  <polyline points="480,552 480,274 390,274" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
-
-  <!-- 是: 向下 -->
-  <line x1="300" y1="600" x2="300" y2="636" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="310" y="622" dominant-baseline="middle" fill="#000" font-size="13">是</text>
-
-  <!-- 扣减库存并更新销量 -->
-  <rect x="210" y="636" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="654" text-anchor="middle" dominant-baseline="middle" fill="#000">扣减库存并更新销量</text>
+  <!-- 确认支付 -->
+  <rect x="210" y="540" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="558" text-anchor="middle" dominant-baseline="middle" fill="#000">确认支付抵扣后金额</text>
 
   <!-- ↓ -->
-  <line x1="300" y1="672" x2="300" y2="706" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="300" y1="576" x2="300" y2="610" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- 生成订单记录 -->
+  <!-- 库存是否充足 -->
+  <polygon points="300,610 380,640 300,670 220,640" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="640" text-anchor="middle" dominant-baseline="middle" fill="#000">库存是否充足</text>
+
+  <!-- 否: 向右进入“提示库存不足” -->
+  <line x1="380" y1="640" x2="420" y2="640" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="392" y="630" text-anchor="start" fill="#000" font-size="13">否</text>
+
+  <!-- 提示库存不足 -->
+  <rect x="420" y="622" width="120" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="480" y="640" text-anchor="middle" dominant-baseline="middle" fill="#000">提示系统库存不足</text>
+
+  <!-- 提示库存不足 -> 回环到“浏览热卖或专属推荐商品” (y中心点 274) -->
+  <polyline points="480,622 480,274 400,274" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)" stroke-linejoin="miter"/>
+
+  <!-- 是: 向下 -->
+  <line x1="300" y1="670" x2="300" y2="706" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="310" y="692" dominant-baseline="middle" fill="#000" font-size="13">是</text>
+
+  <!-- 扣减库存并更新销量 -->
   <rect x="210" y="706" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="724" text-anchor="middle" dominant-baseline="middle" fill="#000">生成订单记录</text>
+  <text x="300" y="724" text-anchor="middle" dominant-baseline="middle" fill="#000">扣减库存并锁定核销</text>
 
   <!-- ↓ -->
   <line x1="300" y1="742" x2="300" y2="776" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- 删除购物车对应商品 -->
+  <!-- 生成订单记录 -->
   <rect x="210" y="776" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="794" text-anchor="middle" dominant-baseline="middle" fill="#000">删除购物车对应商品</text>
+  <text x="300" y="794" text-anchor="middle" dominant-baseline="middle" fill="#000">生成订单快照记录</text>
 
   <!-- ↓ -->
   <line x1="300" y1="812" x2="300" y2="846" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- 购买成功，等待发货 -->
+  <!-- 删除购物车对应商品 -->
   <rect x="210" y="846" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="864" text-anchor="middle" dominant-baseline="middle" fill="#000">购买成功，等待发货</text>
+  <text x="300" y="864" text-anchor="middle" dominant-baseline="middle" fill="#000">删除购物车对应项</text>
 
   <!-- ↓ -->
   <line x1="300" y1="882" x2="300" y2="916" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
+  <!-- 购买成功，等待发货 -->
+  <rect x="210" y="916" width="180" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="934" text-anchor="middle" dominant-baseline="middle" fill="#000">交易达成，转交发货</text>
+
+  <!-- ↓ -->
+  <line x1="300" y1="952" x2="300" y2="986" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+
   <!-- 结束 -->
-  <ellipse cx="300" cy="938" rx="52" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="300" y="938" text-anchor="middle" dominant-baseline="middle" fill="#000">结束</text>
+  <ellipse cx="300" cy="1008" rx="52" ry="22" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="300" y="1008" text-anchor="middle" dominant-baseline="middle" fill="#000">结束</text>
 
 </svg>
 </body>
