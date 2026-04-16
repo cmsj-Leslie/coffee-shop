@@ -69,7 +69,7 @@ spring:
     # 邮件服务器地址（这里以QQ邮箱为例）
     host: smtp.qq.com
     # 邮件服务器端口
-    port: 587
+    port: 465
     properties:
       mail:
         smtp:
@@ -79,7 +79,7 @@ spring:
             enable: true
             required: true
           socketFactory:
-            port: 587
+            port: 465
             class: javax.net.ssl.SSLSocketFactory
             fallback: false
             
@@ -113,3 +113,25 @@ oss:
 
 # 注册用户的默认头像地址，如果使用自己的OSS，请把前缀地址按需改掉
 default-avatar: https://your_bucket_name.oss-cn-hangzhou.aliyuncs.com/default.png
+
+# ==========================================
+# 智能顾问 (AI 大模型 API) 配置说明：
+# 系统内置了 DeepSeek 和 Gemini 接口，在此填入 Key。
+# ==========================================
+ai:
+  deepseek:
+    api-key: your_deepseek_api_key
+    base-url: https://api.deepseek.com/chat/completions
+    model: deepseek-chat
+  
+  gemini:
+    api-key: your_gemini_api_key
+    # 如果在国内想要直连请配置 proxy，或者使用 CF Workers 搭建反代域名替换 base-url
+    base-url: https://generativelanguage.googleapis.com/v1beta/models
+    model: gemini-2.0-flash
+    use-proxy-service: false
+  
+  proxy:
+    enabled: false
+    host: 127.0.0.1
+    port: 7890

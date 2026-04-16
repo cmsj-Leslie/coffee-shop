@@ -25,7 +25,6 @@ thesis_extracted/
 
 # Diagrams (root-level PNGs are thesis materials, not source code)
 /*.png
-图*.png
 最终版*.png
 
 # Temporary/test scripts
@@ -39,7 +38,6 @@ extract.py
 答辩问答*
 thesis.txt
 thesis_content.txt
-null
 
 # Thesis specific excluded dirs and custom notes
 .claude/
@@ -47,3 +45,4 @@ diagrams/
 docs/
 修改.txt
 ppt.html
+答辩/
