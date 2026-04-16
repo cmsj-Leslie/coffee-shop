@@ -61,7 +61,7 @@ public class MvcConfig implements WebMvcConfigurer, ErrorPageRegistrar {
                 // 不拦截的请求（放行）
                 .excludePathPatterns(
                         "/", "/product", "/index.html", "/index", "/login.html", "/register.html", "/forget.html",
-                        "/login", "/register", "/forgetPassword", "/list",
+                        "/login", "/register", "/forgetPassword", "/list", "/wiki.html",
                         "/error400Page", "/error401Page", "/error404Page", "/error500Page",
                         "/front/assets/**", "/common/**",
                         "/ai/**" // AI 聊天接口公开访问

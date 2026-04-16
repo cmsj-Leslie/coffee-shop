@@ -40,4 +40,19 @@ public class Classify implements Serializable {
      */
     private int count;
 
+
+    /**
+     * 百科长篇介绍文案
+     */
+    private String description;
+
+    /**
+     * 百科封面图片路径
+     */
+    private String coverImage;
+
+    /**
+     * 排序权重
+     */
+    private Integer sortOrder;
 }

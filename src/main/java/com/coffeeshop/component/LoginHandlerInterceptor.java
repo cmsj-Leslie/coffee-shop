@@ -20,8 +20,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
         User user = (User) request.getSession().getAttribute("loginUser");
         if (user == null) {
-            //未登录,返回登录页面
-            response.sendRedirect("/coffee-shop");
+            // 未登录, 重定向到登录页面
+            response.sendRedirect(request.getContextPath() + "/login.html");
             return false;
         } else {
             //已登录,放行

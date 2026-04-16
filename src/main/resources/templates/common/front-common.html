@@ -281,7 +281,12 @@
 
                     <!-- Menu -->
                     <ul class="navbar-nav">
-                        <li class="menu-item"><a href="index.html"><i class="fa fa-shopping-cart"></i> 咖咖小铺</a></li>
+                        <li class="menu-item"><a href="index.html"><i class="fa fa-home"></i> 首页</a></li>
+
+                        <li class="menu-item"><a href="list"><i class="fa fa-list"></i> 严选咖啡</a></li>
+                        <li class="menu-item"><a href="my-coupon"><i class="fa fa-tags"></i> 领券中心</a></li>
+                        <li class="menu-item"><a href="javascript:$('#ai-chat-fab').click();"><i class="fa fa-robot"></i> 智能顾问</a></li>
+                        <li class="menu-item"><a href="wiki.html"><i class="fa fa-book-open"></i> 咖啡百科</a></li>
 
                         <li class="menu-item menu-item-has-children mega-menu-wrapper">
                             <a href="javascript:void(0)"><i class="fa fa-info"></i> 关于我们</a>
@@ -325,9 +330,7 @@
                             </ul>
                         </li>
 
-                        <li class="menu-item" th:if="${session.loginUser == null}"><a href="login.html"><i
-                                    class="fa fa-space-shuttle"></i> 登陆</a></li>
-                        <li class="menu-item"><a href="list"><i class="fa fa-list"></i> 商品列表</a></li>
+                        <li class="menu-item" th:if="${session.loginUser == null}"><a href="login.html"><i class="fa fa-space-shuttle"></i> 登陆</a></li>
 
                     </ul>
 

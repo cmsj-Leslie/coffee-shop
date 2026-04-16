@@ -23,6 +23,16 @@ public class SystemController extends BaseController {
     private RecommendService recommendService;
 
     /**
+     * 咖啡百科
+     */
+    @GetMapping("/wiki.html")
+    public String wikiPage(Map<String, Object> map) {
+        List<Classify> categories = classifyService.listClassifys(new Classify());
+        map.put("categories", categories);
+        return "front/wiki";
+    }
+
+    /**
      * 商城主页
      */
     @GetMapping("/index.html")

@@ -7,10 +7,13 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="coverImage" column="cover_image" jdbcType="VARCHAR"/>
+        <result property="sortOrder" column="sort_order" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--全部字段-->
-    <sql id="allColumn"> id, name, create_time </sql>
+    <sql id="allColumn"> id, name, create_time, description, cover_image, sort_order </sql>
 
     <!--添加语句的字段列表-->
     <sql id="insertColumn">
@@ -19,6 +22,12 @@
         </if>
         <if test="createTime != null">
             create_time,
+        </if>
+        <if test="description != null and description != ''">
+            description,
+        </if>
+        <if test="coverImage != null and coverImage != ''">
+            cover_image,
         </if>
     </sql>
 
@@ -30,6 +39,12 @@
         <if test="createTime != null">
             #{createTime},
         </if>
+        <if test="description != null and description != ''">
+            #{description},
+        </if>
+        <if test="coverImage != null and coverImage != ''">
+            #{coverImage},
+        </if>
     </sql>
 
     <!--通用对Classify各个属性的值的非空判断，Insert、Update使用-->
@@ -40,6 +55,15 @@
         <if test="createTime != null">
             create_time = #{createTime},
         </if>
+        <if test="description != null and description != ''">
+            description = #{description},
+        </if>
+        <if test="coverImage != null and coverImage != ''">
+            cover_image = #{coverImage},
+        </if>
+        <if test="sortOrder != null">
+            sort_order = #{sortOrder},
+        </if>
     </sql>
 
     <!--通用对Classify各个属性的值的非空判断,Where查询使用-->
@@ -49,6 +73,15 @@
         </if>
         <if test="createTime != null">
             and create_time = #{createTime}
+        </if>
+        <if test="description != null and description != ''">
+            and description = #{description}
+        </if>
+        <if test="coverImage != null and coverImage != ''">
+            and cover_image = #{coverImage}
+        </if>
+        <if test="sortOrder != null">
+            and sort_order = #{sortOrder}
         </if>
     </sql>
 
@@ -89,6 +122,7 @@
         <trim prefix="where" prefixOverrides="and" suffixOverrides=",">
             <include refid="commonsQuery"></include>
         </trim>
+        ORDER BY sort_order ASC, id ASC
     </select>
 
     <!--通过实体作为筛选条件获取结果数量-->
