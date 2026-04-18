@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>咖咖小铺-主页</title>
+  <title>咖啡商城-主页</title>
 
   <!-- Vendor Stylesheets -->
   <link rel="stylesheet" href="front/assets/css/plugins/bootstrap.min.css">
@@ -229,7 +229,7 @@
             <i class="flaticon-coffee-2"></i>
             <h5>日常休闲</h5>
             <p>
-              喝一杯咖啡，开启新的一天。逛逛博客，学习新的知识。购买你喜爱的产品，守护你喜欢的味道！咖咖小铺为你提供优质的服务。
+              喝一杯咖啡，开启新的一天。逛逛博客，学习新的知识。购买你喜爱的产品，守护你喜欢的味道！咖啡商城为你提供优质的服务。
             </p>
             <svg xmlns="http://www.w3.org/2000/svg">
               <rect height="500" width="500" class="andro_svg-stroke-shape-anim"></rect>
@@ -466,7 +466,7 @@
                 <span th:if="${commodity.stars == null}">暂无评星</span>
               </div>
               <h5 class="andro_product-title">
-                <a th:href="@{product(id=${commodity.id})}" th:text="${commodity.name + '-' + commodity.classify}"></a>
+                <a th:href="@{product(id=${commodity.id})}" th:text="${commodity.classify != null ? commodity.name + '-' + commodity.classify : commodity.name}"></a>
               </h5>
               <div class="andro_product-price">
                 <span th:text="${'¥' + commodity.currentPrice}"></span>

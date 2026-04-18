@@ -1,0 +1,95 @@
+<mxfile host="Electron" modified="2023-10-27T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="cart_flow" name="购物车与订单流转图">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Nodes -->
+        <mxCell id="start" value="开始挑选商品" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="auth" value="是否已登录？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="350" y="140" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="login" value="跳转登录页面" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="160" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="add_cart" value="加入购物车" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="checkout" value="发起结算请求" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="check_coupon" value="核对满减/折扣券&#10;最低门槛" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stock_check" value="库存是否充足？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="350" y="560" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="rollback" value="事务熔断回滚&#10;提示防超卖拦截" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="160" y="570" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="success" value="生成交易订单&#10;清理购物车" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="end" value="结束订单闭环" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="780" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="start" target="auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="否" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="auth" target="login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="是" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="auth" target="add_cart">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="login" target="start">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="70" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="add_cart" target="checkout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="checkout" target="check_coupon">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="check_coupon" target="stock_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="否" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="stock_check" target="rollback">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="是 (@Transactional)" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="stock_check" target="success">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="success" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="rollback" target="add_cart">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

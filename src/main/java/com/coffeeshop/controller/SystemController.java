@@ -33,6 +33,14 @@ public class SystemController extends BaseController {
     }
 
     /**
+     * 忘记密码
+     */
+    @GetMapping("/forget.html")
+    public String forgetPage() {
+        return "front/forget";
+    }
+
+    /**
      * 商城主页
      */
     @GetMapping("/index.html")

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>咖啡商城系统 - 实体关系逻辑图(E-R图)</title>
+  <!-- 引入 Mermaid 渲染器引擎 -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'default',
+        er: {
+            layoutDirection: 'TB',
+            minEntityWidth: 120,
+            minEntityHeight: 80,
+            entityPadding: 20
+        }
+    });
+  </script>
+  <style>
+    body { background-color: #ffffff; display: flex; justify-content: center; padding: 40px; font-family: "Microsoft YaHei", sans-serif; }
+    .mermaid-container { box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 30px; background: #fff; border-radius: 8px; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+
+<div class="mermaid-container">
+    <pre class="mermaid">
+    erDiagram
+        %% 用户核心模块
+        USER {
+            int id PK "主键"
+            varchar username "用户名"
+            varchar password "密码"
+            varchar email "邮箱账号"
+            int role "角色权限"
+        }
+
+        %% 商品与分类模块
+        COMMODITY {
+            int id PK "主键"
+            varchar name "咖啡名称"
+            decimal price "单价"
+            int stock "库存"
+            int category_id FK "分类ID"
+        }
+        CATEGORY {
+            int id PK "主键"
+            varchar category_name "分类名称"
+        }
+
+        %% 订单与交易模块
+        ORDER {
+            int id PK "主键"
+            int user_id FK "买家ID"
+            int address_id FK "地址ID"
+            decimal total_amount "实付总额"
+            int status "订单状态"
+            datetime create_time "下单时间"
+        }
+        ORDER_ITEM {
+            int id PK "主键"
+            int order_id FK "所属订单"
+            int commodity_id FK "商品ID"
+            int quantity "购买数量"
+            decimal price "实扣单价"
+        }
+
+        %% 辅助业务模块
+        CART {
+            int id PK "主键"
+            int user_id FK "用户ID"
+            int commodity_id FK "商品ID"
+            int quantity "加购数量"
+        }
+        ADDRESS {
+            int id PK "主键"
+            int user_id FK "用户ID"
+            varchar receiver "收件人"
+            varchar detail "详细地址"
+        }
+        COUPON {
+            int id PK "主键"
+            varchar name "满减/折扣券名"
+            decimal discount "减免额度"
+        }
+        USER_COUPON {
+            int id PK "领取记录"
+            int user_id FK "用户ID"
+            int coupon_id FK "优惠券ID"
+            int status "使用状态"
+        }
+        COMMENT {
+            int id PK "主键"
+            int user_id FK "评价人"
+            int commodity_id FK "评价商品"
+            varchar content "评价内容"
+            int rating "星级评分"
+        }
+        AI_CHAT_MESSAGE {
+            int id PK "主键"
+            int user_id FK "交互用户"
+            varchar role "user/assistant"
+            text content "内容"
+        }
+
+        %% =========== 核心业务拓扑关系 ===========
+        
+        USER ||--o{ ORDER : "1:N 下单"
+        USER ||--o{ CART : "1:N 放入购物车"
+        USER ||--o{ ADDRESS : "1:N 维护收货地址"
+        USER ||--o{ USER_COUPON : "1:N 领取卡券"
+        USER ||--o{ COMMENT : "1:N 发表评价"
+        USER ||--o{ AI_CHAT_MESSAGE : "1:N 智能交互"
+
+        CATEGORY ||--o{ COMMODITY : "1:N 归类划分"
+        COMMODITY ||--o{ CART : "1:N 被加购"
+        COMMODITY ||--o{ COMMENT : "1:N 获取评价"
+        
+        ORDER ||--|{ ORDER_ITEM : "1:N 包含明细"
+        COMMODITY ||--o{ ORDER_ITEM : "1:N 形成快照"
+        ORDER }o--|| ADDRESS : "N:1 配送至"
+        COUPON ||--o{ USER_COUPON : "1:N 发放清单"
+    </pre>
+</div>
+
+</body>
+</html>

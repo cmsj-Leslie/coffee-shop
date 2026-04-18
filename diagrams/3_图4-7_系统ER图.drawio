@@ -1,0 +1,80 @@
+<mxfile host="Electron" modified="2023-10-27T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="er_diagram" name="系统ER图">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Entities -->
+        <mxCell id="e_user" value="用户 (User)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="120" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_commodity" value="商品 (Commodity)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="640" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_order" value="订单 (Order)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="380" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_coupon" value="优惠券 (Coupon)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_classify" value="分类 (Classify)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_comment" value="评价 (Comment)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="380" y="480" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_address" value="地址 (Address)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="120" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Relationships -->
+        <mxCell id="r_place" value="提交" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="240" y="220" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_contain" value="包含" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="560" y="220" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_belong" value="属于" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="660" y="220" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_receive" value="领用" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="140" y="220" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_write" value="发表" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="240" y="420" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_target" value="针对" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="560" y="420" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_own" value="拥有" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="140" y="420" width="80" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Edges (Connecting entities and relationships) -->
+        <mxCell id="l1" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="e_user" target="r_place"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l2" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="r_place" target="e_order"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l3" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="e_order" target="r_contain"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l4" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="r_contain" target="e_commodity"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l5" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="e_commodity" target="r_belong"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l6" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="r_belong" target="e_classify"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l7" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="e_user" target="r_receive"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l8" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="r_receive" target="e_coupon"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l9" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="e_user" target="r_write"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l10" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="r_write" target="e_comment"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l11" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="e_comment" target="r_target"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l12" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="r_target" target="e_commodity"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l13" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="e_user" target="r_own"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="l14" style="strokeColor=#000000;html=1;rounded=0;" edge="1" parent="1" source="r_own" target="e_address"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Cardinality Labels (1, N, M) -->
+        <mxCell id="t1" value="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1"><mxGeometry x="190" y="270" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="t2" value="N" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1"><mxGeometry x="320" y="190" width="30" height="30" as="geometry" /></mxCell>
+        
+        <mxCell id="t3" value="M" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1"><mxGeometry x="510" y="190" width="30" height="30" as="geometry" /></mxCell>
+        <mxCell id="t4" value="N" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1"><mxGeometry x="610" y="270" width="30" height="30" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

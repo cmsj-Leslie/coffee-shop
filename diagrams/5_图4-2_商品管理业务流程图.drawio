@@ -1,0 +1,87 @@
+<mxfile host="Electron" modified="2023-10-27T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="prod_flow" name="商品管理业务流程图">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <mxCell id="start" value="管理员登录后台" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="enter" value="进入商品管理模块" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="140" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="action" value="选择操作类型" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="350" y="240" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Action Branches -->
+        <mxCell id="a_add" value="新增商品" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="160" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a_edit" value="修改商品信息" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a_status" value="上架/下架控制" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="560" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Details for Add -->
+        <mxCell id="oss_upload" value="OSS上传附图&#10;返回URL" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="160" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Save -->
+        <mxCell id="db_update" value="封装表单参数&#10;写入/更新 MySQL" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="580" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="end" value="操作完成" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="360" y="700" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="start" target="enter"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="enter" target="action"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="action" target="a_add">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="action" target="a_edit"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="action" target="a_status">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e6" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="a_add" target="oss_upload"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="oss_upload" target="db_update">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="a_edit" target="db_update"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="a_status" target="db_update">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" style="strokeColor=#000000;html=1;rounded=0;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" edge="1" parent="1" source="db_update" target="end"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

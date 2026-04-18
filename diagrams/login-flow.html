@@ -60,33 +60,33 @@
   <!-- 否 label: below diamond bottom, right of line -->
   <text x="342" y="241" dominant-baseline="middle" fill="#000" font-size="13">否</text>
 
-  <!-- ⑤ 以邮箱为关键字检索数据库 -->
+  <!-- ⑤ 在数据库中校验该账号 -->
   <rect x="202" y="255" width="256" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="330" y="273" text-anchor="middle" dominant-baseline="middle" fill="#000">以邮箱为关键字检索数据库</text>
+  <text x="330" y="273" text-anchor="middle" dominant-baseline="middle" fill="#000">在数据库中校验该账号</text>
 
   <!-- ⑤→⑥ -->
   <line x1="330" y1="291" x2="330" y2="320" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- ⑥ 用户是否为空  cx=330 cy=350 hw=88 hh=28  left=242 right=418 -->
+  <!-- ⑥ 该账号是否存在  cx=330 cy=350 hw=88 hh=28  left=242 right=418 -->
   <polygon points="330,322 418,350 330,378 242,350" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="330" y="350" text-anchor="middle" dominant-baseline="middle" fill="#000">用户是否为空</text>
+  <text x="330" y="350" text-anchor="middle" dominant-baseline="middle" fill="#000">该账号是否存在</text>
 
-  <!-- 是: 左分支 → ⑦ 用户不存在  (242→192) -->
+  <!-- 否: 左分支 → ⑦ 提示用户不存在  (242→192) -->
   <line x1="242" y1="350" x2="192" y2="350" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
-  <!-- 是 label: above arrow, near diamond edge -->
-  <text x="237" y="340" text-anchor="middle" fill="#000" font-size="13">是</text>
+  <!-- 否 label: above arrow, near diamond edge -->
+  <text x="237" y="340" text-anchor="middle" fill="#000" font-size="13">否</text>
 
-  <!-- ⑦ 用户不存在  right=192 w=114 x=78 -->
+  <!-- ⑦ 提示用户不存在  right=192 w=114 x=78 -->
   <rect x="78" y="332" width="114" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="135" y="350" text-anchor="middle" dominant-baseline="middle" fill="#000">用户不存在</text>
+  <text x="135" y="350" text-anchor="middle" dominant-baseline="middle" fill="#000">提示用户不存在</text>
 
-  <!-- ⑦→结束 左侧回环 -->
-  <polyline points="78,350 40,350 40,648 280,648"
+  <!-- ⑦→重新输入 左侧回环 -->
+  <polyline points="78,350 40,350 40,112 238,112"
             fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- 否: 下分支 →⑧ -->
+  <!-- 是: 下分支 →⑧ -->
   <line x1="330" y1="378" x2="330" y2="408" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="342" y="394" dominant-baseline="middle" fill="#000" font-size="13">否</text>
+  <text x="342" y="394" dominant-baseline="middle" fill="#000" font-size="13">是</text>
 
   <!-- ⑧ 通过邮箱获取密码 -->
   <rect x="228" y="408" width="204" height="36" fill="white" stroke="black" stroke-width="1.5"/>
@@ -99,17 +99,17 @@
   <polygon points="330,474 430,502 330,530 230,502" fill="white" stroke="black" stroke-width="1.5"/>
   <text x="330" y="502" text-anchor="middle" dominant-baseline="middle" fill="#000">输入密码是否正确</text>
 
-  <!-- 否: 右分支 → ⑩ 密码错误  (430→460) -->
+  <!-- 否: 右分支 → ⑩ 提示密码错误  (430→460) -->
   <line x1="430" y1="502" x2="460" y2="502" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
   <!-- 否 label: above arrow, near diamond edge -->
   <text x="432" y="492" text-anchor="start" fill="#000" font-size="13">否</text>
 
-  <!-- ⑩ 密码错误  left=460 w=90 -->
-  <rect x="460" y="484" width="90" height="36" fill="white" stroke="black" stroke-width="1.5"/>
-  <text x="505" y="502" text-anchor="middle" dominant-baseline="middle" fill="#000">密码错误</text>
+  <!-- ⑩ 提示密码错误  left=460 w=100 -->
+  <rect x="460" y="484" width="100" height="36" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="510" y="502" text-anchor="middle" dominant-baseline="middle" fill="#000">提示密码错误</text>
 
-  <!-- ⑩→结束 右侧回环 -->
-  <polyline points="550,502 582,502 582,648 380,648"
+  <!-- ⑩→重新输入 右侧回环 -->
+  <polyline points="560,502 590,502 590,112 422,112"
             fill="none" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
 
   <!-- 是: 下分支 →⑪ 登录成功 -->

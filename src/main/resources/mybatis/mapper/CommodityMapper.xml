@@ -272,7 +272,12 @@
         select
         <include refid="allColumn"></include>
         from commodity
-        where name like #{keyWord} or info like #{keyWord} or description like #{keyWord}
+        where status = 1
+        and (
+            name like CONCAT('%', #{keyWord}, '%')
+            or info like CONCAT('%', #{keyWord}, '%')
+            or description like CONCAT('%', #{keyWord}, '%')
+        )
         order by publish_time desc
     </select>
 

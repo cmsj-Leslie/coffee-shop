@@ -1,0 +1,124 @@
+（1）用户信息表：记录了系统用户的账号、密码、邮箱、头像及角色权限等信息，如表4-1所示。
+表4-1 user（用户信息表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	name	varchar	255	是	否	用户名
+3	password	varchar	255	是	否	密码
+4	email	varchar	255	是	否	邮箱地址
+5	img	varchar	255	否	否	头像地址
+6	info	varchar	500	否	否	个人说明
+7	register_time	datetime	-	是	否	注册时间
+8	role	int	11	是	否	用户角色（0:普通用户, 1:管理员）
+9	update_time	datetime	-	否	否	最近更新
+（2）商品信息表：记录了咖啡商品的详细参数，包括名称、描述、价格、库存及销量统计，如表4-2所示。
+表4-2 commodity（商品信息表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	name	varchar	255	否	否	商品名称
+3	info	longtext	-	否	否	商品简介
+4	description	longtext	-	否	否	商品描述
+5	color	varchar	255	否	否	颜色
+6	material	varchar	255	否	否	原材料
+7	origin	varchar	255	否	否	产地
+8	classify_id	int	11	否	否	商品分类ID
+9	original_price	decimal	5,2	否	否	原价
+10	current_price	decimal	5,2	否	否	现价
+11	inventory	int	11	否	否	库存
+12	publish_time	datetime	-	否	否	上架时间
+13	status	int	11	否	否	状态【1:上架】【0:下架】
+14	img	varchar	255	否	否	商品图片地址
+15	sale_count	int	11	否	否	销量
+（3）订单信息表：记录了交易流水号、关联的用户与商品、实付金额及物流状态，如表4-3所示。
+表4-3 order（订单信息表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	order_number	varchar	255	否	否	订单号
+3	user_id	int	11	否	否	用户ID
+4	commodity_id	int	11	否	否	商品ID
+5	content	longtext	-	否	否	订单记录
+6	courier_number	varchar	255	否	否	快递单号
+7	courier_company	varchar	255	否	否	快递公司
+8	create_time	datetime	-	否	否	创建时间
+9	pay_time	datetime	-	否	否	付款时间
+10	shipping_time	datetime	-	否	否	发货时间
+11	success_time	datetime	-	否	否	成交时间
+12	status	int	11	否	否	订单状态【-1:取消,0:待发货,1:已发货,2:已完成】
+13	address_id	int	11	否	否	地址ID
+14	total_amount	decimal	8,2	否	否	订单总金额
+15	actual_amount	decimal	8,2	否	否	实付金额
+16	coupon_id	int	11	否	否	使用的优惠券ID
+（4）AI聊天记录表：记录用户与AI智能助手的对话文本，用于分析用户偏好，如表4-4所示。
+表4-4 ai_chat_message（AI聊天记录表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	user_id	int	11	是	否	用户ID
+3	role	varchar	10	是	否	消息角色: user/ai
+4	content	text	-	是	否	消息内容
+5	provider	varchar	20	否	否	AI提供商: deepseek/gemini
+6	create_time	datetime	-	是	否	创建时间
+（5）购物车信息表：暂存用户选中的商品项及其购买数量，如表4-5所示。
+表4-5 cart（购物车信息表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	user_id	int	11	否	否	用户ID
+3	commodity_id	int	11	否	否	商品ID
+4	count	int	11	否	否	数量
+5	add_time	datetime	-	否	否	加入购物车时间
+（6）收货地址表：维护用户的物流配送地址及联系电话，并支持默认地址设置，如表4-6所示。
+表4-6 address（收货地址表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	user_id	int	11	否	否	用户ID
+3	name	varchar	255	否	否	姓名
+4	address	varchar	255	否	否	收货地址
+5	phone	varchar	20	否	否	手机号码
+6	is_default	int	11	否	否	是否默认【1:是】【0:否】
+（7）商品分类表：对咖啡及周边商品进行层级划分，如表4-7所示。
+表4-7 classify（商品分类表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	name	varchar	255	否	否	名称
+3	create_time	datetime	-	否	否	创建时间
+4	description	text	-	否	否	分类描述
+5	cover_image	varchar	255	否	否	分类封面
+6	sort_order	int	11	否	否	排序权重
+（8）商品收藏表：记录用户标记为心仪的商品ID，以便在个人中心展示，如表4-8所示。
+表4-8 collection（商品收藏表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	user_id	int	11	否	否	用户ID
+3	commodity_id	int	11	否	否	商品ID
+4	add_time	datetime	-	否	否	收藏时间
+（9）商品评价表：存储用户对已购商品的评分、文字评价及管理员的回复，如表4-9所示。
+表4-9 commodity_comment（商品评价表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	user_id	int	11	否	否	用户ID
+3	commodity_id	int	11	否	否	商品ID
+4	stars	int	11	否	否	评星数【1-5】
+5	comment	varchar	255	否	否	评价内容
+6	comment_time	datetime	-	否	否	评价时间
+7	reply_id	int	11	否	否	回复评论的ID
+（10）优惠券信息表：定义优惠券的名称、满减金额或折扣率以及有效期，如表4-10所示。
+表4-10 coupon（优惠券表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	name	varchar	100	是	否	优惠券名称
+3	type	int	11	是	否	1:满减券 2:折扣券
+4	min_amount	decimal	8,2	否	否	最低使用金额
+5	reduce_amount	decimal	8,2	否	否	满减金额
+6	discount	decimal	4,2	否	否	折扣率
+7	start_time	datetime	-	是	否	生效时间
+8	end_time	datetime	-	是	否	失效时间
+9	create_time	datetime	-	是	否	创建时间
+10	status	int	11	否	否	状态【1:启用 0:禁用】
+（11）用户优惠券流水表：记录用户领取的优惠券及其核销状态、关联订单，如表4-11所示。
+表4-11 user_coupon（用户优惠券表）
+编号	字段名	类型	长度	是否非空	是否主键	注释
+1	id	int	11	是	是	主键ID
+2	user_id	int	11	是	否	用户ID
+3	coupon_id	int	11	是	否	优惠券ID
+4	status	int	11	否	否	状态【0:未使用 1:已使用】
+5	receive_time	datetime	-	是	否	领取时间
+6	use_time	datetime	-	否	否	使用时间
+7	order_id	int	11	否	否	使用的订单ID

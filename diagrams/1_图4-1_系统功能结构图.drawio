@@ -1,0 +1,140 @@
+<mxfile host="Electron" modified="2023-10-27T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="sys_func" name="系统功能结构图">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Root -->
+        <mxCell id="root_node" value="咖啡商城系统" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- L1 -->
+        <mxCell id="admin" value="管理员" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="160" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="普通用户" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="160" width="120" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Edges L0 to L1 -->
+        <mxCell id="edge_l0_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="root_node" target="admin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_l0_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="root_node" target="user">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a0" value="数据看板" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="-120" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a0"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a1" value="用户管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="-70" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a2" value="分类管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a3" value="商品管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="30" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a4" value="商品发布" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="80" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a5" value="订单管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="130" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a6" value="物流发货" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="180" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a7" value="评论管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="230" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a7"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a8" value="优惠券配置" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a8"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a9" value="库存预警" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="330" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a9"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a10" value="角色权限" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="380" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a10"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a11" value="百科维护" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="430" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ea11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="admin" target="a11"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u0" value="注册登录" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="320" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u0"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u1" value="商城浏览" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="370" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u2" value="个性化推荐" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="420" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u3" value="商品搜索" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="470" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u4" value="购物车管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="520" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u5" value="订单与支付" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="570" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u6" value="优惠券核销" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="620" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u7" value="AI智能咨询" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="670" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u7"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u8" value="地址管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="720" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u8"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u9" value="商品评价" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="770" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u9"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u10" value="收藏管理" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="820" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u10"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u11" value="风味分析" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="870" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u11"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u12" value="个人中心" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="920" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u12"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u13" value="咖啡百科" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="970" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u13"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="u14" value="密码找回" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontFamily=Times New Roman, Microsoft YaHei;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="260" width="40" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="eu14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="user" target="u14"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

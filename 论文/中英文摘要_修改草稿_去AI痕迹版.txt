@@ -1,0 +1,16 @@
+摘要
+针对当前咖啡零售行业在线上化进程中存在的业务痛点，本文完成了基于 Spring Boot 框架的咖啡在线销售系统的设计与实现（以下简称“咖啡商城”）。
+本系统采用 B/S 架构，后端以 Spring Boot 和 MyBatis 框架为基础处理业务逻辑，前端利用 Thymeleaf 模板引擎与 Bootstrap 框架构建交互界面，并结合阿里云 OSS 实现了商品图片的云端存储。在核心功能实现上，商城除了具备商品浏览、购物车管理、订单流转等基础模块外，还接入了基于物品的协同过滤算法（Item-based CF）以实现个性化商品推荐；同时，在订单结算环节引入了 @Transactional 事务管理机制，确保了库存扣减与订单生成的数据一致性。此外，系统前台集成了DeepSeek和Gemini大模型接口，开发了具备上下文记忆功能的 AI 智能咨询模块，为用户提供即时的咖啡风味咨询服务。
+系统测试结果表明，该商城各项功能逻辑严密，在模拟并发下单测试中表现正常。本系统的设计与实现不仅完成了完整的线上购物流程，也为中小型零售场景下的数字化尝试提供了一定的参考。
+
+关键词：咖啡在线销售系统；Spring Boot；MySQL；Thymeleaf；AI智能咨询
+
+
+Abstract
+To address the business challenges in the online transformation of the coffee retail industry, this paper completes the design and implementation of a coffee online sales system based on the Spring Boot framework (hereinafter referred to as "Coffee Mall").
+
+Adopting a B/S architecture, the system utilizes Spring Boot and MyBatis for back-end logic processing, while the front-end employs the Thymeleaf template engine and Bootstrap framework to build responsive interfaces. Alibaba Cloud OSS is integrated for stable cloud storage of product images. Beyond basic modules such as product browsing, shopping cart management, and order tracking, the system implements an Item-based Collaborative Filtering algorithm (Item-based CF) for personalized recommendations. To ensure data consistency during settlement, the @Transactional mechanism is applied to manage inventory reduction and order generation. Furthermore, the system front-end integrates application programming interfaces (APIs) for both the DeepSeek and Gemini large language models (LLMs), establishing an AI-powered advisory module equipped with contextual memory to provide real-time guidance on coffee flavor profiling and selection.
+
+System testing results demonstrate that the mall's functional logic is rigorous and performs normally in simulated concurrent ordering tests. The design and implementation of this system not only completes a comprehensive online shopping cycle but also provides a practical reference for the digital efforts of small and medium-sized retailers.
+
+Key Words: Coffee Online Sales System; Spring Boot; MySQL; Thymeleaf; AI-Powered Advisory

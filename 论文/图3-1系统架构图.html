@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>图3-1 系统架构图</title>
+<style>
+    /* 核心字体设定：英文使用 Times New Roman，中文使用 Microsoft YaHei (微软雅黑) */
+    body {
+        font-family: "Times New Roman", "Microsoft YaHei", sans-serif;
+        display: flex;
+        justify-content: center;
+        padding: 50px;
+        background-color: #fff;
+    }
+    
+    .diagram-container {
+        position: relative;
+        width: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 15px;
+        color: #000;
+    }
+
+    .row {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 50px; /* 【核心修改：缩小了层间距，使架构更紧凑】 */
+        position: relative;
+    }
+
+    .row:last-child {
+        margin-bottom: 0;
+    }
+
+    /* 左侧标签列 */
+    .label {
+        width: 120px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    /* 右侧盒子容器 */
+    .box-container {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    /* 通用盒子样式 */
+    .box {
+        border: 1px solid #000;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 600px;
+        box-sizing: border-box;
+    }
+
+    /* 1. 视图层 */
+    .view-layer {
+        height: 120px; /* 【核心修改：缩小了盒子高度】 */
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+    .view-inner-box {
+        border: 1px solid #000;
+        border-radius: 12px;
+        width: 480px;
+        height: 50px; /* 【核心修改：缩小了内盒高度】 */
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 2. 服务层 */
+    .service-layer {
+        height: 70px; /* 【核心修改：缩小了盒子高度】 */
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    /* 3. 数据访问层 */
+    .data-layer {
+        height: 90px;
+        width: 300px;
+        line-height: 1.8;
+        font-size: 16px;
+    }
+
+    /* 绝对方位 SVG 层：专门用于画箭头和旁边的文字 */
+    .arrows-layer {
+        position: absolute;
+        top: 0;
+        left: 120px; /* 偏移掉左侧 label 的宽度 */
+        width: 680px; 
+        height: 100%;
+        pointer-events: none;
+    }
+
+    /* SVG 里的字体也需要强制指定 */
+    text {
+        font-family: "Times New Roman", "Microsoft YaHei", sans-serif;
+        font-size: 14px;
+        fill: #000;
+    }
+</style>
+</head>
+<body>
+
+<div class="diagram-container">
+    <!-- 第1行：视图层 -->
+    <div class="row">
+        <div class="label">视图层</div>
+        <div class="box-container">
+            <div class="box view-layer">
+                <!-- 纯文本不需要特殊标签，受到body字体影响 -->
+                <div>前端各页面：Thymeleaf、HTML、jQuery</div>
+                <div class="view-inner-box">
+                    解析后端返回的响应数据，更新前端各页面内容
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第2行：服务层 -->
+    <div class="row">
+        <div class="label">服务层</div>
+        <div class="box-container">
+            <div class="box service-layer">
+                Spring Boot
+            </div>
+        </div>
+    </div>
+
+    <!-- 第3行：数据访问层 -->
+    <div class="row">
+        <div class="label">数据访问层</div>
+        <div class="box-container">
+            <div class="box data-layer">
+                <!-- 这里补充了 MyBatis -->
+                <div>MyBatis 持久层</div>
+                <div>MySQL 数据库</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SVG 绘制箭头与边侧文字 -->
+    <svg class="arrows-layer">
+        <defs>
+            <!-- 向下的箭头符号 -->
+            <marker id="arrowhead-dn" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+            </marker>
+            <!-- 向上的箭头符号 -->
+            <marker id="arrowhead-up" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+            </marker>
+        </defs>
+
+        <!-- 视图层 到 服务层 (差距：120 - 170) -->
+        <line x1="200" y1="120" x2="200" y2="166" stroke="#000" stroke-width="1.2" marker-end="url(#arrowhead-dn)" />
+        <text x="135" y="148">发起请求</text>
+        
+        <!-- 服务层 到 视图层 -->
+        <line x1="480" y1="170" x2="480" y2="124" stroke="#000" stroke-width="1.2" marker-end="url(#arrowhead-up)" />
+        <text x="490" y="148">返回数据</text>
+
+        <!-- 服务层 到 数据访问层 (差距：240 - 290) -->
+        <line x1="260" y1="240" x2="260" y2="286" stroke="#000" stroke-width="1.2" marker-end="url(#arrowhead-dn)" />
+        <text x="235" y="268">写</text>
+
+        <!-- 数据访问层 到 服务层 (读) -->
+        <line x1="420" y1="290" x2="420" y2="244" stroke="#000" stroke-width="1.2" marker-end="url(#arrowhead-up)" />
+        <text x="430" y="268">读</text>
+    </svg>
+
+</div>
+
+</body>
+</html>

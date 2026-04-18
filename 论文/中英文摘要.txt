@@ -1,0 +1,27 @@
+摘要
+针对当前综合类电商平台难以满足咖啡爱好者专业化购物需求的问题，本文设计并实现了一款基于Spring Boot框架的垂直领域在线销售系统——“咖啡商城”。
+本系统采用 B/S 架构，后端以Spring Boot和MyBatis框架为核心进行业务逻辑处理，前端结合Thymeleaf模板引擎与Bootstrap框架构建响应式用户界面，并依托MySQL数据库与阿里云OSS实现核心业务数据及商品图片的稳定存储。在功能实现上，系统不仅打通了从商品多维度检索、购物车结算到订单状态流转以及后台精细化管理的完整电商闭环，还创新性地接入了大语言模型（DeepSeek与Gemini），打造了具有上下文记忆的AI智能咨询模块，有效降低了新用户的商品挑选门槛。
+经系统测试结果表明，咖啡商城各功能模块运行稳定，前后端数据交互准确无误，不仅能够为用户提供便捷、专业的线上购物环境，也为中小型咖啡零售商提供了一套低成本的数字化转型方案。
+关键词：咖啡在线销售系统；Spring Boot；MySQL；Thymeleaf；AI智能咨询
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Abstract
+To address the difficulty of comprehensive e-commerce platforms in meeting the professional shopping needs of coffee enthusiasts, this paper designs and implements a vertical online sales system named "Kaka Mall" based on the Spring Boot framework.
+Adopting the B/S architecture, the system utilizes Spring Boot and MyBatis for back-end business logic processing, while the front-end combines the Thymeleaf template engine with the Bootstrap framework to build responsive user interfaces. MySQL database and Alibaba Cloud OSS are employed to ensure the stable storage of core business data and product images. Functionally, the system not only implements a complete e-commerce closed loop, including multi-dimensional product search, shopping cart settlement, order status tracking, and refined back-end management, but also innovatively integrates Large Language Models (DeepSeek and Gemini) to create an AI intelligent consultation module with contextual memory, effectively lowering the decision-making barrier for new users.
+System testing results demonstrate that all functional modules of Kaka Mall operate stably with accurate front-end and back-end data interaction. It not only provides users with a convenient and professional online shopping environment but also offers a low-cost digital transformation solution for small and medium-sized coffee retailers.
+Key Words：Online Coffee Sales System; Spring Boot; MySQL; Thymeleaf; AI Chatbot Module
+
+
+老师给我的关键词是咖啡在线销售系统；Spring Boot；MySQL；Thymeleaf；AI智能咨询

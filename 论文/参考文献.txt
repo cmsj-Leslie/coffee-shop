@@ -1,0 +1,28 @@
+ 
+参考文献
+[1] 王培培. 基于SpringBoot的网上商城管理系统设计与实现[J]. 现代计算机, 2024, 30 (07): 117-120.
+[2] 汤智宏. 基于SpringBoot+Vue的线上书店设计与实践[J]. 电脑编程技巧与维护, 2025, (09): 71-73.
+[3] 韦彩仁,张锐杭.基于Vue3和SpringBoot的学生信息管理系统设计与实现[J].电脑编程技巧与维护,2024,(10).
+[4] 沈莹, 黄旭, 曾孟佳. 基于SpringBoot+微信小程序的线上茶叶交易平台的设计与实现[J]. 福建茶叶, 2025, 47 (10): 49-51.
+[5] 杨玉, 刘杰举. 基于Spring Boot与Vue的物业管理系统设计与实现[J]. 鞋类工艺与设计, 2025, 5 (14): 114-116.
+[6] 陆向艳, 刘峻. 基于SpringBoot的机房预约系统的设计与实现[J]. 工业控制计算机, 2025, 38 (07): 128-129.
+[7] 薛楠楠, 张伟, 钟化雨,等. 基于SpringBoot+Vue的事故报告数据库系统设计与实现[J]. 计算机仿真, 2025, 42 (07): 456-462+570.
+[8] 黄蓬国, 于晨龙. 基于SpringBoot框架的住房保障管理系统的设计与实现[J]. 中国建设信息化, 2025, (11): 76-80.
+[9] 魏培阳, 顾建平, 罗艳秋,等. 中医临床经典实训平台的设计与实现[J]. 中国医疗设备, 2025, 40 (07): 61-69.
+[10]牛子逸. 基于Vue+SpringBoot的音乐评阅系统设计与实现[D]. 导师：于佳丽. 电子科技大学, 2025.
+[11]周贤武. 基于SpringBoot的高并发网购平台系统及其后台管理的设计与实现[D]. 导师：兰朝凤. 哈尔滨理工大学, 2024.
+[12]钟英杰, 乌伟. 外卖商家管理系统设计与实现[J]. 电脑编程技巧与维护, 2024, (08): 81-83.
+[13]汪鹏, 姜苏城, 钱宝健. 基于Vue和SpringBoot的乡村创业互助系统[J]. 电脑编程技巧与维护, 2025, (01): 27-30+69.
+[14]姚佰允, 张豪, 杜瑞庆. 基于SpringBoot与Vue的学院人员管理系统设计与实现[J]. 无线互联科技, 2025, 22 (02): 78-83.
+[15]郭静, 胡猛, 李维善, 张文胜. 基于PyQt5和SpringBoot的电影院票务系统检测平台研究[J]. 现代信息科技, 2025, 9 (01): 88-92+99.
+[16]Zhao Z. Design and implementation of a college student comprehensive quality evaluation system based on Spring Boot[J]. 2025.
+[17]SALAUDDIN U. Design and Implementation of Tourism Website Based on Spring Boot[J]. 2025.
+[18]Yang F. Design and implementation of online testing system[J]. 2025.
+[19]Wei T. Spring Boot Based Online Shopping Web Application[J]. 2022.
+[20]Shao W, Liu K. Design and Implementation of Online Ordering System Based on SpringBoot[J]. Journal of Big Data and Computing, 2024, 2(3): 151.
+[21]Zhao Z. Design and implementation of a college student comprehensive quality evaluation system based on Spring Boot[J]. 2025.
+[22]Pleskach V, Tumasoniene I, Avramchuk V. Development and implementation of the folk cruft e-commerce software system[J]. 2024.
+[23]Guo T, Xue Z. Design and Implementation of Interactive Platform for Sharing Travel Guide Based on Spring Boot[J]. Academic Journal of Computing & Information Science, 2024, 7(7): 1-8.
+[24]Nguyen T. E-commerce web shop[J]. 2021.
+[25]Zhang F, Sun G, Zheng B, et al. Design and implementation of energy management system based on spring boot framework[J]. Information, 2021, 12(11): 457.
+

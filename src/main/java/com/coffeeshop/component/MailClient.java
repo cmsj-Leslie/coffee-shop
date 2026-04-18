@@ -37,8 +37,8 @@ public class MailClient {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         try {
-            helper.setSubject("咖咖商城-忘记密码");
-            helper.setText("<h2 >咖咖商城</h2>" + "您好像忘记了您在咖咖商城的账号密码，没关系，我来告诉您：<br><br>" + "登陆邮箱: <span style='color : red'>" + email + "</span><br>" + "登陆密码: <span style='color : red'>" + password + "</span><br>" + "<hr>" + "<h5 style='color : red'>如果并非本人操作,请忽略本邮件</h5>", true);
+            helper.setSubject("咖啡商城-忘记密码");
+            helper.setText("<h2 >咖啡商城</h2>" + "您好像忘记了您在咖啡商城的账号密码，没关系，我来告诉您：<br><br>" + "登陆邮箱: <span style='color : red'>" + email + "</span><br>" + "登陆密码: <span style='color : red'>" + password + "</span><br>" + "<hr>" + "<h5 style='color : red'>如果并非本人操作,请忽略本邮件</h5>", true);
             helper.setFrom(Objects.requireNonNull(fromEmail));
             helper.setTo(email);
         } catch (MessagingException e) {
