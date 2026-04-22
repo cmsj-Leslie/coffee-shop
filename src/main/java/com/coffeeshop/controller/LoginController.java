@@ -25,7 +25,7 @@ public class LoginController extends BaseController {
     @PostMapping("/login")
     @ResponseBody
     public ResponseResult login(String email, String password) {
-        log.info("请求登陆：email = " + email + ", password = " + password);
+        log.info("请求登陆：email = " + email);
         // 查询用户
         User search = User.builder().email(email).password(password).build();
         List<User> users = userService.listUsers(search);
