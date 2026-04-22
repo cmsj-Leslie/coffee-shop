@@ -9,7 +9,6 @@ import com.coffeeshop.entity.User;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * 用户控制器
@@ -120,7 +119,7 @@ public class UserController extends BaseController {
             result.setMessage("邮箱尚未注册");
         } else {
             User user = userService.getByEmail(email);
-            String password = Objects.requireNonNullElse(user.getPassword(), "");
+            String password = user.getPassword() != null ? user.getPassword() : "";
             // 发送邮件
             mailClient.sendEmail(email, password);
             result.setCode(200);

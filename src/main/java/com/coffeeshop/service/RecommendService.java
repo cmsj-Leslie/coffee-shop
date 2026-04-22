@@ -121,7 +121,7 @@ public class RecommendService {
         List<Order> orders = orderMapper.listAllUserCommodityInteractions();
         for (Order order : orders) {
             matrix.computeIfAbsent(order.getUserId(), k -> new HashMap<>())
-                    .merge(order.getCommodityId(), 3.0, Math::max);
+                    .merge(order.getCommodityId(), 3.0, (a, b) -> a > b ? a : b);
         }
 
         // 评价行为（星级直接作为分值）
@@ -130,14 +130,14 @@ public class RecommendService {
             if (comment.getStars() == null) continue;
             double starScore = comment.getStars().doubleValue();
             matrix.computeIfAbsent(comment.getUserId(), k -> new HashMap<>())
-                    .merge(comment.getCommodityId(), starScore, Math::max);
+                    .merge(comment.getCommodityId(), starScore, (a, b) -> a > b ? a : b);
         }
 
         // 收藏行为（隐式正反馈，固定 2.0 分）
         List<Collection> collections = collectionMapper.listAllUserCommodityCollections();
         for (Collection collection : collections) {
             matrix.computeIfAbsent(collection.getUserId(), k -> new HashMap<>())
-                    .merge(collection.getCommodityId(), 2.0, Math::max);
+                    .merge(collection.getCommodityId(), 2.0, (a, b) -> a > b ? a : b);
         }
 
         return matrix;
