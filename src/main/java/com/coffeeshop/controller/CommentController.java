@@ -19,6 +19,17 @@ public class CommentController extends BaseController {
      */
     @PostMapping("/addComment")
     public ResponseResult addComment(Integer id, Integer stars, String comment) {
+        // 购买验证：只有购买过（status=2 已完成）的用户才能评论
+        com.coffeeshop.entity.Order orderCheck = com.coffeeshop.entity.Order.builder()
+                .userId(loginUser.getId())
+                .commodityId(id)
+                .status(2)
+                .build();
+        if (orderService.countOrders(orderCheck) == 0) {
+            result.setCode(500);
+            result.setMessage("请购买并收货后再评价");
+            return result;
+        }
         // 创建评论对象
         CommodityComment build = CommodityComment.builder()
                 .userId(loginUser.getId())

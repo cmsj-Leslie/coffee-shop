@@ -59,7 +59,7 @@ public class CommodityController extends BaseController {
      */
     @PostMapping("/editGoods")
     public ResponseResult editGoods(Commodity commodity, Map<String, Object> map) {
-        commodity.setPublishTime(new Date());
+        // Bug修复：编辑商品不更新 publishTime，保留原始发布时间以免影响首页排序
         if (commodityService.update(commodity)) {
             result.setCode(200);
             result.setMessage("修改成功");
@@ -113,7 +113,18 @@ public class CommodityController extends BaseController {
      */
     @PostMapping("/doCollect")
     public ResponseResult doCollect(@RequestParam("id") Integer id) {
-        // 查询收藏信息
+        // 重复收藏校验：先查询是否已收藏
+        Collection check = Collection.builder()
+                .userId(loginUser.getId())
+                .commodityId(id)
+                .build();
+        List<Collection> existing = collectionService.listCollections(check);
+        if (!existing.isEmpty()) {
+            result.setCode(200);
+            result.setMessage("已收藏过该商品");
+            return result;
+        }
+        // 收藏
         Collection param = Collection.builder()
                 .userId(loginUser.getId())
                 .commodityId(id)
