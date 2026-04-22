@@ -184,8 +184,8 @@ public class RecommendService {
         commodities.forEach(c -> {
             // 折扣
             if (c.getOriginalPrice() != null && c.getCurrentPrice() != null && c.getOriginalPrice() > 0) {
-                double discount = new BigDecimal(c.getCurrentPrice() / c.getOriginalPrice())
-                        .multiply(new BigDecimal(10))
+                double discount = BigDecimal.valueOf(c.getCurrentPrice() / c.getOriginalPrice())
+                        .multiply(BigDecimal.valueOf(10))
                         .setScale(1, RoundingMode.HALF_UP)
                         .doubleValue();
                 c.setDiscount(discount);

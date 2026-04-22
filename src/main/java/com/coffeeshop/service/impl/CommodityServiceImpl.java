@@ -41,14 +41,14 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
         Double originalPrice = commodity.getOriginalPrice();
         Double currentPrice = commodity.getCurrentPrice();
         if (originalPrice != null && originalPrice > 0 && currentPrice != null) {
-            Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
+            Double discount = BigDecimal.valueOf(currentPrice / originalPrice).multiply(BigDecimal.valueOf(10))
                     .setScale(1, RoundingMode.HALF_UP).doubleValue();
             commodity.setDiscount(discount);
         }
         // 获取平均星星数
         Double avgStar = commodityCommentMapper.getAvgStar(commodity.getId());
         if (ObjectUtil.isNotEmpty(avgStar)) {
-            avgStar = new BigDecimal(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
+            avgStar = BigDecimal.valueOf(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
         }
         commodity.setStars(ObjectUtil.isNotEmpty(avgStar) ? avgStar.intValue() : null);
         return commodity;
@@ -67,14 +67,14 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             Double originalPrice = temp.getOriginalPrice();
             Double currentPrice = temp.getCurrentPrice();
             if (originalPrice != null && originalPrice > 0 && currentPrice != null) {
-                Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
+                Double discount = BigDecimal.valueOf(currentPrice / originalPrice).multiply(BigDecimal.valueOf(10))
                         .setScale(1, RoundingMode.HALF_UP).doubleValue();
                 temp.setDiscount(discount);
             }
             // 获取平均星星数
             Double avgStar = commodityCommentMapper.getAvgStar(temp.getId());
             if (ObjectUtil.isNotEmpty(avgStar)) {
-                avgStar = new BigDecimal(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
+                avgStar = BigDecimal.valueOf(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
             }
             temp.setStars(ObjectUtil.isNotEmpty(avgStar) ? avgStar.intValue() : null);
         });
@@ -94,14 +94,14 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             Double originalPrice = temp.getOriginalPrice();
             Double currentPrice = temp.getCurrentPrice();
             if (originalPrice != null && originalPrice > 0 && currentPrice != null) {
-                Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
+                Double discount = BigDecimal.valueOf(currentPrice / originalPrice).multiply(BigDecimal.valueOf(10))
                         .setScale(1, RoundingMode.HALF_UP).doubleValue();
                 temp.setDiscount(discount);
             }
             // 获取平均星星数
             Double avgStar = commodityCommentMapper.getAvgStar(temp.getId());
             if (ObjectUtil.isNotEmpty(avgStar)) {
-                avgStar = new BigDecimal(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
+                avgStar = BigDecimal.valueOf(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
             }
             temp.setStars(ObjectUtil.isNotEmpty(avgStar) ? avgStar.intValue() : null);
         });
@@ -121,14 +121,14 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             Double originalPrice = temp.getOriginalPrice();
             Double currentPrice = temp.getCurrentPrice();
             if (originalPrice != null && originalPrice > 0 && currentPrice != null) {
-                Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
+                Double discount = BigDecimal.valueOf(currentPrice / originalPrice).multiply(BigDecimal.valueOf(10))
                         .setScale(1, RoundingMode.HALF_UP).doubleValue();
                 temp.setDiscount(discount);
             }
             // 获取平均星星数
             Double avgStar = commodityCommentMapper.getAvgStar(temp.getId());
             if (ObjectUtil.isNotEmpty(avgStar)) {
-                avgStar = new BigDecimal(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
+                avgStar = BigDecimal.valueOf(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
             }
             temp.setStars(ObjectUtil.isNotEmpty(avgStar) ? avgStar.intValue() : null);
         });
@@ -158,14 +158,14 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
             Double originalPrice = temp.getOriginalPrice();
             Double currentPrice = temp.getCurrentPrice();
             if (originalPrice != null && originalPrice > 0 && currentPrice != null) {
-                Double discount = new BigDecimal(currentPrice / originalPrice).multiply(new BigDecimal(10))
+                Double discount = BigDecimal.valueOf(currentPrice / originalPrice).multiply(BigDecimal.valueOf(10))
                         .setScale(1, RoundingMode.HALF_UP).doubleValue();
                 temp.setDiscount(discount);
             }
             // 获取平均星星数
             Double avgStar = commodityCommentMapper.getAvgStar(temp.getId());
             if (ObjectUtil.isNotEmpty(avgStar)) {
-                avgStar = new BigDecimal(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
+                avgStar = BigDecimal.valueOf(avgStar).setScale(0, RoundingMode.HALF_UP).doubleValue();
             }
             temp.setStars(ObjectUtil.isNotEmpty(avgStar) ? avgStar.intValue() : null);
         });
