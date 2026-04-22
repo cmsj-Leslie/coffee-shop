@@ -119,9 +119,10 @@ public class UserController extends BaseController {
             result.setMessage("邮箱尚未注册");
         } else {
             User user = userService.getByEmail(email);
-            // 实例化邮件工具类
+            String password = user.getPassword();
+            if (password == null) password = "";
             // 发送邮件
-            mailClient.sendEmail(email, user.getPassword());
+            mailClient.sendEmail(email, password);
             result.setCode(200);
             result.setMessage("发送邮件成功，请注意查收..");
         }

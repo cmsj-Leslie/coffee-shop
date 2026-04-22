@@ -51,7 +51,7 @@ public class OssClient {
         //设置文件路径
         String fileUrl = path + "/" + IdUtil.simpleUUID() + extension;
         String url = "https://" + bucketName + "." + endPoint + "/" + fileUrl;
-        PutObjectResult result = ossClient.putObject(new PutObjectRequest(bucketName, fileUrl, file.getInputStream()));
+        ossClient.putObject(new PutObjectRequest(bucketName, fileUrl, file.getInputStream()));
         //上传文件
         ossClient.setBucketAcl(bucketName, CannedAccessControlList.PublicRead);
         return url;
