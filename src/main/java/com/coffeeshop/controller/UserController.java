@@ -9,6 +9,7 @@ import com.coffeeshop.entity.User;
 
 import java.io.IOException;
 import java.util.Date;
+import org.springframework.lang.NonNull;
 
 /**
  * 用户控制器
@@ -112,7 +113,7 @@ public class UserController extends BaseController {
      * 忘记密码
      */
     @PostMapping("/forgetPassword")
-    public ResponseResult forgetPassword(String email) {
+    public ResponseResult forgetPassword(@NonNull String email) {
         // 判断邮箱是否存在
         if (!userService.isExistEmail(email)) {
             result.setCode(404);
