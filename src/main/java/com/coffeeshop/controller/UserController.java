@@ -113,6 +113,7 @@ public class UserController extends BaseController {
      * 忘记密码
      */
     @PostMapping("/forgetPassword")
+    @SuppressWarnings("null")
     public ResponseResult forgetPassword(@NonNull String email) {
         // 判断邮箱是否存在
         if (!userService.isExistEmail(email)) {
