@@ -17,6 +17,7 @@ public class ResponseResult {
 
     private Integer code;
 
+    @Builder.Default
     private String message = "";
 
     private Object data;
