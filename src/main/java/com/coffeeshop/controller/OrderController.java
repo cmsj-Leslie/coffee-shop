@@ -226,6 +226,13 @@ public class OrderController extends BaseController {
      */
     @PostMapping("/confirmOrder")
     public ResponseResult confirmOrder(Integer id) {
+        // 权限校验：验证该订单是否属于当前登录用户
+        Order order = orderService.getById(id);
+        if (order == null || !order.getUserId().equals(loginUser.getId())) {
+            result.setCode(403);
+            result.setMessage("无权操作此订单");
+            return result;
+        }
         Order param = Order.builder().id(id).status(2).successTime(new Date()).build();
         if (orderService.update(param)) {
             result.setCode(200);

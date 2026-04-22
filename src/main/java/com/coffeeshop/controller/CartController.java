@@ -35,7 +35,14 @@ public class CartController extends BaseController {
         if (ObjectUtil.isNotEmpty(carts)) {
             // 获取当前的收藏信息
             Cart cart = carts.get(0);
-            cart.setCount(cart.getCount() + count);
+            int newCount = cart.getCount() + count;
+            // 库存校验：叠加后不能超过库存
+            if (newCount > cart.getCommodity().getInventory()) {
+                result.setCode(500);
+                result.setMessage("加入数量超过库存（剩余" + cart.getCommodity().getInventory() + "件，购物车已有" + cart.getCount() + "件）");
+                return result;
+            }
+            cart.setCount(newCount);
             cart.setAddTime(new Date());
             if (cartService.update(cart)) {
                 result.setMessage("添加购物车成功");
