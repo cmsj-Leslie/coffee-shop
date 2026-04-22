@@ -233,14 +233,17 @@ public class SystemController extends BaseController {
     public String list(String keyWord, Integer classifyId, Map<String, Object> map) {
         List<Commodity> commodities = null;
         if (ObjectUtil.isNotEmpty(classifyId)) {
-            Commodity param = Commodity.builder().classifyId(classifyId).build();
+            // Bug修复：加上 status=1，避免下架商品出现在分类浏览列表
+            Commodity param = Commodity.builder().classifyId(classifyId).status(1).build();
             commodities = commodityService.listCommoditys(param);
             map.put("classifyId", classifyId);
         } else if (ObjectUtil.isNotEmpty(keyWord)) {
             commodities = commodityService.listCommoditys(keyWord);
             map.put("keyWord", keyWord);
         } else {
-            commodities = commodityService.listCommoditys();
+            // Bug修复：加上 status=1，避免下架商品出现在全部商品列表
+            Commodity param = Commodity.builder().status(1).build();
+            commodities = commodityService.listCommoditys(param);
         }
 
         // ===== 优化：批量查询替代 N+1 查询 =====

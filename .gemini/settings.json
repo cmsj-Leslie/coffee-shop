@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "word-server": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "office-word-mcp-server",
+        "word_mcp_server"
+      ]
+    },
+    "drawio": {
+      "url": "https://mcp.draw.io/mcp"
+    }
+  }
+}

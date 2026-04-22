@@ -103,7 +103,7 @@ public class CommodityServiceImpl extends BaseService implements CommodityServic
 
     @Override
     public List<Commodity> listCommoditys(String keyWord) {
-        List<Commodity> commodities = commodityMapper.listCommoditysByKeyWord("%" + keyWord + "%");
+        List<Commodity> commodities = commodityMapper.listCommoditysByKeyWord(keyWord);
         commodities.forEach(temp -> {
             // 获取分类名称
             Classify classify = classifyMapper.getById(temp.getClassifyId());
