@@ -36,6 +36,13 @@ public class AddressController extends BaseController {
      */
     @PostMapping("/deleteAddress")
     public ResponseResult deleteAddress(Integer id) {
+        // 权限校验：验证该地址是否属于当前登录用户
+        Address address = addressService.getById(id);
+        if (address == null || !address.getUserId().equals(loginUser.getId())) {
+            result.setCode(403);
+            result.setMessage("无权操作此地址");
+            return result;
+        }
         // 删除地址
         if (addressService.deleteById(id)) {
             result.setCode(200);

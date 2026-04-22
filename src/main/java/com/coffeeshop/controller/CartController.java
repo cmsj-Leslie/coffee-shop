@@ -60,6 +60,13 @@ public class CartController extends BaseController {
      */
     @PostMapping("/deleteCart")
     public ResponseResult deleteCart(@RequestParam("id") Integer id) {
+        // 权限校验：验证该购物车是否属于当前登录用户
+        Cart cart = cartService.getById(id);
+        if (cart == null || !cart.getUserId().equals(loginUser.getId())) {
+            result.setCode(403);
+            result.setMessage("无权操作此购物车条目");
+            return result;
+        }
         // 删除
         if (cartService.deleteById(id)) {
             result.setCode(200);
@@ -77,6 +84,18 @@ public class CartController extends BaseController {
     @PostMapping("/changeCartCount")
     public ResponseResult changeCartCount(@RequestParam("id") Integer id, @RequestParam("count") Integer count) {
         Cart cart = cartService.getById(id);
+        // 权限校验：验证该购物车是否属于当前登录用户
+        if (cart == null || !cart.getUserId().equals(loginUser.getId())) {
+            result.setCode(403);
+            result.setMessage("无权操作此购物车条目");
+            return result;
+        }
+        // 库存校验：修改数量不能超过库存
+        if (count > cart.getCommodity().getInventory()) {
+            result.setCode(500);
+            result.setMessage("数量不能超过库存（剩余" + cart.getCommodity().getInventory() + "件）");
+            return result;
+        }
         cart.setCount(count);
         if (cartService.update(cart)) {
             result.setMessage("更新数量成功");

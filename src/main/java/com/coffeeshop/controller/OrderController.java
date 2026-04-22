@@ -203,6 +203,13 @@ public class OrderController extends BaseController {
      */
     @PostMapping("/cancelOrder")
     public ResponseResult cancelOrder(Integer id) {
+        // 权限校验：验证该订单是否属于当前登录用户
+        Order order = orderService.getById(id);
+        if (order == null || !order.getUserId().equals(loginUser.getId())) {
+            result.setCode(403);
+            result.setMessage("无权操作此订单");
+            return result;
+        }
         Order param = Order.builder().id(id).status(-1).build();
         if (orderService.update(param)) {
             result.setCode(200);
@@ -235,6 +242,13 @@ public class OrderController extends BaseController {
      */
     @PostMapping("/deleteOrder")
     public ResponseResult deleteOrder(Integer id) {
+        // 权限校验：验证该订单是否属于当前登录用户
+        Order order = orderService.getById(id);
+        if (order == null || !order.getUserId().equals(loginUser.getId())) {
+            result.setCode(403);
+            result.setMessage("无权操作此订单");
+            return result;
+        }
         if (orderService.deleteById(id)) {
             result.setCode(200);
             result.setMessage("删除订单成功");
