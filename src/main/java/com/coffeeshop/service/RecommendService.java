@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -185,7 +186,7 @@ public class RecommendService {
             if (c.getOriginalPrice() != null && c.getCurrentPrice() != null && c.getOriginalPrice() > 0) {
                 double discount = new BigDecimal(c.getCurrentPrice() / c.getOriginalPrice())
                         .multiply(new BigDecimal(10))
-                        .setScale(1, BigDecimal.ROUND_HALF_UP)
+                        .setScale(1, RoundingMode.HALF_UP)
                         .doubleValue();
                 c.setDiscount(discount);
             }
